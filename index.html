@@ -6,8 +6,8 @@
     <title>Sol Ruca Official | Elite Fan Portal</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://unpkg.com/lucide@latest"></script>
-    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
-    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Syncopate:wght@700&family=Inter:wght@300;400;700;900&display=swap');
         :root { --sol-gold: #fbbf24; }
@@ -54,6 +54,19 @@
                 Get Started
             </button>
         </main>
+
+        <section id="about" class="py-32 px-8 max-w-6xl mx-auto grid md:grid-cols-2 gap-20 items-center">
+            <div>
+                <h2 class="text-4xl font-title mb-8 italic">The Athlete<br><span class="text-yellow-500">Beyond the Ring</span></h2>
+                <p class="text-gray-400 leading-relaxed mb-6">Sol Ruca isn't just a WWE Superstar; she is a world-class athlete who redefined what is possible in the squared circle. From her viral finisher to her elite background in Division I Acrobatics.</p>
+                <div class="grid grid-cols-2 gap-4">
+                    <div class="glass p-6 rounded-2xl"><h4 class="text-yellow-500 font-title text-2xl">D1</h4><p class="text-[10px] uppercase">Athlete</p></div>
+                    <div class="glass p-6 rounded-2xl"><h4 class="text-yellow-500 font-title text-2xl">99%</h4><p class="text-[10px] uppercase">Accuracy</p></div>
+                </div>
+            </div>
+            <div class="glass p-4 rounded-[40px]"><img src="https://www.wwe.com/f/styles/gallery_img_l/public/all/2023/04/002_NXT_04112023_SolRuca--45167b78997a0669b9148d488974a625.jpg" class="rounded-[32px] w-full" alt="Sol"></div>
+        </section>
+
         <footer class="py-12 text-center text-[10px] text-gray-600 uppercase tracking-[0.4em]">&copy; 2026 Sol Ruca Elite. WWE Official Property.</footer>
     </div>
 
@@ -65,7 +78,7 @@
                     <div class="video-container"><iframe src="https://www.youtube.com/embed/ucH_JlCGrFc" allowfullscreen></iframe></div>
                 </div>
                 <div class="space-y-4">
-                    <h3 class="font-bold uppercase tracking-widest text-sm text-yellow-500">Upcoming Road to WrestleMania (15 Matches)</h3>
+                    <h3 class="font-bold uppercase tracking-widest text-sm text-yellow-500">Upcoming Road to WrestleMania Schedule</h3>
                     <div id="ticket-container" class="grid md:grid-cols-2 gap-3"></div>
                 </div>
             </div>
@@ -84,18 +97,18 @@
             <button onclick="closeModals()" class="absolute top-8 right-8 text-gray-500"><i data-lucide="x"></i></button>
             <h2 class="text-2xl font-title italic text-yellow-500 uppercase">Meet & Greet Form</h2>
             <input type="text" id="meet-name" placeholder="Full Name" class="w-full bg-white/5 border border-white/10 p-4 rounded-xl outline-none">
-            <div class="grid grid-cols-2 gap-4">
-                <input type="text" id="meet-country" placeholder="Country" class="bg-white/5 border border-white/10 p-4 rounded-xl outline-none">
-                <input type="text" id="meet-state" placeholder="State" class="bg-white/5 border border-white/10 p-4 rounded-xl outline-none">
-            </div>
-            <input type="tel" id="meet-phone" placeholder="Phone Number" class="w-full bg-white/5 border border-white/10 p-4 rounded-xl outline-none">
             <input type="email" id="meet-email" placeholder="Email Address" class="w-full bg-white/5 border border-white/10 p-4 rounded-xl outline-none">
-            <button onclick="initiatePayment('Meet & Greet Fee', '500')" class="w-full py-5 bg-yellow-500 text-black font-black rounded-2xl uppercase tracking-widest">Continue to Checkout</button>
+            <button onclick="initiatePayment('Meet & Greet Fee', '500')" class="w-full py-5 bg-yellow-500 text-black font-black rounded-2xl uppercase tracking-widest">Pay & Submit</button>
         </div>
     </div>
 
     <div id="pay-modal" class="hidden-section fixed inset-0 z-[500] flex items-center justify-center bg-black/98 p-6">
         <div class="glass max-w-md w-full p-10 rounded-[40px] text-center space-y-6 relative">
+            <div class="flex flex-col items-center gap-2 mb-4">
+                <div class="text-xl font-title font-bold text-yellow-500 italic">SOL RUCA</div>
+                <div class="h-[1px] w-20 bg-yellow-500/30"></div>
+            </div>
+
             <div id="pay-stage-1" class="space-y-6">
                 <h2 class="text-xl font-black uppercase italic">Choose Method</h2>
                 <div class="p-6 bg-yellow-500/10 rounded-3xl border border-yellow-500/20">
@@ -106,13 +119,15 @@
                     <button onclick="showWallet('Bitcoin', 'bc1q4c6f7xzsekkpvd2guwkaww4m7se9yjlrxnrjc7')" class="w-full p-4 glass rounded-2xl flex justify-between"><span>Bitcoin (BTC)</span><i data-lucide="chevron-right"></i></button>
                     <button onclick="showWallet('USDT ERC-20', '0x08cfe6ddc3b58b0655dd1c9214bcfddbd3855cca')" class="w-full p-4 glass rounded-2xl flex justify-between"><span>USDT (ERC-20)</span><i data-lucide="chevron-right"></i></button>
                 </div>
+                <button onclick="closeModals()" class="text-xs text-gray-400 font-bold uppercase">Cancel</button>
             </div>
 
             <div id="pay-stage-2" class="hidden-section space-y-6">
+                <div class="flex justify-start"><button onclick="backToMethods()" class="flex items-center gap-2 text-xs text-gray-400 uppercase font-bold"><i data-lucide="arrow-left"></i> Back</button></div>
                 <h2 id="wallet-title" class="text-xl font-black text-yellow-500"></h2>
+                <p class="text-xs text-gray-400">Send <span id="final-amt" class="text-white font-bold"></span> to:</p>
                 <div class="bg-white p-3 rounded-2xl w-44 h-44 mx-auto"><img id="qr-img" src="" class="w-full h-full"></div>
                 <div class="bg-black/40 p-4 rounded-xl border border-white/10 break-all"><p id="wallet-addr" class="text-[10px] font-mono"></p></div>
-                <button onclick="copyWallet()" class="text-yellow-500 text-[10px] uppercase font-bold">Copy Address</button>
                 <button onclick="processFinal()" class="w-full py-5 bg-yellow-500 text-black font-black rounded-2xl uppercase">I Have Sent It</button>
             </div>
 
@@ -123,8 +138,9 @@
 
             <div id="pay-stage-4" class="hidden-section py-10 space-y-4">
                 <i data-lucide="check-circle" class="w-16 h-16 text-green-500 mx-auto"></i>
-                <h2 class="text-2xl font-title italic">Application Received</h2>
-                <button onclick="location.reload()" class="w-full py-4 bg-white/10 rounded-2xl uppercase font-bold text-[10px]">Done</button>
+                <h2 class="text-2xl font-title italic uppercase">Done</h2>
+                <p class="text-gray-400 text-sm">Application Received. Check your email shortly.</p>
+                <button onclick="location.reload()" class="w-full py-4 bg-white/10 rounded-2xl">Done</button>
             </div>
         </div>
     </div>
@@ -136,7 +152,7 @@
                 <h2 class="text-3xl font-title italic mb-6">SIGN UP</h2>
                 <input type="text" id="reg-name" placeholder="Full Name" class="w-full bg-white/5 border border-white/10 p-4 rounded-xl outline-none">
                 <input type="email" id="reg-email" placeholder="Email" class="w-full bg-white/5 border border-white/10 p-4 rounded-xl outline-none">
-                <input type="password" id="reg-pass" placeholder="Password" class="w-full bg-white/5 border border-white/10 p-4 rounded-xl outline-none">
+                <input type="password" id="reg-pass" placeholder="Create Password" class="w-full bg-white/5 border border-white/10 p-4 rounded-xl outline-none">
                 <button onclick="handleSignup()" class="w-full py-5 bg-yellow-500 text-black font-black rounded-2xl uppercase">Join</button>
             </div>
             <div id="login-box" class="hidden-section space-y-4">
@@ -150,24 +166,25 @@
 
     <script>
         lucide.createIcons();
+        let user = null;
         let db = JSON.parse(localStorage.getItem('sol_fans')) || [];
 
         const matches = [
-            { name: "NXT New Year's Evil", date: "Jan 06, 2026", price: "85" },
-            { name: "NXT Live! Road Trip", date: "Jan 29, 2026", price: "45" },
-            { name: "NXT Live! Event", date: "Jan 30, 2026", price: "45" },
-            { name: "NXT Live! Event", date: "Jan 31, 2026", price: "40" },
-            { name: "NXT Vengeance Day", date: "Feb 08, 2026", price: "120" },
-            { name: "NXT Live! Northwest", date: "Feb 12, 2026", price: "50" },
-            { name: "NXT Live! Northwest", date: "Feb 13, 2026", price: "50" },
-            { name: "NXT Live! Road Trip", date: "Feb 14, 2026", price: "55" },
-            { name: "NXT TV Taping", date: "Feb 24, 2026", price: "60" },
-            { name: "Elimination Chamber", date: "Feb 28, 2026", price: "250" },
-            { name: "NXT Live! Event", date: "Mar 07, 2026", price: "65" },
-            { name: "Road to WrestleMania", date: "Mar 15, 2026", price: "75" },
-            { name: "NXT Stand & Deliver", date: "Apr 18, 2026", price: "180" },
-            { name: "WrestleMania 42 Day 1", date: "Apr 18, 2026", price: "350" },
-            { name: "WrestleMania 42 Day 2", date: "Apr 19, 2026", price: "350" }
+            { name: "NXT New Year's Evil", date: "Jan 06, 2026", loc: "Orlando, FL", price: "85" },
+            { name: "NXT Live! Road Trip", date: "Jan 29, 2026", loc: "Knoxville, TN", price: "45" },
+            { name: "NXT Live! Event", date: "Jan 30, 2026", loc: "Nashville, TN", price: "45" },
+            { name: "NXT Live! Event", date: "Jan 31, 2026", loc: "Birmingham, AL", price: "40" },
+            { name: "NXT Vengeance Day", date: "Feb 08, 2026", loc: "Charlotte, NC", price: "120" },
+            { name: "NXT Live! Northwest", date: "Feb 12, 2026", loc: "Wenatchee, WA", price: "50" },
+            { name: "NXT Live! Northwest", date: "Feb 13, 2026", loc: "Kennewick, WA", price: "50" },
+            { name: "NXT Live! Road Trip", date: "Feb 14, 2026", loc: "Kent, WA", price: "55" },
+            { name: "NXT TV Taping", date: "Feb 24, 2026", loc: "Atlanta, GA", price: "60" },
+            { name: "Elimination Chamber (Special)", date: "Feb 28, 2026", loc: "Chicago, IL", price: "250" },
+            { name: "NXT Live! Event", date: "Mar 07, 2026", loc: "Phoenix, AZ", price: "65" },
+            { name: "Road to WrestleMania", date: "Mar 15, 2026", loc: "Arlington, TX", price: "75" },
+            { name: "NXT Stand & Deliver", date: "Apr 18, 2026", loc: "Las Vegas, NV", price: "180" },
+            { name: "WrestleMania 42 Day 1", date: "Apr 18, 2026", loc: "Las Vegas, NV", price: "350" },
+            { name: "WrestleMania 42 Day 2", date: "Apr 19, 2026", loc: "Las Vegas, NV", price: "350" }
         ];
 
         const tiers = [
@@ -187,12 +204,7 @@
             document.getElementById('login-box').classList.toggle('hidden-section', m === 'signup');
         }
 
-        function closeModals() { 
-            document.getElementById('auth-modal').classList.add('hidden-section');
-            document.getElementById('pay-modal').classList.add('hidden-section');
-            document.getElementById('meet-modal').classList.add('hidden-section');
-        }
-
+        function closeModals() { document.querySelectorAll('#auth-modal, #pay-modal, #meet-modal').forEach(m => m.classList.add('hidden-section')); }
         function openMeetForm() { document.getElementById('meet-modal').classList.remove('hidden-section'); }
 
         function initiatePayment(item, price) {
@@ -204,6 +216,7 @@
             document.getElementById('pay-stage-4').classList.add('hidden-section');
             document.getElementById('target-item').innerText = item;
             document.getElementById('target-price').innerText = `$${price}`;
+            document.getElementById('final-amt').innerText = `$${price}`;
         }
 
         function showWallet(method, addr) {
@@ -212,6 +225,11 @@
             document.getElementById('wallet-title').innerText = method;
             document.getElementById('wallet-addr').innerText = addr;
             document.getElementById('qr-img').src = `https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=${addr}`;
+        }
+
+        function backToMethods() {
+            document.getElementById('pay-stage-1').classList.remove('hidden-section');
+            document.getElementById('pay-stage-2').classList.add('hidden-section');
         }
 
         function copyWallet() {
@@ -225,41 +243,48 @@
             setTimeout(() => {
                 document.getElementById('pay-stage-3').classList.add('hidden-section');
                 document.getElementById('pay-stage-4').classList.remove('hidden-section');
-            }, 8000);
+            }, 10000);
         }
 
         function handleSignup() {
             const name = document.getElementById('reg-name').value;
-            db.push({ name, email: document.getElementById('reg-email').value, pass: document.getElementById('reg-pass').value });
+            const email = document.getElementById('reg-email').value;
+            if(!name || !email) return toast("All fields required");
+            db.push({ name, email, pass: document.getElementById('reg-pass').value });
             localStorage.setItem('sol_fans', JSON.stringify(db));
-            toast("Account Created!"); openAuth('login');
+            toast("Sign Up Successful!"); openAuth('login');
         }
 
         function handleLogin() {
             const email = document.getElementById('log-email').value;
-            const user = db.find(u => u.email === email);
-            if(user) { 
-                document.getElementById('landing-page-container').classList.add('hidden-section');
-                document.getElementById('dashboard').classList.remove('hidden-section');
-                document.getElementById('auth-nav').classList.add('hidden-section');
-                document.getElementById('user-nav').classList.remove('hidden-section');
-                document.getElementById('nav-user-name').innerText = user.name;
-                document.getElementById('welcome-name').innerText = user.name.toUpperCase();
-                
-                document.getElementById('ticket-container').innerHTML = matches.map(m => `
-                    <div class="glass p-4 rounded-2xl flex justify-between items-center">
-                        <div><p class="text-[9px] text-yellow-500 font-bold uppercase">${m.date}</p><h4 class="font-bold text-xs">${m.name}</h4></div>
-                        <button onclick="initiatePayment('${m.name}', '${m.price}')" class="bg-white/10 px-4 py-2 rounded-lg text-[9px] font-black hover:bg-yellow-500 transition">Buy $${m.price}</button>
-                    </div>`).join('');
+            const pass = document.getElementById('log-pass').value;
+            const found = db.find(u => u.email === email && u.pass === pass);
+            if(found) { user = found; launch(); } else toast("Invalid details");
+        }
 
-                document.getElementById('tier-container').innerHTML = tiers.map(t => `
-                    <div class="flex justify-between items-center p-4 rounded-2xl bg-white/5">
-                        <div><b class="${t.color} text-[10px] tracking-widest uppercase">${t.name}</b><p class="text-xl font-bold">$${t.price}</p></div>
-                        <button onclick="initiatePayment('${t.name} Membership', '${t.price}')" class="text-[10px] font-black border border-yellow-500 p-2 rounded-lg text-yellow-500">Join</button>
-                    </div>`).join('');
-                closeModals();
-                window.scrollTo(0,0);
-            }
+        function launch() {
+            document.getElementById('landing-page-container').classList.add('hidden-section');
+            document.getElementById('dashboard').classList.remove('hidden-section');
+            document.getElementById('auth-nav').classList.add('hidden-section');
+            document.getElementById('user-nav').classList.remove('hidden-section');
+            document.getElementById('nav-user-name').innerText = user.name;
+            document.getElementById('welcome-name').innerText = user.name.toUpperCase();
+            
+            document.getElementById('ticket-container').innerHTML = matches.map(m => `
+                <div class="glass p-4 rounded-2xl flex justify-between items-center border border-white/5">
+                    <div><p class="text-[9px] text-yellow-500 font-bold uppercase">${m.date} • ${m.loc}</p><h4 class="font-bold text-xs">${m.name}</h4></div>
+                    <button onclick="initiatePayment('${m.name}', '${m.price}')" class="bg-white/10 px-4 py-2 rounded-lg text-[9px] font-black hover:bg-yellow-500 transition">Buy $${m.price}</button>
+                </div>
+            `).join('');
+
+            document.getElementById('tier-container').innerHTML = tiers.map(t => `
+                <div class="flex justify-between items-center p-4 rounded-2xl bg-white/5 border border-white/5">
+                    <div><b class="${t.color} uppercase text-[10px] tracking-widest">${t.name}</b><p class="text-xl font-bold">$${t.price}</p></div>
+                    <button onclick="initiatePayment('${t.name} Membership', '${t.price}')" class="text-[10px] font-black border border-yellow-500 p-2 rounded-lg text-yellow-500">Join</button>
+                </div>
+            `).join('');
+            closeModals();
+            window.scrollTo(0,0);
         }
     </script>
 </body>
