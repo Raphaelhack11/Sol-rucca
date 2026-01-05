@@ -11,25 +11,26 @@
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Syncopate:wght@700&family=Inter:wght@300;400;700;900&display=swap');
         :root { --sol-gold: #fbbf24; }
-        body { font-family: 'Inter', sans-serif; background: #050505; color: white; scroll-behavior: smooth; }
+        body { font-family: 'Inter', sans-serif; background: #050505; color: white; scroll-behavior: smooth; overflow-x: hidden; }
         .font-title { font-family: 'Syncopate', sans-serif; }
         .glass { background: rgba(255,255,255,0.03); backdrop-filter: blur(15px); border: 1px solid rgba(255,255,255,0.08); }
         
-        /* UPDATED: Using high-quality public image to prevent 404 errors */
+        /* High-quality public background */
         .hero-img { 
-            background: linear-gradient(to bottom, rgba(5,5,5,0.3), #050505), 
+            background: linear-gradient(to bottom, rgba(5,5,5,0.2), #050505), 
             url('https://www.wwe.com/f/styles/wwe_large/public/all/2024/07/NXT_07022024_Heatwave_SolRuca--3e96f1d2.jpg'); 
             background-size: cover; 
             background-position: center 20%; 
         }
 
-        .hidden-section { display: none; }
+        .hidden-section { display: none !important; }
         .video-container { position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; border-radius: 20px; }
         .video-container iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: 0; }
         .custom-scroll::-webkit-scrollbar { width: 4px; }
         .custom-scroll::-webkit-scrollbar-thumb { background: var(--sol-gold); border-radius: 10px; }
-        .animate-fade { animation: fadeIn 0.8s ease-out; }
-        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+        
+        .animate-bounce-slow { animation: bounce 3s infinite; }
+        @keyframes bounce { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-10px); } }
     </style>
 </head>
 <body>
@@ -38,9 +39,9 @@
         <div class="text-2xl font-title font-bold text-yellow-500 tracking-tighter italic">SOL RUCA</div>
         <div id="auth-nav" class="flex gap-6 items-center">
             <button onclick="openAuth('login')" class="text-xs font-bold uppercase tracking-widest hover:text-yellow-500 transition">Login</button>
-            <button onclick="openAuth('signup')" class="bg-yellow-500 text-black px-6 py-2 rounded-full text-xs font-black uppercase shadow-lg shadow-yellow-500/20">Join the Wave</button>
+            <button onclick="openAuth('signup')" class="bg-yellow-500 text-black px-6 py-2 rounded-full text-xs font-black uppercase shadow-lg">Join the Wave</button>
         </div>
-        <div id="user-nav" class="hidden flex items-center gap-4">
+        <div id="user-nav" class="hidden-section flex items-center gap-4">
             <div class="text-right">
                 <p id="nav-user-name" class="font-bold text-sm"></p>
                 <p class="text-[10px] text-yellow-500 font-bold uppercase tracking-widest">Elite Member</p>
@@ -49,66 +50,56 @@
         </div>
     </nav>
 
-    <main id="landing-page" class="animate-fade">
-        <section class="hero-img h-screen flex flex-col justify-center items-center text-center px-6">
+    <div id="landing-page-container">
+        <main id="landing-page" class="hero-img h-screen flex flex-col justify-center items-center text-center px-6 relative">
             <h1 class="text-6xl md:text-9xl font-title font-bold mb-4 tracking-tighter uppercase">Sol Snatcher</h1>
-            <p class="text-xl text-gray-400 max-w-xl mb-10 font-light italic">The most athletic superstar in NXT history. Experience the wave.</p>
-            <button onclick="openAuth('signup')" class="bg-white text-black px-12 py-5 rounded-full font-black uppercase tracking-widest hover:bg-yellow-500 transition shadow-2xl">Enter Dashboard</button>
+            <p class="text-xl text-gray-300 max-w-xl mb-10 font-light italic">The future of NXT is athletic. The future is Sol.</p>
+            <button onclick="openAuth('signup')" class="bg-white text-black px-12 py-5 rounded-full font-black uppercase tracking-widest hover:bg-yellow-500 transition shadow-2xl z-10">
+                Enter Dashboard
+            </button>
+            
+            <div class="absolute bottom-10 animate-bounce-slow flex flex-col items-center opacity-50">
+                <span class="text-[10px] uppercase tracking-[0.3em] mb-2">Scroll for Stats</span>
+                <i data-lucide="chevron-down"></i>
+            </div>
+        </main>
+
+        <section class="py-24 px-8 bg-[#050505] grid md:grid-cols-3 gap-8 max-w-6xl mx-auto">
+            <div class="glass p-10 rounded-[32px] text-center border-yellow-500/10">
+                <h3 class="text-yellow-500 font-title text-4xl mb-2">D1</h3>
+                <p class="text-gray-400 uppercase text-xs tracking-widest">Atheletic Background</p>
+            </div>
+            <div class="glass p-10 rounded-[32px] text-center border-yellow-500/10">
+                <h3 class="text-yellow-500 font-title text-4xl mb-2">99%</h3>
+                <p class="text-gray-400 uppercase text-xs tracking-widest">Win Rate Potential</p>
+            </div>
+            <div class="glass p-10 rounded-[32px] text-center border-yellow-500/10">
+                <h3 class="text-yellow-500 font-title text-4xl mb-2">CORE</h3>
+                <p class="text-gray-400 uppercase text-xs tracking-widest">Strength & Agility</p>
+            </div>
         </section>
-    </main>
+    </div>
 
     <div id="dashboard" class="hidden-section pt-32 px-8 max-w-[1600px] mx-auto pb-20">
         <div class="grid lg:grid-cols-12 gap-10">
-            
             <div class="lg:col-span-8 space-y-10">
                 <header>
                     <h2 class="text-4xl font-title tracking-tighter">SOL VAULT / <span id="welcome-name" class="text-yellow-500"></span></h2>
-                    <p class="text-gray-500 mt-2 uppercase text-xs tracking-[0.2em]">Exclusive Match Highlights & Training Clips</p>
                 </header>
-
-                <div class="glass p-6 rounded-[32px] border-yellow-500/20">
+                <div class="glass p-6 rounded-[32px]">
                     <div class="video-container mb-6">
                         <iframe id="main-player" src="https://www.youtube.com/embed/ucH_JlCGrFc" allowfullscreen></iframe>
                     </div>
-                    <div class="flex gap-4 overflow-x-auto pb-4 custom-scroll">
-                        <button onclick="setVideo('ucH_JlCGrFc')" class="min-w-[160px] h-24 glass rounded-xl overflow-hidden relative group border-yellow-500">
-                            <img src="https://img.youtube.com/vi/ucH_JlCGrFc/0.jpg" class="object-cover w-full h-full opacity-50 group-hover:opacity-100 transition">
-                            <span class="absolute inset-0 flex items-center justify-center text-[10px] font-bold">VS BAYLEY</span>
-                        </button>
-                        <button onclick="setVideo('hx567yMEff8')" class="min-w-[160px] h-24 glass rounded-xl overflow-hidden relative group">
-                            <img src="https://img.youtube.com/vi/hx567yMEff8/0.jpg" class="object-cover w-full h-full opacity-50 group-hover:opacity-100 transition">
-                            <span class="absolute inset-0 flex items-center justify-center text-[10px] font-bold uppercase text-center p-2">VS Chelsea Green</span>
-                        </button>
-                        <button onclick="setVideo('tuT-ea6LSIU')" class="min-w-[160px] h-24 glass rounded-xl overflow-hidden relative group">
-                            <img src="https://img.youtube.com/vi/tuT-ea6LSIU/0.jpg" class="object-cover w-full h-full opacity-50 group-hover:opacity-100 transition">
-                            <span class="absolute inset-0 flex items-center justify-center text-[10px] font-bold">VS KELANI JORDAN</span>
-                        </button>
-                    </div>
                 </div>
-
-                <div class="space-y-4">
-                    <h3 class="font-bold uppercase tracking-widest text-sm text-yellow-500">Upcoming Live Events</h3>
-                    <div id="ticket-container" class="grid gap-3"></div>
-                </div>
+                <div id="ticket-container" class="grid gap-3"></div>
             </div>
-
             <div class="lg:col-span-4 space-y-6">
-                <div class="glass p-8 rounded-[40px] border-yellow-500/30">
-                    <h3 class="text-xl font-title mb-6 italic text-sm">Memberships</h3>
-                    <div class="space-y-4" id="tier-container"></div>
-                </div>
-
+                <div class="glass p-8 rounded-[40px]" id="tier-container"></div>
                 <div class="glass p-6 rounded-3xl">
-                    <button onclick="toast('Meet & Greet Form Opened!')" class="w-full py-4 bg-white text-black font-black rounded-2xl uppercase text-xs tracking-widest hover:bg-yellow-500 transition mb-6">Request Meet & Greet</button>
-                    <div class="border-t border-white/10 pt-6">
-                        <p class="text-[10px] font-bold text-gray-500 uppercase mb-4 tracking-widest">Fan Support Chat</p>
-                        <div id="chat-box" class="h-48 overflow-y-auto mb-4 space-y-3 pr-2 custom-scroll text-xs">
-                            <div class="bg-white/5 p-3 rounded-xl"><span class="text-yellow-500 font-bold">SYSTEM:</span> Welcome to the squad!</div>
-                        </div>
-                        <div class="flex gap-2">
-                            <input type="text" id="chat-msg" placeholder="Ask a question..." class="flex-1 bg-white/5 border border-white/10 rounded-xl px-4 py-2 text-xs outline-none focus:border-yellow-500">
-                            <button onclick="sendChat()" class="p-2 bg-yellow-500 text-black rounded-xl hover:scale-110 transition"><i data-lucide="send" class="w-4 h-4"></i></button>
-                        </div>
+                    <div id="chat-box" class="h-48 overflow-y-auto mb-4 space-y-3 custom-scroll text-xs"></div>
+                    <div class="flex gap-2">
+                        <input type="text" id="chat-msg" class="flex-1 bg-white/5 border border-white/10 rounded-xl px-4 py-2 outline-none">
+                        <button onclick="sendChat()" class="p-2 bg-yellow-500 text-black rounded-xl"><i data-lucide="send" class="w-4 h-4"></i></button>
                     </div>
                 </div>
             </div>
@@ -117,39 +108,33 @@
 
     <div id="auth-modal" class="hidden-section fixed inset-0 z-[200] flex items-center justify-center bg-black/95 backdrop-blur-xl p-6">
         <div class="glass max-w-md w-full p-10 rounded-[40px] relative text-white">
-            <button onclick="closeModals()" class="absolute top-8 right-8 text-gray-500 hover:text-white transition"><i data-lucide="x"></i></button>
+            <button onclick="closeModals()" class="absolute top-8 right-8 text-gray-500"><i data-lucide="x"></i></button>
             <div id="signup-box" class="space-y-4">
                 <h2 class="text-3xl font-title italic mb-6">SIGN UP</h2>
-                <input type="text" id="reg-name" placeholder="Full Name" class="w-full bg-white/5 border border-white/10 p-4 rounded-2xl outline-none focus:border-yellow-500">
-                <input type="email" id="reg-email" placeholder="Email" class="w-full bg-white/5 border border-white/10 p-4 rounded-2xl outline-none focus:border-yellow-500">
-                <div class="grid grid-cols-2 gap-4">
-                    <input type="text" id="reg-country" placeholder="Country" class="bg-white/5 border border-white/10 p-4 rounded-2xl outline-none focus:border-yellow-500">
-                    <input type="text" id="reg-state" placeholder="State" class="bg-white/5 border border-white/10 p-4 rounded-2xl outline-none focus:border-yellow-500">
-                </div>
-                <input type="password" id="reg-pass" placeholder="Password" class="w-full bg-white/5 border border-white/10 p-4 rounded-2xl outline-none focus:border-yellow-500">
-                <button onclick="handleSignup()" class="w-full py-5 bg-yellow-500 text-black font-black rounded-2xl uppercase tracking-widest hover:scale-105 transition">Create Profile</button>
+                <input type="text" id="reg-name" placeholder="Full Name" class="w-full bg-white/5 border border-white/10 p-4 rounded-2xl outline-none">
+                <input type="email" id="reg-email" placeholder="Email" class="w-full bg-white/5 border border-white/10 p-4 rounded-2xl outline-none">
+                <input type="password" id="reg-pass" placeholder="Password" class="w-full bg-white/5 border border-white/10 p-4 rounded-2xl outline-none">
+                <button onclick="handleSignup()" class="w-full py-5 bg-yellow-500 text-black font-black rounded-2xl uppercase tracking-widest">Create Profile</button>
             </div>
-            <div id="login-box" class="hidden space-y-4">
+            <div id="login-box" class="hidden-section space-y-4">
                 <h2 class="text-3xl font-title italic mb-6">LOGIN</h2>
-                <input type="email" id="log-email" placeholder="Email" class="w-full bg-white/5 border border-white/10 p-4 rounded-2xl outline-none focus:border-yellow-500">
-                <input type="password" id="log-pass" placeholder="Password" class="w-full bg-white/5 border border-white/10 p-4 rounded-2xl outline-none focus:border-yellow-500">
-                <button onclick="handleLogin()" class="w-full py-5 bg-yellow-500 text-black font-black rounded-2xl uppercase tracking-widest hover:scale-105 transition">Sign In</button>
+                <input type="email" id="log-email" placeholder="Email" class="w-full bg-white/5 border border-white/10 p-4 rounded-2xl outline-none">
+                <input type="password" id="log-pass" placeholder="Password" class="w-full bg-white/5 border border-white/10 p-4 rounded-2xl outline-none">
+                <button onclick="handleLogin()" class="w-full py-5 bg-yellow-500 text-black font-black rounded-2xl uppercase tracking-widest">Sign In</button>
             </div>
         </div>
     </div>
 
     <div id="pay-modal" class="hidden-section fixed inset-0 z-[300] flex items-center justify-center bg-black/98 p-6 text-white">
         <div class="glass max-w-sm w-full p-10 rounded-[40px] space-y-6">
-            <h2 class="text-xl font-black uppercase text-center">Secure Checkout</h2>
+            <h2 class="text-xl font-black uppercase text-center">Checkout</h2>
             <div class="text-center p-6 bg-yellow-500/10 rounded-3xl border border-yellow-500/20">
-                <p id="pay-item" class="text-xs text-gray-400 uppercase tracking-widest"></p>
-                <p id="pay-price" class="text-4xl font-bold text-yellow-500 mt-2"></p>
+                <p id="pay-item" class="text-xs text-gray-400 uppercase"></p>
+                <p id="pay-price" class="text-4xl font-bold text-yellow-500"></p>
             </div>
-            <div class="space-y-4">
-                <input type="text" placeholder="Card Number" class="w-full bg-white/5 border border-white/10 p-4 rounded-xl outline-none focus:border-yellow-500">
-                <button onclick="process()" id="pay-btn" class="w-full py-5 bg-white text-black font-black rounded-2xl uppercase tracking-widest">Pay Now</button>
-                <button onclick="closeModals()" class="w-full text-xs text-gray-500 uppercase font-bold">Cancel</button>
-            </div>
+            <input type="text" placeholder="Card Number" class="w-full bg-white/5 border border-white/10 p-4 rounded-xl outline-none">
+            <button onclick="process()" id="pay-btn" class="w-full py-5 bg-white text-black font-black rounded-2xl uppercase">Pay Now</button>
+            <button onclick="closeModals()" class="w-full text-xs text-gray-500 uppercase">Cancel</button>
         </div>
     </div>
 
@@ -158,31 +143,15 @@
         let user = null;
         let db = JSON.parse(localStorage.getItem('sol_fans')) || [];
 
-        const tickets = [
-            { name: "NXT New Year's Evil", date: "Jan 06, 2026", price: "$85" },
-            { name: "NXT Level Up", date: "Jan 13, 2026", price: "$30" },
-            { name: "Royal Rumble 2026", date: "Jan 24, 2026", price: "$250" },
-            { name: "NXT Vengeance Day", date: "Feb 15, 2026", price: "$120" }
-        ];
-
-        const tiers = [
-            { n: "VIP", p: "$100", c: "text-gray-400" },
-            { n: "Premium", p: "$240", c: "text-blue-400" },
-            { n: "Gold", p: "$300", c: "text-yellow-500" },
-            { n: "Diamond", p: "$400", c: "text-purple-500" }
-        ];
-
-        function toast(txt) {
-            Toastify({ text: txt, duration: 3000, position: "right", style: { background: "#fbbf24", color: "#000", fontWeight: "900", borderRadius: "12px" } }).showToast();
-        }
-
         function openAuth(m) {
             document.getElementById('auth-modal').classList.remove('hidden-section');
-            document.getElementById('signup-box').classList.toggle('hidden', m === 'login');
-            document.getElementById('login-box').classList.toggle('hidden', m === 'signup');
+            document.getElementById('signup-box').classList.toggle('hidden-section', m === 'login');
+            document.getElementById('login-box').classList.toggle('hidden-section', m === 'signup');
         }
 
-        function closeModals() { document.querySelectorAll('#auth-modal, #pay-modal').forEach(m => m.classList.add('hidden-section')); }
+        function closeModals() { 
+            document.querySelectorAll('#auth-modal, #pay-modal').forEach(m => m.classList.add('hidden-section')); 
+        }
 
         function handleSignup() {
             const data = { 
@@ -190,67 +159,36 @@
                 email: document.getElementById('reg-email').value, 
                 pass: document.getElementById('reg-pass').value 
             };
-            if(!data.name || !data.email || !data.pass) return toast("Fill all fields");
+            if(!data.name || !data.email) return toast("Fill all fields");
             db.push(data); localStorage.setItem('sol_fans', JSON.stringify(db));
-            toast("Account Created! You can now log in."); openAuth('login');
+            toast("Profile Created!"); openAuth('login');
         }
 
         function handleLogin() {
             const email = document.getElementById('log-email').value;
             const pass = document.getElementById('log-pass').value;
             const found = db.find(u => u.email === email && u.pass === pass);
-            if(found) { user = found; launch(); toast("Login Successful!"); } else toast("Invalid Login");
+            if(found) { user = found; launch(); } else toast("Login Failed");
         }
 
         function launch() {
-            document.getElementById('landing-page').classList.add('hidden-section');
-            document.getElementById('auth-modal').classList.add('hidden-section');
+            document.getElementById('landing-page-container').classList.add('hidden-section');
             document.getElementById('dashboard').classList.remove('hidden-section');
-            document.getElementById('auth-nav').classList.add('hidden');
-            document.getElementById('user-nav').classList.remove('hidden');
-            document.getElementById('nav-user-name').innerText = user.name;
+            document.getElementById('auth-nav').classList.add('hidden-section');
+            document.getElementById('user-nav').classList.remove('hidden-section');
             document.getElementById('welcome-name').innerText = user.name.toUpperCase();
-
-            document.getElementById('ticket-container').innerHTML = tickets.map(t => `
-                <div class="glass p-5 rounded-2xl flex justify-between items-center group hover:border-yellow-500/50 transition">
-                    <div><p class="text-[10px] text-yellow-500 font-bold uppercase">${t.date}</p><h4 class="font-bold">${t.name}</h4></div>
-                    <div class="flex items-center gap-6"><span class="font-bold">${t.price}</span><button onclick="checkout('${t.name}', '${t.price}')" class="bg-white/10 px-6 py-2 rounded-full text-[10px] font-black uppercase hover:bg-white hover:text-black transition">Buy</button></div>
-                </div>
-            `).join('');
-
-            document.getElementById('tier-container').innerHTML = tiers.map(t => `
-                <div class="flex justify-between items-center p-4 rounded-2xl bg-white/5 border border-white/5">
-                    <div><b class="${t.c} uppercase text-xs tracking-widest">${t.n}</b><p class="text-lg font-bold">${t.p}</p></div>
-                    <button onclick="checkout('${t.n} Membership', '${t.p}')" class="text-[10px] font-black uppercase border border-yellow-500 p-2 rounded-lg text-yellow-500 hover:bg-yellow-500 hover:text-black transition">Purchase</button>
-                </div>
-            `).join('');
+            closeModals();
         }
 
-        function setVideo(id) { document.getElementById('main-player').src = `https://www.youtube.com/embed/${id}?autoplay=1`; }
-
-        function checkout(n, p) {
-            document.getElementById('pay-modal').classList.remove('hidden-section');
-            document.getElementById('pay-item').innerText = n;
-            document.getElementById('pay-price').innerText = p;
-        }
-
-        function process() {
-            const btn = document.getElementById('pay-btn');
-            btn.innerText = "Processing...";
-            setTimeout(() => {
-                toast("Payment Confirmed! Welcome aboard.");
-                btn.innerText = "Pay Now";
-                closeModals();
-            }, 2000);
+        function toast(txt) {
+            Toastify({ text: txt, duration: 3000, position: "right", style: { background: "#fbbf24", color: "#000", fontWeight: "900" } }).showToast();
         }
 
         function sendChat() {
             const msg = document.getElementById('chat-msg');
             if(!msg.value) return;
-            const chatBox = document.getElementById('chat-box');
-            chatBox.innerHTML += `<div class="bg-yellow-500/10 p-3 rounded-xl text-right animate-fade"><span class="text-yellow-500 font-bold uppercase text-[10px]">YOU:</span><br>${msg.value}</div>`;
+            document.getElementById('chat-box').innerHTML += `<div class="bg-yellow-500/10 p-3 rounded-xl text-right"><b>YOU:</b> ${msg.value}</div>`;
             msg.value = '';
-            chatBox.scrollTop = chatBox.scrollHeight;
         }
     </script>
 </body>
