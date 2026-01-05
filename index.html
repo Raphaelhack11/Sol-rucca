@@ -15,9 +15,10 @@
         .font-title { font-family: 'Syncopate', sans-serif; }
         .glass { background: rgba(255,255,255,0.03); backdrop-filter: blur(15px); border: 1px solid rgba(255,255,255,0.08); }
         
+        /* Fixed Background Link */
         .hero-img { 
-            background: linear-gradient(to bottom, rgba(5,5,5,0.5), #050505), 
-            url('https://i.imgur.com/be5f0698-0872-4957-8154-3957de1e8ca1.jpg'); 
+            background: linear-gradient(to bottom, rgba(5,5,5,0.4), #050505), 
+            url('https://i.imgur.com/be5f069.jpg'); 
             background-size: cover; 
             background-position: center; 
         }
@@ -27,18 +28,21 @@
         .video-container iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: 0; }
         .custom-scroll::-webkit-scrollbar { width: 4px; }
         .custom-scroll::-webkit-scrollbar-thumb { background: var(--sol-gold); border-radius: 10px; }
-        
         @keyframes spin-slow { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
         .animate-spin-slow { animation: spin-slow 2s linear infinite; }
+        .animate-bounce-slow { animation: bounce 3s infinite; }
+        @keyframes bounce { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-10px); } }
     </style>
 </head>
 <body>
 
     <nav class="fixed w-full z-[100] px-8 py-4 flex justify-between items-center glass border-none bg-black/70">
         <div class="text-2xl font-title font-bold text-yellow-500 tracking-tighter italic">SOL RUCA</div>
-        <div id="auth-nav" class="flex gap-8 items-center">
-            <button onclick="openAuth('login')" class="text-xs font-bold uppercase tracking-widest hover:text-yellow-500 transition">Login</button>
-            <button onclick="openAuth('signup')" class="bg-yellow-500 text-black px-6 py-2 rounded-full text-xs font-black uppercase">Join</button>
+        <div id="auth-nav" class="flex gap-8 items-center text-[10px] font-bold uppercase tracking-widest">
+            <a href="#about" class="hover:text-yellow-500 transition">About</a>
+            <a href="#contact" class="hover:text-yellow-500 transition">Contact</a>
+            <button onclick="openAuth('login')" class="hover:text-yellow-500 transition">Login</button>
+            <button onclick="openAuth('signup')" class="bg-yellow-500 text-black px-6 py-2 rounded-full font-black">Join</button>
         </div>
         <div id="user-nav" class="hidden-section flex items-center gap-4">
             <div class="text-right">
@@ -52,11 +56,37 @@
     <div id="landing-page-container">
         <main class="hero-img h-screen flex flex-col justify-center items-center text-center px-6 relative">
             <h1 class="text-6xl md:text-9xl font-title font-bold mb-4 tracking-tighter uppercase">Sol Snatcher</h1>
-            <p class="text-xl text-gray-300 max-w-xl mb-10 font-light italic">The ultimate destination for the Sol Ruca squad.</p>
+            <p class="text-xl text-gray-300 max-w-xl mb-10 font-light italic tracking-wide">Elite Athletics. Exclusive Access.</p>
             <button onclick="openAuth('signup')" class="bg-white text-black px-12 py-5 rounded-full font-black uppercase tracking-widest hover:bg-yellow-500 transition shadow-2xl z-10">
-                Enter Dashboard
+                Get Started
             </button>
+            <div class="absolute bottom-10 animate-bounce-slow opacity-50"><i data-lucide="chevron-down"></i></div>
         </main>
+
+        <section id="about" class="py-32 px-8 max-w-6xl mx-auto grid md:grid-cols-2 gap-20 items-center">
+            <div>
+                <h2 class="text-4xl font-title mb-8 italic">The Athlete<br><span class="text-yellow-500">Beyond the Ring</span></h2>
+                <p class="text-gray-400 leading-relaxed mb-6">Sol Ruca isn't just a WWE Superstar; she is a world-class athlete who redefined what is possible in the squared circle. From her viral "Sol Snatcher" finisher to her elite background in Acrobatics and Tumbling.</p>
+                <div class="grid grid-cols-2 gap-4">
+                    <div class="glass p-6 rounded-2xl"><h4 class="text-yellow-500 font-title text-2xl">D1</h4><p class="text-[10px] uppercase">Athelete</p></div>
+                    <div class="glass p-6 rounded-2xl"><h4 class="text-yellow-500 font-title text-2xl">99%</h4><p class="text-[10px] uppercase">Accuracy</p></div>
+                </div>
+            </div>
+            <div class="glass p-4 rounded-[40px]"><img src="https://www.wwe.com/f/styles/gallery_img_l/public/all/2023/04/002_NXT_04112023_SolRuca--45167b78997a0669b9148d488974a625.jpg" class="rounded-[32px]" alt="Sol"></div>
+        </section>
+
+        <section id="contact" class="py-32 px-8 bg-white/5">
+            <div class="max-w-4xl mx-auto text-center">
+                <h2 class="text-4xl font-title mb-4 italic uppercase">Contact Us</h2>
+                <p class="text-gray-400 mb-12 uppercase tracking-widest text-xs">For booking, press, and legal inquiries.</p>
+                <div class="grid md:grid-cols-2 gap-8">
+                    <div class="glass p-8 rounded-3xl"><i data-lucide="mail" class="mx-auto mb-4 text-yellow-500"></i><p class="font-bold">booking@solruca.com</p></div>
+                    <div class="glass p-8 rounded-3xl"><i data-lucide="shield-check" class="mx-auto mb-4 text-yellow-500"></i><p class="font-bold">legal@wwe.com</p></div>
+                </div>
+            </div>
+        </section>
+
+        <footer class="py-12 text-center text-[10px] text-gray-600 uppercase tracking-[0.4em]">&copy; 2026 Sol Ruca Elite. WWE Official Property.</footer>
     </div>
 
     <div id="dashboard" class="hidden-section pt-32 px-8 max-w-[1600px] mx-auto pb-20">
@@ -73,12 +103,10 @@
             </div>
             <div class="lg:col-span-4 space-y-6">
                 <div class="glass p-8 rounded-[40px] border-yellow-500/30">
-                    <h3 class="text-xl font-title mb-6 italic text-sm">Memberships</h3>
+                    <h3 class="text-xl font-title mb-6 italic text-sm text-center">Memberships</h3>
                     <div class="space-y-4" id="tier-container"></div>
                 </div>
-                <button onclick="openMeetForm()" class="w-full py-6 bg-yellow-500 text-black font-black rounded-[30px] uppercase text-sm tracking-widest hover:scale-105 transition shadow-xl shadow-yellow-500/10">
-                    Request Meet & Greet
-                </button>
+                <button onclick="openMeetForm()" class="w-full py-6 bg-yellow-500 text-black font-black rounded-[30px] uppercase text-sm tracking-widest hover:scale-105 transition shadow-xl">Request Meet & Greet</button>
             </div>
         </div>
     </div>
@@ -86,8 +114,7 @@
     <div id="meet-modal" class="hidden-section fixed inset-0 z-[400] flex items-center justify-center bg-black/95 p-6">
         <div class="glass max-w-lg w-full p-10 rounded-[40px] space-y-4 relative">
             <button onclick="closeModals()" class="absolute top-8 right-8 text-gray-500"><i data-lucide="x"></i></button>
-            <h2 class="text-2xl font-title italic text-yellow-500">Meet & Greet Application</h2>
-            <p class="text-xs text-gray-400 mb-4">Complete the form to proceed to secure application fee payment.</p>
+            <h2 class="text-2xl font-title italic text-yellow-500">Meet & Greet</h2>
             <input type="text" id="meet-name" placeholder="Full Name" class="w-full bg-white/5 border border-white/10 p-4 rounded-xl outline-none">
             <div class="grid grid-cols-2 gap-4">
                 <input type="text" id="meet-country" placeholder="Country" class="bg-white/5 border border-white/10 p-4 rounded-xl outline-none">
@@ -100,51 +127,40 @@
     </div>
 
     <div id="pay-modal" class="hidden-section fixed inset-0 z-[500] flex items-center justify-center bg-black/98 p-6">
-        <div class="glass max-w-md w-full p-10 rounded-[40px] text-center space-y-6" id="pay-content-wrapper">
+        <div class="glass max-w-md w-full p-10 rounded-[40px] text-center space-y-6">
             <div id="pay-stage-1" class="space-y-6">
-                <h2 class="text-xl font-black uppercase italic">Select Payment Method</h2>
+                <h2 class="text-xl font-black uppercase italic">Payment Method</h2>
                 <div class="p-6 bg-yellow-500/10 rounded-3xl border border-yellow-500/20">
-                    <p id="target-item" class="text-[10px] text-gray-400 uppercase tracking-widest"></p>
-                    <p id="target-price" class="text-4xl font-bold text-yellow-500 mt-2"></p>
+                    <p id="target-item" class="text-[10px] text-gray-400 uppercase"></p>
+                    <p id="target-price" class="text-4xl font-bold text-yellow-500"></p>
                 </div>
                 <div class="grid gap-3">
-                    <button onclick="showWallet('Bitcoin', 'bc1q4c6f7xzsekkpvd2guwkaww4m7se9yjlrxnrjc7')" class="w-full p-4 glass rounded-2xl flex items-center justify-between hover:bg-white/10">
-                        <span class="font-bold">Bitcoin (BTC)</span><i data-lucide="chevron-right"></i>
-                    </button>
-                    <button onclick="showWallet('USDT ERC-20', '0x08cfe6ddc3b58b0655dd1c9214bcfddbd3855cca')" class="w-full p-4 glass rounded-2xl flex items-center justify-between hover:bg-white/10">
-                        <span class="font-bold">USDT (ERC-20)</span><i data-lucide="chevron-right"></i>
-                    </button>
+                    <button onclick="showWallet('Bitcoin', 'bc1q4c6f7xzsekkpvd2guwkaww4m7se9yjlrxnrjc7')" class="w-full p-4 glass rounded-2xl flex justify-between"><span>Bitcoin (BTC)</span><i data-lucide="chevron-right"></i></button>
+                    <button onclick="showWallet('USDT ERC-20', '0x08cfe6ddc3b58b0655dd1c9214bcfddbd3855cca')" class="w-full p-4 glass rounded-2xl flex justify-between"><span>USDT (ERC-20)</span><i data-lucide="chevron-right"></i></button>
                 </div>
-                <button onclick="closeModals()" class="text-xs text-gray-500 uppercase font-bold tracking-widest">Cancel Transaction</button>
             </div>
 
             <div id="pay-stage-2" class="hidden-section space-y-6">
-                <h2 id="wallet-title" class="text-xl font-black text-yellow-500 italic uppercase"></h2>
-                <p class="text-xs text-gray-400">Please pay exactly <span id="final-amt" class="text-white font-bold"></span> to the address below:</p>
-                <div class="bg-white p-4 rounded-2xl mx-auto w-40 h-40 flex items-center justify-center shadow-lg">
-                    <div class="w-32 h-32 bg-gray-200 border-2 border-black flex items-center justify-center">
-                        <i data-lucide="qr-code" class="text-black w-16 h-16"></i>
-                    </div>
+                <h2 id="wallet-title" class="text-xl font-black text-yellow-500"></h2>
+                <p class="text-xs text-gray-400">Send <span id="final-amt" class="text-white font-bold"></span> to:</p>
+                <div class="bg-white p-4 rounded-2xl w-40 h-40 mx-auto flex items-center justify-center"><i data-lucide="qr-code" class="text-black w-32 h-32"></i></div>
+                <div class="bg-black/40 p-4 rounded-xl border border-white/10 break-all">
+                    <p id="wallet-addr" class="text-[10px] font-mono"></p>
+                    <button onclick="copyWallet()" class="mt-2 text-[10px] text-yellow-500 font-bold uppercase">Copy Address</button>
                 </div>
-                <div class="bg-black/40 p-4 rounded-xl border border-white/10 break-all relative group">
-                    <p id="wallet-addr" class="text-[10px] font-mono text-gray-300"></p>
-                    <button onclick="copyWallet()" class="mt-4 text-[10px] text-yellow-500 font-bold uppercase flex items-center justify-center gap-2 mx-auto">
-                        <i data-lucide="copy" class="w-3 h-3"></i> Copy Address
-                    </button>
-                </div>
-                <button onclick="processFinal()" class="w-full py-5 bg-yellow-500 text-black font-black rounded-2xl uppercase tracking-widest shadow-lg shadow-yellow-500/20">I Have Sent It</button>
+                <button onclick="processFinal()" class="w-full py-5 bg-yellow-500 text-black font-black rounded-2xl uppercase">I Have Sent It</button>
             </div>
 
             <div id="pay-stage-3" class="hidden-section py-10 space-y-6">
-                <div class="w-20 h-20 border-4 border-yellow-500 border-t-transparent rounded-full animate-spin-slow mx-auto"></div>
-                <p class="text-yellow-500 font-bold uppercase tracking-widest text-xs">Verifying Transaction...</p>
+                <div class="w-16 h-16 border-4 border-yellow-500 border-t-transparent rounded-full animate-spin-slow mx-auto"></div>
+                <p class="text-yellow-500 font-bold uppercase text-[10px]">Verifying Transaction...</p>
             </div>
 
-            <div id="pay-stage-4" class="hidden-section py-10 space-y-6">
-                <i data-lucide="check-circle" class="w-20 h-20 text-green-500 mx-auto"></i>
+            <div id="pay-stage-4" class="hidden-section py-10 space-y-4">
+                <i data-lucide="check-circle" class="w-16 h-16 text-green-500 mx-auto"></i>
                 <h2 class="text-2xl font-title italic">Thank You!</h2>
-                <p class="text-gray-400 text-sm leading-relaxed">Your application is being processed. We will contact you through email to proceed with your application shortly.</p>
-                <button onclick="location.reload()" class="w-full py-4 bg-white/10 rounded-2xl uppercase font-bold text-xs tracking-widest">Back to Dashboard</button>
+                <p class="text-gray-400 text-sm">We will contact you through email shortly to proceed.</p>
+                <button onclick="location.reload()" class="w-full py-4 bg-white/10 rounded-2xl uppercase font-bold text-xs">Close</button>
             </div>
         </div>
     </div>
@@ -156,11 +172,16 @@
                 <h2 class="text-3xl font-title italic mb-6">SIGN UP</h2>
                 <input type="text" id="reg-name" placeholder="Full Name" class="w-full bg-white/5 border border-white/10 p-4 rounded-xl outline-none">
                 <input type="email" id="reg-email" placeholder="Email" class="w-full bg-white/5 border border-white/10 p-4 rounded-xl outline-none">
+                <div class="grid grid-cols-2 gap-4">
+                    <input type="text" id="reg-country" placeholder="Country" class="bg-white/5 border border-white/10 p-4 rounded-xl outline-none">
+                    <input type="text" id="reg-state" placeholder="State" class="bg-white/5 border border-white/10 p-4 rounded-xl outline-none">
+                </div>
+                <input type="tel" id="reg-phone" placeholder="Phone Number" class="w-full bg-white/5 border border-white/10 p-4 rounded-xl outline-none">
                 <input type="password" id="reg-pass" placeholder="Password" class="w-full bg-white/5 border border-white/10 p-4 rounded-xl outline-none">
-                <button onclick="handleSignup()" class="w-full py-5 bg-yellow-500 text-black font-black rounded-2xl uppercase tracking-widest transition hover:scale-105">Create Profile</button>
+                <button onclick="handleSignup()" class="w-full py-5 bg-yellow-500 text-black font-black rounded-2xl uppercase tracking-widest">Create Profile</button>
             </div>
             <div id="login-box" class="hidden-section space-y-4">
-                <h2 class="text-3xl font-title italic mb-6">LOGIN</h2>
+                <h2 class="text-3xl font-title italic mb-6 text-yellow-500">LOGIN</h2>
                 <input type="email" id="log-email" placeholder="Email" class="w-full bg-white/5 border border-white/10 p-4 rounded-xl outline-none">
                 <input type="password" id="log-pass" placeholder="Password" class="w-full bg-white/5 border border-white/10 p-4 rounded-xl outline-none">
                 <button onclick="handleLogin()" class="w-full py-5 bg-yellow-500 text-black font-black rounded-2xl uppercase tracking-widest">Sign In</button>
@@ -173,15 +194,8 @@
         let user = null;
         let db = JSON.parse(localStorage.getItem('sol_fans')) || [];
 
-        const tickets = [
-            { name: "NXT Heatwave", date: "July 07, 2026", price: "95" },
-            { name: "NXT Level Up", date: "July 14, 2026", price: "40" }
-        ];
-
-        const tiers = [
-            { name: "VIP Pro", price: "150", color: "text-gray-400" },
-            { name: "Gold Fan", price: "350", color: "text-yellow-500" }
-        ];
+        const tickets = [{ name: "NXT Heatwave", date: "July 07, 2026", price: "95" }, { name: "NXT Level Up", date: "July 14, 2026", price: "40" }];
+        const tiers = [{ name: "VIP Pro", price: "150", color: "text-gray-400" }, { name: "Gold Fan", price: "350", color: "text-yellow-500" }];
 
         function openAuth(m) {
             document.getElementById('auth-modal').classList.remove('hidden-section');
@@ -189,13 +203,8 @@
             document.getElementById('login-box').classList.toggle('hidden-section', m === 'signup');
         }
 
-        function closeModals() {
-            document.querySelectorAll('#auth-modal, #pay-modal, #meet-modal').forEach(m => m.classList.add('hidden-section'));
-        }
-
-        function openMeetForm() {
-            document.getElementById('meet-modal').classList.remove('hidden-section');
-        }
+        function closeModals() { document.querySelectorAll('#auth-modal, #pay-modal, #meet-modal').forEach(m => m.classList.add('hidden-section')); }
+        function openMeetForm() { document.getElementById('meet-modal').classList.remove('hidden-section'); }
 
         function initiatePayment(item, price) {
             closeModals();
@@ -204,7 +213,6 @@
             document.getElementById('pay-stage-2').classList.add('hidden-section');
             document.getElementById('pay-stage-3').classList.add('hidden-section');
             document.getElementById('pay-stage-4').classList.add('hidden-section');
-            
             document.getElementById('target-item').innerText = item;
             document.getElementById('target-price').innerText = `$${price}`;
             document.getElementById('final-amt').innerText = `$${price}`;
@@ -218,9 +226,8 @@
         }
 
         function copyWallet() {
-            const addr = document.getElementById('wallet-addr').innerText;
-            navigator.clipboard.writeText(addr);
-            toast("Address Copied!");
+            navigator.clipboard.writeText(document.getElementById('wallet-addr').innerText);
+            toast("Copied!");
         }
 
         function processFinal() {
@@ -238,7 +245,7 @@
             if(!name || !email) return toast("Fill all fields");
             db.push({ name, email, pass: document.getElementById('reg-pass').value });
             localStorage.setItem('sol_fans', JSON.stringify(db));
-            toast("Account Ready! Please Login."); openAuth('login');
+            toast("Profile Created!"); openAuth('login');
         }
 
         function handleLogin() {
@@ -257,8 +264,8 @@
             document.getElementById('welcome-name').innerText = user.name.toUpperCase();
             
             document.getElementById('ticket-container').innerHTML = tickets.map(t => `
-                <div class="glass p-5 rounded-2xl flex justify-between items-center border-white/5">
-                    <div><p class="text-[10px] text-yellow-500 font-bold uppercase">${t.date}</p><h4 class="font-bold">${t.name}</h4></div>
+                <div class="glass p-5 rounded-2xl flex justify-between items-center">
+                    <div><p class="text-[10px] text-yellow-500 uppercase font-bold">${t.date}</p><h4 class="font-bold">${t.name}</h4></div>
                     <button onclick="initiatePayment('${t.name}', '${t.price}')" class="bg-white/10 px-6 py-2 rounded-full text-[10px] font-black uppercase hover:bg-yellow-500 transition">Buy $${t.price}</button>
                 </div>
             `).join('');
@@ -266,7 +273,7 @@
             document.getElementById('tier-container').innerHTML = tiers.map(t => `
                 <div class="flex justify-between items-center p-4 rounded-2xl bg-white/5">
                     <div><b class="${t.color} uppercase text-[10px] tracking-widest">${t.name}</b><p class="text-xl font-bold">$${t.price}</p></div>
-                    <button onclick="initiatePayment('${t.name} Membership', '${t.price}')" class="text-[10px] font-black uppercase border border-yellow-500 p-2 rounded-lg text-yellow-500 transition">Join</button>
+                    <button onclick="initiatePayment('${t.name} Membership', '${t.price}')" class="text-[10px] font-black border border-yellow-500 p-2 rounded-lg text-yellow-500">Join</button>
                 </div>
             `).join('');
             closeModals();
