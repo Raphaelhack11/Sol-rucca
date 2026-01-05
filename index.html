@@ -14,12 +14,22 @@
         body { font-family: 'Inter', sans-serif; background: #050505; color: white; scroll-behavior: smooth; }
         .font-title { font-family: 'Syncopate', sans-serif; }
         .glass { background: rgba(255,255,255,0.03); backdrop-filter: blur(15px); border: 1px solid rgba(255,255,255,0.08); }
-        .hero-img { background: linear-gradient(to bottom, rgba(5,5,5,0.2), #050505), url('public/images/hero-bg.jpeg); background-size: cover; background-position: center; }
+        
+        /* FIXED: Added missing quote and set path relative to the public folder root */
+        .hero-img { 
+            background: linear-gradient(to bottom, rgba(5,5,5,0.2), #050505), url('/images/hero-bg.jpeg'); 
+            background-size: cover; 
+            background-position: center; 
+        }
+        
         .hidden-section { display: none; }
         .video-container { position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; border-radius: 20px; }
         .video-container iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: 0; }
         .custom-scroll::-webkit-scrollbar { width: 4px; }
         .custom-scroll::-webkit-scrollbar-thumb { background: var(--sol-gold); border-radius: 10px; }
+        
+        .animate-fade { animation: fadeIn 0.8s ease-out; }
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
     </style>
 </head>
 <body>
@@ -40,10 +50,10 @@
     </nav>
 
     <main id="landing-page" class="animate-fade">
-        <section class="hero-img h-screen flex flex-col justify-center items-center text-center">
-            <h1 class="text-7xl md:text-9xl font-title font-bold mb-4 tracking-tighter">SOL SNATCHER</h1>
+        <section class="hero-img h-screen flex flex-col justify-center items-center text-center px-6">
+            <h1 class="text-6xl md:text-9xl font-title font-bold mb-4 tracking-tighter">SOL SNATCHER</h1>
             <p class="text-xl text-gray-400 max-w-xl mb-10 font-light">Experience the future of professional wrestling. The most athletic superstar in NXT history.</p>
-            <button onclick="openAuth('signup')" class="bg-white text-black px-12 py-5 rounded-full font-black uppercase tracking-widest hover:bg-yellow-500 transition">Enter Dashboard</button>
+            <button onclick="openAuth('signup')" class="bg-white text-black px-12 py-5 rounded-full font-black uppercase tracking-widest hover:bg-yellow-500 transition shadow-lg">Enter Dashboard</button>
         </section>
     </main>
 
@@ -52,7 +62,7 @@
             
             <div class="lg:col-span-8 space-y-10">
                 <header>
-                    <h2 class="text-4xl font-title tracking-tighter">SOL VAULT / <span id="welcome-name" class="text-yellow-500"></span></h2>
+                    <h2 class="text-4xl font-title tracking-tighter uppercase">Sol Vault / <span id="welcome-name" class="text-yellow-500"></span></h2>
                     <p class="text-gray-500 mt-2 uppercase text-xs tracking-[0.2em]">Exclusive Match Highlights & Training Clips</p>
                 </header>
 
@@ -62,15 +72,15 @@
                     </div>
                     <div class="flex gap-4 overflow-x-auto pb-4 custom-scroll">
                         <button onclick="setVideo('ucH_JlCGrFc')" class="min-w-[160px] h-24 glass rounded-xl overflow-hidden relative group border-yellow-500">
-                            <img src="https://img.youtube.com/vi/ucH_JlCGrFc/0.jpg" class="object-cover w-full h-full opacity-50 group-hover:opacity-100 transition">
+                            <img src="https://img.youtube.com/vi/ucH_JlCGrFc/0.jpg" class="object-cover w-full h-full opacity-50 group-hover:opacity-100 transition" alt="VS Bayley">
                             <span class="absolute inset-0 flex items-center justify-center text-[10px] font-bold">VS BAYLEY</span>
                         </button>
                         <button onclick="setVideo('hx567yMEff8')" class="min-w-[160px] h-24 glass rounded-xl overflow-hidden relative group">
-                            <img src="https://img.youtube.com/vi/hx567yMEff8/0.jpg" class="object-cover w-full h-full opacity-50 group-hover:opacity-100 transition">
+                            <img src="https://img.youtube.com/vi/hx567yMEff8/0.jpg" class="object-cover w-full h-full opacity-50 group-hover:opacity-100 transition" alt="VS Chelsea Green">
                             <span class="absolute inset-0 flex items-center justify-center text-[10px] font-bold uppercase text-center p-2">VS Chelsea Green</span>
                         </button>
                         <button onclick="setVideo('tuT-ea6LSIU')" class="min-w-[160px] h-24 glass rounded-xl overflow-hidden relative group">
-                            <img src="https://img.youtube.com/vi/tuT-ea6LSIU/0.jpg" class="object-cover w-full h-full opacity-50 group-hover:opacity-100 transition">
+                            <img src="https://img.youtube.com/vi/tuT-ea6LSIU/0.jpg" class="object-cover w-full h-full opacity-50 group-hover:opacity-100 transition" alt="VS Kelani Jordan">
                             <span class="absolute inset-0 flex items-center justify-center text-[10px] font-bold">VS KELANI JORDAN</span>
                         </button>
                     </div>
@@ -93,11 +103,11 @@
                     <div class="border-t border-white/10 pt-6">
                         <p class="text-[10px] font-bold text-gray-500 uppercase mb-4 tracking-widest">Fan Support Chat</p>
                         <div id="chat-box" class="h-48 overflow-y-auto mb-4 space-y-3 pr-2 custom-scroll text-xs">
-                            <div class="bg-white/5 p-3 rounded-xl"><span class="text-yellow-500 font-bold">SYSTEM:</span> Welcome to the squad!</div>
+                            <div class="bg-white/5 p-3 rounded-xl"><span class="text-yellow-500 font-bold uppercase">System:</span> Welcome to the squad!</div>
                         </div>
                         <div class="flex gap-2">
-                            <input type="text" id="chat-msg" placeholder="Ask a question..." class="flex-1 bg-white/5 border border-white/10 rounded-xl px-4 py-2 text-xs outline-none">
-                            <button onclick="sendChat()" class="p-2 bg-yellow-500 text-black rounded-xl"><i data-lucide="send" class="w-4 h-4"></i></button>
+                            <input type="text" id="chat-msg" placeholder="Ask a question..." class="flex-1 bg-white/5 border border-white/10 rounded-xl px-4 py-2 text-xs outline-none focus:border-yellow-500">
+                            <button onclick="sendChat()" class="p-2 bg-yellow-500 text-black rounded-xl hover:scale-105 transition"><i data-lucide="send" class="w-4 h-4"></i></button>
                         </div>
                     </div>
                 </div>
@@ -107,38 +117,45 @@
 
     <div id="auth-modal" class="hidden-section fixed inset-0 z-[200] flex items-center justify-center bg-black/95 backdrop-blur-xl p-6">
         <div class="glass max-w-md w-full p-10 rounded-[40px] relative">
-            <button onclick="closeModals()" class="absolute top-8 right-8 text-gray-500"><i data-lucide="x"></i></button>
+            <button onclick="closeModals()" class="absolute top-8 right-8 text-gray-500 hover:text-white transition"><i data-lucide="x"></i></button>
+            
             <div id="signup-box" class="space-y-4">
                 <h2 class="text-3xl font-title italic mb-6">SIGN UP</h2>
                 <input type="text" id="reg-name" placeholder="Full Name" class="w-full bg-white/5 border border-white/10 p-4 rounded-2xl outline-none focus:border-yellow-500">
                 <input type="email" id="reg-email" placeholder="Email" class="w-full bg-white/5 border border-white/10 p-4 rounded-2xl outline-none focus:border-yellow-500">
                 <div class="grid grid-cols-2 gap-4">
-                    <input type="text" id="reg-country" placeholder="Country" class="bg-white/5 border border-white/10 p-4 rounded-2xl outline-none">
-                    <input type="text" id="reg-state" placeholder="State" class="bg-white/5 border border-white/10 p-4 rounded-2xl outline-none">
+                    <input type="text" id="reg-country" placeholder="Country" class="bg-white/5 border border-white/10 p-4 rounded-2xl outline-none focus:border-yellow-500">
+                    <input type="text" id="reg-state" placeholder="State" class="bg-white/5 border border-white/10 p-4 rounded-2xl outline-none focus:border-yellow-500">
                 </div>
                 <input type="password" id="reg-pass" placeholder="Password" class="w-full bg-white/5 border border-white/10 p-4 rounded-2xl outline-none focus:border-yellow-500">
-                <button onclick="handleSignup()" class="w-full py-5 bg-yellow-500 text-black font-black rounded-2xl uppercase tracking-widest">Create Profile</button>
+                <button onclick="handleSignup()" class="w-full py-5 bg-yellow-500 text-black font-black rounded-2xl uppercase tracking-widest hover:scale-105 transition">Create Profile</button>
+                <p class="text-center text-[10px] text-gray-500 uppercase">Already have an account? <button onclick="openAuth('login')" class="text-yellow-500 font-bold">Login</button></p>
             </div>
+
             <div id="login-box" class="hidden space-y-4">
                 <h2 class="text-3xl font-title italic mb-6">LOGIN</h2>
                 <input type="email" id="log-email" placeholder="Email" class="w-full bg-white/5 border border-white/10 p-4 rounded-2xl outline-none focus:border-yellow-500">
                 <input type="password" id="log-pass" placeholder="Password" class="w-full bg-white/5 border border-white/10 p-4 rounded-2xl outline-none focus:border-yellow-500">
-                <button onclick="handleLogin()" class="w-full py-5 bg-yellow-500 text-black font-black rounded-2xl uppercase tracking-widest">Sign In</button>
+                <button onclick="handleLogin()" class="w-full py-5 bg-yellow-500 text-black font-black rounded-2xl uppercase tracking-widest hover:scale-105 transition">Sign In</button>
+                <p class="text-center text-[10px] text-gray-500 uppercase">Need an account? <button onclick="openAuth('signup')" class="text-yellow-500 font-bold">Sign Up</button></p>
             </div>
         </div>
     </div>
 
     <div id="pay-modal" class="hidden-section fixed inset-0 z-[300] flex items-center justify-center bg-black/98 p-6">
         <div class="glass max-w-sm w-full p-10 rounded-[40px] space-y-6">
-            <h2 class="text-xl font-black uppercase text-center">Secure Checkout</h2>
+            <h2 class="text-xl font-black uppercase text-center tracking-tighter italic">Secure Checkout</h2>
             <div class="text-center p-6 bg-yellow-500/10 rounded-3xl border border-yellow-500/20">
                 <p id="pay-item" class="text-xs text-gray-400 uppercase tracking-widest"></p>
                 <p id="pay-price" class="text-4xl font-bold text-yellow-500 mt-2"></p>
             </div>
             <div class="space-y-4">
-                <input type="text" placeholder="Card Number" class="w-full bg-white/5 border border-white/10 p-4 rounded-xl outline-none">
-                <button onclick="process()" id="pay-btn" class="w-full py-5 bg-white text-black font-black rounded-2xl uppercase">Pay Now</button>
-                <button onclick="closeModals()" class="w-full text-xs text-gray-500 uppercase font-bold">Cancel</button>
+                <div class="space-y-2">
+                    <label class="text-[10px] font-bold text-gray-500 uppercase ml-2">Card Number</label>
+                    <input type="text" placeholder="**** **** **** ****" class="w-full bg-white/5 border border-white/10 p-4 rounded-xl outline-none focus:border-yellow-500">
+                </div>
+                <button onclick="process()" id="pay-btn" class="w-full py-5 bg-white text-black font-black rounded-2xl uppercase tracking-widest hover:bg-yellow-500 transition">Pay Now</button>
+                <button onclick="closeModals()" class="w-full text-xs text-gray-500 uppercase font-bold hover:text-white transition">Cancel</button>
             </div>
         </div>
     </div>
@@ -175,17 +192,29 @@
         function closeModals() { document.querySelectorAll('#auth-modal, #pay-modal').forEach(m => m.classList.add('hidden-section')); }
 
         function handleSignup() {
-            const data = { name: document.getElementById('reg-name').value, email: document.getElementById('reg-email').value, pass: document.getElementById('reg-pass').value };
-            if(!data.name || !data.email) return toast("Fill all fields");
-            db.push(data); localStorage.setItem('sol_fans', JSON.stringify(db));
-            toast("Account Created!"); openAuth('login');
+            const data = { 
+                name: document.getElementById('reg-name').value, 
+                email: document.getElementById('reg-email').value, 
+                pass: document.getElementById('reg-pass').value 
+            };
+            if(!data.name || !data.email || !data.pass) return toast("Please fill all fields");
+            db.push(data); 
+            localStorage.setItem('sol_fans', JSON.stringify(db));
+            toast("Account Created! You can now login."); 
+            openAuth('login');
         }
 
         function handleLogin() {
             const email = document.getElementById('log-email').value;
             const pass = document.getElementById('log-pass').value;
             const found = db.find(u => u.email === email && u.pass === pass);
-            if(found) { user = found; launch(); } else toast("Invalid Login");
+            if(found) { 
+                user = found; 
+                launch(); 
+                toast("Welcome to the squad!");
+            } else {
+                toast("Invalid email or password");
+            }
         }
 
         function launch() {
@@ -194,25 +223,28 @@
             document.getElementById('dashboard').classList.remove('hidden-section');
             document.getElementById('auth-nav').classList.add('hidden');
             document.getElementById('user-nav').classList.remove('hidden');
+            
             document.getElementById('nav-user-name').innerText = user.name;
             document.getElementById('welcome-name').innerText = user.name.toUpperCase();
 
             document.getElementById('ticket-container').innerHTML = tickets.map(t => `
-                <div class="glass p-5 rounded-2xl flex justify-between items-center group hover:border-white/20 transition">
-                    <div><p class="text-[10px] text-yellow-500 font-bold uppercase">${t.date}</p><h4 class="font-bold">${t.name}</h4></div>
-                    <div class="flex items-center gap-6"><span class="font-bold">${t.price}</span><button onclick="checkout('${t.name}', '${t.price}')" class="bg-white/10 px-6 py-2 rounded-full text-[10px] font-black uppercase hover:bg-white hover:text-black transition">Buy</button></div>
+                <div class="glass p-5 rounded-2xl flex justify-between items-center group hover:border-yellow-500/50 transition">
+                    <div><p class="text-[10px] text-yellow-500 font-bold uppercase tracking-widest">${t.date}</p><h4 class="font-bold text-lg">${t.name}</h4></div>
+                    <div class="flex items-center gap-6"><span class="font-bold text-xl">${t.price}</span><button onclick="checkout('${t.name}', '${t.price}')" class="bg-white/10 px-6 py-2 rounded-full text-[10px] font-black uppercase hover:bg-white hover:text-black transition">Buy Ticket</button></div>
                 </div>
             `).join('');
 
             document.getElementById('tier-container').innerHTML = tiers.map(t => `
-                <div class="flex justify-between items-center p-4 rounded-2xl bg-white/5 border border-white/5">
-                    <div><b class="${t.c} uppercase text-xs tracking-widest">${t.n}</b><p class="text-lg font-bold">${t.p}</p></div>
-                    <button onclick="checkout('${t.n} Membership', '${t.p}')" class="text-[10px] font-black uppercase border border-yellow-500 p-2 rounded-lg text-yellow-500 hover:bg-yellow-500 hover:text-black transition">Purchase</button>
+                <div class="flex justify-between items-center p-4 rounded-2xl bg-white/5 border border-white/5 hover:border-white/20 transition">
+                    <div><b class="${t.c} uppercase text-[10px] tracking-widest">${t.n} SQUAD</b><p class="text-xl font-bold">${t.p}</p></div>
+                    <button onclick="checkout('${t.n} Membership', '${t.p}')" class="text-[10px] font-black uppercase border border-yellow-500 p-2 rounded-lg text-yellow-500 hover:bg-yellow-500 hover:text-black transition">Join</button>
                 </div>
             `).join('');
         }
 
-        function setVideo(id) { document.getElementById('main-player').src = `https://www.youtube.com/embed/${id}?autoplay=1`; }
+        function setVideo(id) { 
+            document.getElementById('main-player').src = `https://www.youtube.com/embed/${id}?autoplay=1`; 
+        }
 
         function checkout(n, p) {
             document.getElementById('pay-modal').classList.remove('hidden-section');
@@ -223,9 +255,11 @@
         function process() {
             const btn = document.getElementById('pay-btn');
             btn.innerText = "Processing...";
+            btn.disabled = true;
             setTimeout(() => {
-                toast("Payment Confirmed! Check your email.");
+                toast("Transaction Successful! Access granted.");
                 btn.innerText = "Pay Now";
+                btn.disabled = false;
                 closeModals();
             }, 2000);
         }
@@ -233,8 +267,13 @@
         function sendChat() {
             const msg = document.getElementById('chat-msg');
             if(!msg.value) return;
-            document.getElementById('chat-box').innerHTML += `<div class="bg-yellow-500/10 p-2 rounded-lg text-right"><b>YOU:</b> ${msg.value}</div>`;
+            const chatBox = document.getElementById('chat-box');
+            chatBox.innerHTML += `<div class="bg-yellow-500/10 p-3 rounded-2xl rounded-tr-none text-right border border-yellow-500/10 ml-8 animate-fade">
+                                    <span class="text-[10px] text-yellow-500 font-bold uppercase">You</span>
+                                    <p class="mt-1">${msg.value}</p>
+                                  </div>`;
             msg.value = '';
+            chatBox.scrollTop = chatBox.scrollHeight;
         }
     </script>
 </body>
