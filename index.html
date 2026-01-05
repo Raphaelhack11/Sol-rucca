@@ -16,10 +16,10 @@
         .glass { background: rgba(255,255,255,0.03); backdrop-filter: blur(15px); border: 1px solid rgba(255,255,255,0.08); }
         
         .hero-img { 
-            background: linear-gradient(to bottom, rgba(5,5,5,0.3), #050505), 
-            url('https://www.wwe.com/f/styles/wwe_large/public/all/2024/07/NXT_07022024_Heatwave_SolRuca--3e96f1d2.jpg'); 
+            background: linear-gradient(to bottom, rgba(5,5,5,0.5), #050505), 
+            url('https://i.imgur.com/be5f0698-0872-4957-8154-3957de1e8ca1.jpg'); 
             background-size: cover; 
-            background-position: center 20%; 
+            background-position: center; 
         }
 
         .hidden-section { display: none !important; }
@@ -28,8 +28,8 @@
         .custom-scroll::-webkit-scrollbar { width: 4px; }
         .custom-scroll::-webkit-scrollbar-thumb { background: var(--sol-gold); border-radius: 10px; }
         
-        .animate-bounce-slow { animation: bounce 3s infinite; }
-        @keyframes bounce { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-10px); } }
+        @keyframes spin-slow { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+        .animate-spin-slow { animation: spin-slow 2s linear infinite; }
     </style>
 </head>
 <body>
@@ -37,8 +37,6 @@
     <nav class="fixed w-full z-[100] px-8 py-4 flex justify-between items-center glass border-none bg-black/70">
         <div class="text-2xl font-title font-bold text-yellow-500 tracking-tighter italic">SOL RUCA</div>
         <div id="auth-nav" class="flex gap-8 items-center">
-            <a href="#about" class="hidden md:block text-[10px] uppercase font-bold tracking-widest hover:text-yellow-500 transition">About</a>
-            <a href="#contact" class="hidden md:block text-[10px] uppercase font-bold tracking-widest hover:text-yellow-500 transition">Contact</a>
             <button onclick="openAuth('login')" class="text-xs font-bold uppercase tracking-widest hover:text-yellow-500 transition">Login</button>
             <button onclick="openAuth('signup')" class="bg-yellow-500 text-black px-6 py-2 rounded-full text-xs font-black uppercase">Join</button>
         </div>
@@ -54,93 +52,99 @@
     <div id="landing-page-container">
         <main class="hero-img h-screen flex flex-col justify-center items-center text-center px-6 relative">
             <h1 class="text-6xl md:text-9xl font-title font-bold mb-4 tracking-tighter uppercase">Sol Snatcher</h1>
-            <p class="text-xl text-gray-300 max-w-xl mb-10 font-light italic">The future of NXT is athletic. The future is Sol.</p>
+            <p class="text-xl text-gray-300 max-w-xl mb-10 font-light italic">The ultimate destination for the Sol Ruca squad.</p>
             <button onclick="openAuth('signup')" class="bg-white text-black px-12 py-5 rounded-full font-black uppercase tracking-widest hover:bg-yellow-500 transition shadow-2xl z-10">
                 Enter Dashboard
             </button>
-            
-            <div class="absolute bottom-10 animate-bounce-slow flex flex-col items-center opacity-50">
-                <i data-lucide="chevron-down"></i>
-            </div>
         </main>
-
-        <section class="py-24 px-8 bg-[#050505] grid md:grid-cols-3 gap-8 max-w-6xl mx-auto border-b border-white/5">
-            <div class="glass p-10 rounded-[32px] text-center border-yellow-500/10 hover:border-yellow-500/40 transition">
-                <h3 class="text-yellow-500 font-title text-4xl mb-2">D1</h3>
-                <p class="text-gray-400 uppercase text-xs tracking-widest">Acrobatics & Tumbling</p>
-            </div>
-            <div class="glass p-10 rounded-[32px] text-center border-yellow-500/10 hover:border-yellow-500/40 transition">
-                <h3 class="text-yellow-500 font-title text-4xl mb-2">99%</h3>
-                <p class="text-gray-400 uppercase text-xs tracking-widest">Atheletic Accuracy</p>
-            </div>
-            <div class="glass p-10 rounded-[32px] text-center border-yellow-500/10 hover:border-yellow-500/40 transition">
-                <h3 class="text-yellow-500 font-title text-4xl mb-2">NEW</h3>
-                <p class="text-gray-400 uppercase text-xs tracking-widest">Era of Women's Wrestling</p>
-            </div>
-        </section>
-
-        <section id="about" class="py-32 px-8 max-w-6xl mx-auto grid md:grid-cols-2 gap-20 items-center">
-            <div>
-                <h2 class="text-4xl font-title mb-8 italic">The Athlete<br><span class="text-yellow-500">Beyond the Ring</span></h2>
-                <p class="text-gray-400 leading-relaxed mb-6 font-light">Sol Ruca isn't just a WWE Superstar; she is a world-class athlete who redefined what is possible in the squared circle. From her roots as a standout in Division I Acrobatics and Tumbling to her viral "Sol Snatcher" finisher, she represents a new breed of athleticism.</p>
-                <ul class="space-y-4 text-sm font-bold uppercase tracking-widest text-gray-300">
-                    <li class="flex items-center gap-3"><i data-lucide="check" class="text-yellow-500 w-4 h-4"></i> Viral TikTok Phenom</li>
-                    <li class="flex items-center gap-3"><i data-lucide="check" class="text-yellow-500 w-4 h-4"></i> NXT Breakout Star</li>
-                    <li class="flex items-center gap-3"><i data-lucide="check" class="text-yellow-500 w-4 h-4"></i> Master of the Sol Snatcher</li>
-                </ul>
-            </div>
-            <div class="glass p-4 rounded-[40px] rotate-3 hover:rotate-0 transition duration-700">
-                <img src="https://www.wwe.com/f/styles/gallery_img_l/public/all/2023/04/002_NXT_04112023_SolRuca--45167b78997a0669b9148d488974a625.jpg" class="rounded-[32px] grayscale hover:grayscale-0 transition duration-700" alt="Sol Training">
-            </div>
-        </section>
-
-        <section id="contact" class="py-32 px-8 bg-white/5 border-y border-white/5">
-            <div class="max-w-4xl mx-auto text-center">
-                <h2 class="text-4xl font-title mb-4 italic">Get In Touch</h2>
-                <p class="text-gray-400 mb-12">For business inquiries, sponsorships, or media requests.</p>
-                <div class="grid md:grid-cols-2 gap-8">
-                    <div class="glass p-8 rounded-3xl">
-                        <i data-lucide="mail" class="mx-auto mb-4 text-yellow-500"></i>
-                        <p class="text-xs uppercase font-bold text-gray-500 tracking-widest mb-1">Booking</p>
-                        <p class="font-bold">booking@solruca.com</p>
-                    </div>
-                    <div class="glass p-8 rounded-3xl">
-                        <i data-lucide="message-square" class="mx-auto mb-4 text-yellow-500"></i>
-                        <p class="text-xs uppercase font-bold text-gray-500 tracking-widest mb-1">Press</p>
-                        <p class="font-bold">media@wwe.com</p>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <footer class="py-12 px-8 text-center text-[10px] text-gray-600 uppercase tracking-[0.4em]">
-            <p>&copy; 2026 Sol Ruca Elite. All Rights Reserved. WWE Property.</p>
-        </footer>
     </div>
 
     <div id="dashboard" class="hidden-section pt-32 px-8 max-w-[1600px] mx-auto pb-20">
         <div class="grid lg:grid-cols-12 gap-10">
             <div class="lg:col-span-8 space-y-10">
-                <header>
-                    <h2 class="text-4xl font-title tracking-tighter">SOL VAULT / <span id="welcome-name" class="text-yellow-500"></span></h2>
-                </header>
-                <div class="glass p-6 rounded-[32px]">
-                    <div class="video-container mb-6">
-                        <iframe id="main-player" src="https://www.youtube.com/embed/ucH_JlCGrFc" allowfullscreen></iframe>
-                    </div>
+                <header><h2 class="text-4xl font-title tracking-tighter uppercase">Sol Vault / <span id="welcome-name" class="text-yellow-500"></span></h2></header>
+                <div class="glass p-6 rounded-[32px] border-yellow-500/20">
+                    <div class="video-container"><iframe id="main-player" src="https://www.youtube.com/embed/ucH_JlCGrFc" allowfullscreen></iframe></div>
                 </div>
-                <div id="ticket-container" class="grid gap-3"></div>
+                <div class="space-y-4">
+                    <h3 class="font-bold uppercase tracking-widest text-sm text-yellow-500">Live Events</h3>
+                    <div id="ticket-container" class="grid gap-3"></div>
+                </div>
             </div>
             <div class="lg:col-span-4 space-y-6">
-                <div class="glass p-8 rounded-[40px]" id="tier-container"></div>
-                <div class="glass p-6 rounded-3xl">
-                    <button onclick="toast('Meet & Greet Form Opened!')" class="w-full py-4 bg-white text-black font-black rounded-2xl uppercase text-xs tracking-widest hover:bg-yellow-500 transition mb-6">Request Meet & Greet</button>
-                    <div id="chat-box" class="h-48 overflow-y-auto mb-4 space-y-3 custom-scroll text-xs"></div>
-                    <div class="flex gap-2">
-                        <input type="text" id="chat-msg" class="flex-1 bg-white/5 border border-white/10 rounded-xl px-4 py-2 outline-none">
-                        <button onclick="sendChat()" class="p-2 bg-yellow-500 text-black rounded-xl"><i data-lucide="send" class="w-4 h-4"></i></button>
+                <div class="glass p-8 rounded-[40px] border-yellow-500/30">
+                    <h3 class="text-xl font-title mb-6 italic text-sm">Memberships</h3>
+                    <div class="space-y-4" id="tier-container"></div>
+                </div>
+                <button onclick="openMeetForm()" class="w-full py-6 bg-yellow-500 text-black font-black rounded-[30px] uppercase text-sm tracking-widest hover:scale-105 transition shadow-xl shadow-yellow-500/10">
+                    Request Meet & Greet
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <div id="meet-modal" class="hidden-section fixed inset-0 z-[400] flex items-center justify-center bg-black/95 p-6">
+        <div class="glass max-w-lg w-full p-10 rounded-[40px] space-y-4 relative">
+            <button onclick="closeModals()" class="absolute top-8 right-8 text-gray-500"><i data-lucide="x"></i></button>
+            <h2 class="text-2xl font-title italic text-yellow-500">Meet & Greet Application</h2>
+            <p class="text-xs text-gray-400 mb-4">Complete the form to proceed to secure application fee payment.</p>
+            <input type="text" id="meet-name" placeholder="Full Name" class="w-full bg-white/5 border border-white/10 p-4 rounded-xl outline-none">
+            <div class="grid grid-cols-2 gap-4">
+                <input type="text" id="meet-country" placeholder="Country" class="bg-white/5 border border-white/10 p-4 rounded-xl outline-none">
+                <input type="text" id="meet-state" placeholder="State" class="bg-white/5 border border-white/10 p-4 rounded-xl outline-none">
+            </div>
+            <input type="tel" id="meet-phone" placeholder="Phone Number" class="w-full bg-white/5 border border-white/10 p-4 rounded-xl outline-none">
+            <input type="email" id="meet-email" placeholder="Email Address" class="w-full bg-white/5 border border-white/10 p-4 rounded-xl outline-none">
+            <button onclick="initiatePayment('Meet & Greet Fee', '500')" class="w-full py-5 bg-white text-black font-black rounded-2xl uppercase tracking-widest">Continue to Payment</button>
+        </div>
+    </div>
+
+    <div id="pay-modal" class="hidden-section fixed inset-0 z-[500] flex items-center justify-center bg-black/98 p-6">
+        <div class="glass max-w-md w-full p-10 rounded-[40px] text-center space-y-6" id="pay-content-wrapper">
+            <div id="pay-stage-1" class="space-y-6">
+                <h2 class="text-xl font-black uppercase italic">Select Payment Method</h2>
+                <div class="p-6 bg-yellow-500/10 rounded-3xl border border-yellow-500/20">
+                    <p id="target-item" class="text-[10px] text-gray-400 uppercase tracking-widest"></p>
+                    <p id="target-price" class="text-4xl font-bold text-yellow-500 mt-2"></p>
+                </div>
+                <div class="grid gap-3">
+                    <button onclick="showWallet('Bitcoin', 'bc1q4c6f7xzsekkpvd2guwkaww4m7se9yjlrxnrjc7')" class="w-full p-4 glass rounded-2xl flex items-center justify-between hover:bg-white/10">
+                        <span class="font-bold">Bitcoin (BTC)</span><i data-lucide="chevron-right"></i>
+                    </button>
+                    <button onclick="showWallet('USDT ERC-20', '0x08cfe6ddc3b58b0655dd1c9214bcfddbd3855cca')" class="w-full p-4 glass rounded-2xl flex items-center justify-between hover:bg-white/10">
+                        <span class="font-bold">USDT (ERC-20)</span><i data-lucide="chevron-right"></i>
+                    </button>
+                </div>
+                <button onclick="closeModals()" class="text-xs text-gray-500 uppercase font-bold tracking-widest">Cancel Transaction</button>
+            </div>
+
+            <div id="pay-stage-2" class="hidden-section space-y-6">
+                <h2 id="wallet-title" class="text-xl font-black text-yellow-500 italic uppercase"></h2>
+                <p class="text-xs text-gray-400">Please pay exactly <span id="final-amt" class="text-white font-bold"></span> to the address below:</p>
+                <div class="bg-white p-4 rounded-2xl mx-auto w-40 h-40 flex items-center justify-center shadow-lg">
+                    <div class="w-32 h-32 bg-gray-200 border-2 border-black flex items-center justify-center">
+                        <i data-lucide="qr-code" class="text-black w-16 h-16"></i>
                     </div>
                 </div>
+                <div class="bg-black/40 p-4 rounded-xl border border-white/10 break-all relative group">
+                    <p id="wallet-addr" class="text-[10px] font-mono text-gray-300"></p>
+                    <button onclick="copyWallet()" class="mt-4 text-[10px] text-yellow-500 font-bold uppercase flex items-center justify-center gap-2 mx-auto">
+                        <i data-lucide="copy" class="w-3 h-3"></i> Copy Address
+                    </button>
+                </div>
+                <button onclick="processFinal()" class="w-full py-5 bg-yellow-500 text-black font-black rounded-2xl uppercase tracking-widest shadow-lg shadow-yellow-500/20">I Have Sent It</button>
+            </div>
+
+            <div id="pay-stage-3" class="hidden-section py-10 space-y-6">
+                <div class="w-20 h-20 border-4 border-yellow-500 border-t-transparent rounded-full animate-spin-slow mx-auto"></div>
+                <p class="text-yellow-500 font-bold uppercase tracking-widest text-xs">Verifying Transaction...</p>
+            </div>
+
+            <div id="pay-stage-4" class="hidden-section py-10 space-y-6">
+                <i data-lucide="check-circle" class="w-20 h-20 text-green-500 mx-auto"></i>
+                <h2 class="text-2xl font-title italic">Thank You!</h2>
+                <p class="text-gray-400 text-sm leading-relaxed">Your application is being processed. We will contact you through email to proceed with your application shortly.</p>
+                <button onclick="location.reload()" class="w-full py-4 bg-white/10 rounded-2xl uppercase font-bold text-xs tracking-widest">Back to Dashboard</button>
             </div>
         </div>
     </div>
@@ -150,35 +154,17 @@
             <button onclick="closeModals()" class="absolute top-8 right-8 text-gray-500"><i data-lucide="x"></i></button>
             <div id="signup-box" class="space-y-4">
                 <h2 class="text-3xl font-title italic mb-6">SIGN UP</h2>
-                <input type="text" id="reg-name" placeholder="Full Name" class="w-full bg-white/5 border border-white/10 p-4 rounded-2xl outline-none focus:border-yellow-500">
-                <input type="email" id="reg-email" placeholder="Email" class="w-full bg-white/5 border border-white/10 p-4 rounded-2xl outline-none focus:border-yellow-500">
-                <div class="grid grid-cols-2 gap-4">
-                    <input type="text" id="reg-country" placeholder="Country" class="bg-white/5 border border-white/10 p-4 rounded-2xl outline-none">
-                    <input type="text" id="reg-state" placeholder="State" class="bg-white/5 border border-white/10 p-4 rounded-2xl outline-none">
-                </div>
-                <input type="tel" id="reg-phone" placeholder="Phone Number" class="w-full bg-white/5 border border-white/10 p-4 rounded-2xl outline-none">
-                <input type="password" id="reg-pass" placeholder="Password" class="w-full bg-white/5 border border-white/10 p-4 rounded-2xl outline-none focus:border-yellow-500">
+                <input type="text" id="reg-name" placeholder="Full Name" class="w-full bg-white/5 border border-white/10 p-4 rounded-xl outline-none">
+                <input type="email" id="reg-email" placeholder="Email" class="w-full bg-white/5 border border-white/10 p-4 rounded-xl outline-none">
+                <input type="password" id="reg-pass" placeholder="Password" class="w-full bg-white/5 border border-white/10 p-4 rounded-xl outline-none">
                 <button onclick="handleSignup()" class="w-full py-5 bg-yellow-500 text-black font-black rounded-2xl uppercase tracking-widest transition hover:scale-105">Create Profile</button>
             </div>
             <div id="login-box" class="hidden-section space-y-4">
                 <h2 class="text-3xl font-title italic mb-6">LOGIN</h2>
-                <input type="email" id="log-email" placeholder="Email" class="w-full bg-white/5 border border-white/10 p-4 rounded-2xl outline-none">
-                <input type="password" id="log-pass" placeholder="Password" class="w-full bg-white/5 border border-white/10 p-4 rounded-2xl outline-none">
+                <input type="email" id="log-email" placeholder="Email" class="w-full bg-white/5 border border-white/10 p-4 rounded-xl outline-none">
+                <input type="password" id="log-pass" placeholder="Password" class="w-full bg-white/5 border border-white/10 p-4 rounded-xl outline-none">
                 <button onclick="handleLogin()" class="w-full py-5 bg-yellow-500 text-black font-black rounded-2xl uppercase tracking-widest">Sign In</button>
             </div>
-        </div>
-    </div>
-
-    <div id="pay-modal" class="hidden-section fixed inset-0 z-[300] flex items-center justify-center bg-black/98 p-6 text-white">
-        <div class="glass max-w-sm w-full p-10 rounded-[40px] space-y-6">
-            <h2 class="text-xl font-black uppercase text-center">Checkout</h2>
-            <div class="text-center p-6 bg-yellow-500/10 rounded-3xl border border-yellow-500/20">
-                <p id="pay-item" class="text-[10px] text-gray-400 uppercase tracking-widest"></p>
-                <p id="pay-price" class="text-4xl font-bold text-yellow-500 mt-2"></p>
-            </div>
-            <input type="text" placeholder="Card Number" class="w-full bg-white/5 border border-white/10 p-4 rounded-xl outline-none">
-            <button onclick="process()" id="pay-btn" class="w-full py-5 bg-white text-black font-black rounded-2xl uppercase">Complete Order</button>
-            <button onclick="closeModals()" class="w-full text-[10px] text-gray-500 uppercase font-bold">Cancel</button>
         </div>
     </div>
 
@@ -188,15 +174,13 @@
         let db = JSON.parse(localStorage.getItem('sol_fans')) || [];
 
         const tickets = [
-            { name: "NXT Heatwave", date: "July 07, 2026", price: "$95" },
-            { name: "NXT Level Up", date: "July 14, 2026", price: "$40" },
-            { name: "Summerslam 2026", date: "Aug 03, 2026", price: "$290" }
+            { name: "NXT Heatwave", date: "July 07, 2026", price: "95" },
+            { name: "NXT Level Up", date: "July 14, 2026", price: "40" }
         ];
 
         const tiers = [
-            { name: "VIP Pro", price: "$150", color: "text-gray-400" },
-            { name: "Gold Fan", price: "$350", color: "text-yellow-500" },
-            { name: "Legend", price: "$600", color: "text-purple-500" }
+            { name: "VIP Pro", price: "150", color: "text-gray-400" },
+            { name: "Gold Fan", price: "350", color: "text-yellow-500" }
         ];
 
         function openAuth(m) {
@@ -205,24 +189,63 @@
             document.getElementById('login-box').classList.toggle('hidden-section', m === 'signup');
         }
 
-        function closeModals() { 
-            document.querySelectorAll('#auth-modal, #pay-modal').forEach(m => m.classList.add('hidden-section')); 
+        function closeModals() {
+            document.querySelectorAll('#auth-modal, #pay-modal, #meet-modal').forEach(m => m.classList.add('hidden-section'));
+        }
+
+        function openMeetForm() {
+            document.getElementById('meet-modal').classList.remove('hidden-section');
+        }
+
+        function initiatePayment(item, price) {
+            closeModals();
+            document.getElementById('pay-modal').classList.remove('hidden-section');
+            document.getElementById('pay-stage-1').classList.remove('hidden-section');
+            document.getElementById('pay-stage-2').classList.add('hidden-section');
+            document.getElementById('pay-stage-3').classList.add('hidden-section');
+            document.getElementById('pay-stage-4').classList.add('hidden-section');
+            
+            document.getElementById('target-item').innerText = item;
+            document.getElementById('target-price').innerText = `$${price}`;
+            document.getElementById('final-amt').innerText = `$${price}`;
+        }
+
+        function showWallet(method, addr) {
+            document.getElementById('pay-stage-1').classList.add('hidden-section');
+            document.getElementById('pay-stage-2').classList.remove('hidden-section');
+            document.getElementById('wallet-title').innerText = method;
+            document.getElementById('wallet-addr').innerText = addr;
+        }
+
+        function copyWallet() {
+            const addr = document.getElementById('wallet-addr').innerText;
+            navigator.clipboard.writeText(addr);
+            toast("Address Copied!");
+        }
+
+        function processFinal() {
+            document.getElementById('pay-stage-2').classList.add('hidden-section');
+            document.getElementById('pay-stage-3').classList.remove('hidden-section');
+            setTimeout(() => {
+                document.getElementById('pay-stage-3').classList.add('hidden-section');
+                document.getElementById('pay-stage-4').classList.remove('hidden-section');
+            }, 10000);
         }
 
         function handleSignup() {
             const name = document.getElementById('reg-name').value;
             const email = document.getElementById('reg-email').value;
-            if(!name || !email) return toast("Fill required fields");
+            if(!name || !email) return toast("Fill all fields");
             db.push({ name, email, pass: document.getElementById('reg-pass').value });
             localStorage.setItem('sol_fans', JSON.stringify(db));
-            toast("Account Ready! Login now."); openAuth('login');
+            toast("Account Ready! Please Login."); openAuth('login');
         }
 
         function handleLogin() {
             const email = document.getElementById('log-email').value;
             const pass = document.getElementById('log-pass').value;
             const found = db.find(u => u.email === email && u.pass === pass);
-            if(found) { user = found; launch(); } else toast("Access Denied");
+            if(found) { user = found; launch(); } else toast("Invalid Login");
         }
 
         function launch() {
@@ -230,19 +253,20 @@
             document.getElementById('dashboard').classList.remove('hidden-section');
             document.getElementById('auth-nav').classList.add('hidden-section');
             document.getElementById('user-nav').classList.remove('hidden-section');
+            document.getElementById('nav-user-name').innerText = user.name;
             document.getElementById('welcome-name').innerText = user.name.toUpperCase();
             
             document.getElementById('ticket-container').innerHTML = tickets.map(t => `
                 <div class="glass p-5 rounded-2xl flex justify-between items-center border-white/5">
                     <div><p class="text-[10px] text-yellow-500 font-bold uppercase">${t.date}</p><h4 class="font-bold">${t.name}</h4></div>
-                    <button onclick="checkout('${t.name}', '${t.price}')" class="bg-white/10 px-6 py-2 rounded-full text-[10px] font-black uppercase hover:bg-yellow-500 hover:text-black transition">Buy ${t.price}</button>
+                    <button onclick="initiatePayment('${t.name}', '${t.price}')" class="bg-white/10 px-6 py-2 rounded-full text-[10px] font-black uppercase hover:bg-yellow-500 transition">Buy $${t.price}</button>
                 </div>
             `).join('');
 
             document.getElementById('tier-container').innerHTML = tiers.map(t => `
-                <div class="flex justify-between items-center p-4 rounded-2xl bg-white/5 border border-white/5">
-                    <div><b class="${t.color} uppercase text-[10px] tracking-widest">${t.name}</b><p class="text-xl font-bold">${t.price}</p></div>
-                    <button onclick="checkout('${t.name}', '${t.price}')" class="text-[10px] font-black uppercase border border-yellow-500 p-2 rounded-lg text-yellow-500 hover:bg-yellow-500 hover:text-black transition">Upgrade</button>
+                <div class="flex justify-between items-center p-4 rounded-2xl bg-white/5">
+                    <div><b class="${t.color} uppercase text-[10px] tracking-widest">${t.name}</b><p class="text-xl font-bold">$${t.price}</p></div>
+                    <button onclick="initiatePayment('${t.name} Membership', '${t.price}')" class="text-[10px] font-black uppercase border border-yellow-500 p-2 rounded-lg text-yellow-500 transition">Join</button>
                 </div>
             `).join('');
             closeModals();
@@ -250,25 +274,6 @@
 
         function toast(txt) {
             Toastify({ text: txt, duration: 3000, position: "right", style: { background: "#fbbf24", color: "#000", fontWeight: "900", borderRadius: "12px" } }).showToast();
-        }
-
-        function checkout(n, p) {
-            document.getElementById('pay-modal').classList.remove('hidden-section');
-            document.getElementById('pay-item').innerText = n;
-            document.getElementById('pay-price').innerText = p;
-        }
-
-        function process() {
-            const btn = document.getElementById('pay-btn');
-            btn.innerText = "Processing...";
-            setTimeout(() => { toast("Success!"); btn.innerText = "Complete Order"; closeModals(); }, 2000);
-        }
-
-        function sendChat() {
-            const msg = document.getElementById('chat-msg');
-            if(!msg.value) return;
-            document.getElementById('chat-box').innerHTML += `<div class="bg-yellow-500/10 p-3 rounded-xl text-right"><b>YOU:</b> ${msg.value}</div>`;
-            msg.value = '';
         }
     </script>
 </body>
