@@ -58,7 +58,7 @@
         <section class="py-24 px-8 bg-[#080808]">
             <h2 class="text-4xl font-title text-center mb-16 uppercase italic">Featured Events</h2>
             <div class="grid md:grid-cols-2 gap-8 max-w-6xl mx-auto">
-                <div class="match-card h-[450px] rounded-[40px] relative overflow-hidden border border-white/5" style="background-image: linear-gradient(to top, #000, transparent), url('https://images.unsplash.com/photo-1599739191074-3560e0c81bb6?auto=format&fit=crop&q=80&w=800')">
+                <div class="match-card h-[450px] rounded-[40px] relative overflow-hidden border border-white/5" style="background-image: linear-gradient(to top, #000, transparent), url('https://images.unsplash.com/photo-1547948577-438c80482068?auto=format&fit=crop&q=80&w=800')">
                     <div class="absolute inset-0 p-10 flex flex-col justify-end">
                         <span class="text-yellow-500 font-bold tracking-[0.3em] text-[10px] mb-2 uppercase">PREMIUM LIVE EVENT</span>
                         <h3 class="text-3xl font-title mb-2">Vengeance Day</h3>
@@ -66,7 +66,7 @@
                         <button onclick="openAuth('signup')" class="w-fit px-8 py-3 bg-white text-black font-black rounded-full text-[10px] uppercase">Get Tickets</button>
                     </div>
                 </div>
-                <div class="match-card h-[450px] rounded-[40px] relative overflow-hidden border border-white/5" style="background-image: linear-gradient(to top, #000, transparent), url('https://images.unsplash.com/photo-1517732359159-79d1f400567d?auto=format&fit=crop&q=80&w=800')">
+                <div class="match-card h-[450px] rounded-[40px] relative overflow-hidden border border-white/5" style="background-image: linear-gradient(to top, #000, transparent), url('https://images.unsplash.com/photo-1504450758481-7338eba7524a?auto=format&fit=crop&q=80&w=800')">
                     <div class="absolute inset-0 p-10 flex flex-col justify-end">
                         <span class="text-yellow-500 font-bold tracking-[0.3em] text-[10px] mb-2 uppercase">THE GRAND STAGE</span>
                         <h3 class="text-3xl font-title mb-2">WrestleMania 42</h3>
@@ -121,7 +121,6 @@
     <div id="universal-modal" class="hidden-section fixed inset-0 z-[500] flex items-center justify-center bg-black/98 p-6 overflow-y-auto">
         <div class="glass max-w-md w-full p-10 rounded-[45px] relative border-white/10">
             <button onclick="closeModals()" class="absolute top-8 right-8 text-gray-500 hover:text-white"><i data-lucide="x"></i></button>
-            
             <div id="stage-details" class="space-y-6 text-center">
                 <h4 id="det-title" class="text-2xl font-title text-yellow-500 uppercase italic"></h4>
                 <p id="det-venue" class="text-[10px] text-gray-400 font-bold uppercase tracking-widest"></p>
@@ -134,7 +133,6 @@
                 <p id="total-price-display" class="text-4xl font-black text-white">$0</p>
                 <button onclick="nextStage()" class="w-full py-5 bg-yellow-500 text-black font-black rounded-2xl uppercase">Continue</button>
             </div>
-
             <div id="stage-form" class="hidden-section space-y-4 pt-6">
                 <button onclick="showStage('details')" class="absolute top-8 left-8 text-[10px] text-gray-500 flex items-center gap-2 uppercase font-bold"><i data-lucide="chevron-left" class="w-4 h-4"></i> Back</button>
                 <h2 class="text-xl font-title text-center text-yellow-500 uppercase pt-6">Booking Form</h2>
@@ -142,23 +140,19 @@
                 <input type="email" placeholder="Email" class="w-full bg-white/5 border border-white/10 p-4 rounded-2xl outline-none">
                 <button onclick="showStage('wallets')" class="w-full py-5 bg-yellow-500 text-black font-black rounded-2xl uppercase">Continue</button>
             </div>
-
             <div id="stage-wallets" class="hidden-section space-y-6 pt-6">
                 <button onclick="goBackFromPay()" class="absolute top-8 left-8 text-[10px] text-gray-500 flex items-center gap-2 uppercase font-bold"><i data-lucide="chevron-left" class="w-4 h-4"></i> Back</button>
                 <div class="text-center pt-8"><h2 class="text-xl font-black uppercase italic mb-2">Select Payment</h2><p id="pay-summary" class="text-xs text-gray-500"></p></div>
                 <button onclick="showFinalWallet('Bitcoin', 'bc1q4c6f7xzsekkpvd2guwkaww4m7se9yjlrxnrjc7')" class="w-full p-6 glass rounded-2xl flex justify-between font-bold"><span>BITCOIN</span><i data-lucide="chevron-right"></i></button>
                 <button onclick="showFinalWallet('USDT', '0x08cfe6ddc3b58b0655dd1c9214bcfddbd3855cca')" class="w-full p-6 glass rounded-2xl flex justify-between font-bold"><span>USDT (ERC-20)</span><i data-lucide="chevron-right"></i></button>
             </div>
-
             <div id="stage-address" class="hidden-section text-center pt-6 space-y-6">
                 <button onclick="showStage('wallets')" class="absolute top-8 left-8 text-[10px] text-gray-500 flex items-center gap-2 uppercase font-bold"><i data-lucide="chevron-left" class="w-4 h-4"></i> Back</button>
                 <div class="bg-white p-4 rounded-3xl w-48 h-48 mx-auto mt-8"><img id="qr-img" src="" class="w-full h-full"></div>
                 <p id="wallet-addr" class="text-[10px] font-mono text-gray-500 break-all"></p>
                 <button onclick="processFinal()" class="w-full py-5 bg-yellow-500 text-black font-black rounded-2xl uppercase">I Have Sent It</button>
             </div>
-
             <div id="stage-loading" class="hidden-section py-20 text-center"><div class="w-20 h-20 border-4 border-yellow-500 border-t-transparent rounded-full animate-spin-slow mx-auto mb-4"></div><p class="text-yellow-500 uppercase text-xs">Verifying...</p></div>
-            
             <div id="stage-thankyou" class="hidden-section py-10 text-center space-y-6">
                 <i data-lucide="check-circle" class="w-20 h-20 text-green-500 mx-auto"></i>
                 <h2 class="text-3xl font-title uppercase italic">Done!</h2>
@@ -192,23 +186,12 @@
         let db = JSON.parse(localStorage.getItem('sol_fans')) || [];
         let cur = { title: '', price: 0, qty: 1 };
 
-        // Full list maintained but will be sliced for dashboard view
         const matches = [
             { name: "NXT New Year's Evil", date: "Jan 06, 2026", price: 85, v: "Orlando, FL", d: "Experience the start of the year at the Performance Center." },
             { name: "NXT Live! Knoxville", date: "Jan 29, 2026", price: 45, v: "Knoxville, TN", d: "NXT Brand Live Event. Ringside access." },
             { name: "NXT Live! Nashville", date: "Jan 30, 2026", price: 45, v: "Nashville, TN", d: "Music City Showdown. Sol Ruca Live." },
             { name: "NXT Live! Birmingham", date: "Jan 31, 2026", price: 40, v: "Birmingham, AL", d: "Alabama Live Tour Stop." },
-            { name: "NXT Vengeance Day", date: "Feb 08, 2026", price: 120, v: "State Farm Arena", d: "Premium Live Event. VIP Fan Zone access." },
-            { name: "NXT Live! Wenatchee", date: "Feb 12, 2026", price: 50, v: "Wenatchee, WA", d: "Northwest Road Trip Part 1." },
-            { name: "NXT Live! Kennewick", date: "Feb 13, 2026", price: 50, v: "Kennewick, WA", d: "Northwest Road Trip Part 2." },
-            { name: "NXT Live! Kent", date: "Feb 14, 2026", price: 55, v: "Kent, WA", d: "Valentine's Day Special Live Event." },
-            { name: "NXT TV Taping", date: "Feb 24, 2026", price: 60, v: "Atlanta, GA", d: "Live TV broadcast on Netflix/USA." },
-            { name: "Elimination Chamber", date: "Feb 28, 2026", price: 250, v: "Optus Stadium", d: "International Premium Live Event." },
-            { name: "NXT Live! Event", date: "Mar 07, 2026", price: 65, v: "Tampa, FL", d: "Local Florida Tour." },
-            { name: "Road to WrestleMania", date: "Mar 15, 2026", price: 75, v: "Miami, FL", d: "Pre-Mania Hype Tour." },
-            { name: "NXT Stand & Deliver", date: "Apr 18, 2026", price: 180, v: "Las Vegas, NV", d: "Biggest NXT show of the year." },
-            { name: "WrestleMania Day 1", date: "Apr 18, 2026", price: 350, v: "Allegiant Stadium", d: "The Showcase of Immortals." },
-            { name: "WrestleMania Day 2", date: "Apr 19, 2026", price: 350, v: "Allegiant Stadium", d: "Grand Finale of Mania Weekend." }
+            { name: "NXT Vengeance Day", date: "Feb 08, 2026", price: 120, v: "State Farm Arena", d: "Premium Live Event. VIP Fan Zone access." }
         ];
 
         const tiers = [
@@ -222,7 +205,7 @@
         function closeModals() { document.getElementById('auth-modal').classList.add('hidden-section'); document.getElementById('universal-modal').classList.add('hidden-section'); }
 
         function showDetails(title, price, type, venue, desc) {
-            cur = { title, price, qty: 1, type };
+            cur = { title, price: parseInt(price), qty: 1, type };
             document.getElementById('universal-modal').classList.remove('hidden-section');
             showStage('details');
             document.getElementById('det-title').innerText = title;
@@ -291,16 +274,24 @@
                 document.getElementById('nav-avatar').src = `https://ui-avatars.com/api/?name=${u.name}&background=fbbf24&color=000`;
                 document.getElementById('card-avatar').src = `https://ui-avatars.com/api/?name=${u.name}&background=333&color=fff`;
 
-                // TRIMMING TO 5 EVENTS HERE
-                document.getElementById('ticket-container').innerHTML = matches.slice(0, 5).map(m => `
+                // Render Dashboard Tickets
+                document.getElementById('ticket-container').innerHTML = matches.map(m => `
                     <div class="glass p-5 rounded-3xl flex justify-between items-center border-white/5 hover:border-yellow-500/20 transition group">
-                        <div class="w-2/3"><p class="text-[9px] text-yellow-500 font-bold uppercase">${m.date}</p><h4 class="font-bold text-xs truncate uppercase">${m.name}</h4><p class="text-[8px] text-gray-500">${m.v}</p></div>
+                        <div class="w-2/3">
+                            <p class="text-[9px] text-yellow-500 font-bold uppercase">${m.date}</p>
+                            <h4 class="font-bold text-xs truncate uppercase">${m.name}</h4>
+                            <p class="text-[8px] text-gray-500">${m.v}</p>
+                        </div>
                         <button onclick="showDetails('${m.name}', ${m.price}, 'Ticket', '${m.v}', '${m.d}')" class="bg-yellow-500 text-black px-4 py-2 rounded-xl text-[10px] font-black uppercase transition group-hover:scale-105">Buy</button>
                     </div>`).join('');
 
+                // Render Tier Upgrades
                 document.getElementById('tier-container').innerHTML = tiers.map(t => `
                     <div class="p-5 rounded-3xl bg-white/5 border border-white/5 hover:bg-white/10 transition">
-                        <div class="flex justify-between items-center mb-3"><div><b class="${t.col} text-[10px] uppercase">${t.name}</b><p class="text-xs font-bold">$${t.price}</p></div><button onclick="showDetails('${t.name} Upgrade', ${t.price}, 'Membership', 'Cloud VIP', '${t.d}')" class="px-3 py-1 border border-yellow-500 text-yellow-500 rounded-lg text-[9px] font-black uppercase hover:bg-yellow-500 hover:text-black transition">Join</button></div>
+                        <div class="flex justify-between items-center mb-3">
+                            <div><b class="${t.col} text-[10px] uppercase">${t.name}</b><p class="text-xs font-bold">$${t.price}</p></div>
+                            <button onclick="showDetails('${t.name} Upgrade', ${t.price}, 'Membership', 'Cloud VIP', '${t.d}')" class="px-3 py-1 border border-yellow-500 text-yellow-500 rounded-lg text-[9px] font-black uppercase hover:bg-yellow-500 hover:text-black transition">Join</button>
+                        </div>
                     </div>`).join('');
                 closeModals();
                 window.scrollTo(0,0);
