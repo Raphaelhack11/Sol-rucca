@@ -1,289 +1,282 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sol Ruca Official | Elite Fan Portal</title>
-    
-    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
-    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script src="https://unpkg.com/lucide@latest"></script>
-    
-    <style>
-        @import url('https://fonts.googleapis.com/css2?family=Syncopate:wght@700&family=Inter:wght@300;400;700;900&display=swap');
-        
-        body { font-family: 'Inter', sans-serif; background: #050505; color: white; overflow-x: hidden; }
-        .glass { background: rgba(255,255,255,0.03); backdrop-filter: blur(15px); border: 1px solid rgba(255,255,255,0.08); }
-        
-        /* RESTORED YOUR IMGUR HERO */
-        .hero-img { 
-            background: linear-gradient(to bottom, rgba(5,5,5,0.5), #050505), url('https://i.imgur.com/OGKm7lg.jpeg'); 
-            background-size: cover; background-position: center 20%; 
-        }
-        .match-card { background-color: #111; background-size: cover; background-position: center; transition: transform 0.4s; }
-        .match-card:hover { transform: scale(1.02); }
-        .hidden-section { display: none !important; }
-        .font-title { font-family: 'Syncopate', sans-serif; }
-        
-        .video-container { position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; border-radius: 20px; background: #000; }
-        .video-container iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: 0; }
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sol Ruca Official | Elite Fan Portal</title>
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
+<script src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
+<script src="https://cdn.tailwindcss.com"></script>
+<script src="https://unpkg.com/lucide@latest"></script>
+
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Syncopate:wght@700&family=Inter:wght@300;400;700;900&display=swap');
+
+html { scroll-behavior: smooth; }
+
+body {
+    font-family: 'Inter', sans-serif;
+    background: #050505;
+    color: white;
+    overflow-x: hidden;
+    overscroll-behavior: none;
+    -webkit-overflow-scrolling: touch;
+}
+
+.glass {
+    background: rgba(255,255,255,0.03);
+    backdrop-filter: blur(15px);
+    border: 1px solid rgba(255,255,255,0.08);
+    will-change: transform;
+    transform: translateZ(0);
+}
+
+.hero-img {
+    background: linear-gradient(to bottom, rgba(5,5,5,0.5), #050505),
+    url('https://i.imgur.com/OGKm7lg.jpeg');
+    background-size: cover;
+    background-position: center 20%;
+}
+
+.match-card {
+    background-color: #111;
+    background-size: cover;
+    background-position: center;
+    transition: transform 0.3s ease;
+}
+
+.match-card:hover { transform: scale(1.02); }
+
+.hidden-section { display: none !important; }
+.font-title { font-family: 'Syncopate', sans-serif; }
+
+.video-container {
+    position: relative;
+    padding-bottom: 56.25%;
+    height: 0;
+    overflow: hidden;
+    border-radius: 20px;
+}
+
+.video-container iframe {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+}
+</style>
 </head>
+
 <body class="min-h-screen">
 
-    <nav class="fixed w-full z-[100] px-8 py-6 flex justify-between items-center glass bg-black/80">
-        <div class="text-2xl font-title font-bold text-yellow-500 italic">SOL RUCA</div>
-        <div id="auth-nav" class="flex gap-8 items-center text-[10px] font-bold uppercase tracking-widest">
-            <button onclick="openAuth('login')" class="hover:text-yellow-500 transition">Login</button>
-            <button onclick="openAuth('signup')" class="bg-yellow-500 text-black px-6 py-2 rounded-full font-black hover:scale-105 transition">Join</button>
-        </div>
-        <div id="user-nav" class="hidden-section flex items-center gap-4">
-            <div class="text-right">
-                <p id="nav-user-name" class="font-bold text-sm"></p>
-                <p class="text-[10px] text-yellow-500 uppercase italic">Elite Member</p>
-            </div>
-            <img id="nav-avatar" src="" class="w-10 h-10 rounded-full border-2 border-yellow-500 object-cover">
-            <button onclick="location.reload()" class="p-2 bg-white/5 rounded-full hover:text-red-500 transition"><i data-lucide="log-out" class="w-4 h-4"></i></button>
-        </div>
-    </nav>
+<!-- NAV -->
+<nav class="fixed w-full z-[100] px-8 py-6 flex justify-between items-center glass bg-black/80">
+    <div class="text-2xl font-title font-bold text-yellow-500 italic">SOL RUCA</div>
 
-    <div id="landing-page-container">
-        <section class="hero-img min-h-screen flex flex-col justify-center items-center text-center px-6">
-            <h1 class="text-6xl md:text-[9rem] font-title font-bold mb-4 tracking-tighter uppercase leading-none">Sol Snatcher</h1>
-            <p class="text-xl text-gray-300 max-w-2xl mb-12 font-light italic tracking-widest text-center">Elite Athletics. Global Tour. Exclusive Access.</p>
-            <button onclick="openAuth('signup')" class="bg-white text-black px-16 py-6 rounded-full font-black uppercase tracking-widest hover:bg-yellow-500 transition shadow-2xl">Enter the Vault</button>
-        </section>
-
-        <section class="py-24 px-8 bg-[#080808]">
-            <h2 class="text-4xl font-title text-center mb-16 uppercase italic">Featured Events</h2>
-            <div class="grid md:grid-cols-2 gap-8 max-w-6xl mx-auto">
-                <div class="match-card h-[450px] rounded-[40px] relative overflow-hidden border border-white/5" style="background-image: linear-gradient(to top, #000, transparent), url('https://www.wwe.com/f/all/2023/03/001_WM39_04012023_JJ_0001--223f66c0d8b335606d15b09000b21389.jpg')">
-                    <div class="absolute inset-0 p-10 flex flex-col justify-end">
-                        <span class="text-yellow-500 font-bold tracking-[0.3em] text-[10px] mb-2 uppercase">PREMIUM LIVE EVENT</span>
-                        <h3 class="text-3xl font-title mb-2">Vengeance Day</h3>
-                        <p class="text-gray-400 text-xs mb-6 uppercase tracking-widest">Atlanta, GA | Feb 08, 2026</p>
-                        <button onclick="openAuth('signup')" class="w-fit px-8 py-3 bg-white text-black font-black rounded-full text-[10px] uppercase">Get Tickets</button>
-                    </div>
-                </div>
-                <div class="match-card h-[450px] rounded-[40px] relative overflow-hidden border border-white/5" style="background-image: linear-gradient(to top, #000, transparent), url('https://images.lifestyleasia.com/wp-content/uploads/sites/6/2023/04/04124903/wrestlemania-39-highlights-1600x900.jpg')">
-                    <div class="absolute inset-0 p-10 flex flex-col justify-end">
-                        <span class="text-yellow-500 font-bold tracking-[0.3em] text-[10px] mb-2 uppercase">THE GRAND STAGE</span>
-                        <h3 class="text-3xl font-title mb-2">WrestleMania 42</h3>
-                        <p class="text-gray-400 text-xs mb-6 uppercase tracking-widest">Las Vegas, NV | Apr 18, 2026</p>
-                        <button onclick="openAuth('signup')" class="w-fit px-8 py-3 bg-white text-black font-black rounded-full text-[10px] uppercase">Join Waitlist</button>
-                    </div>
-                </div>
-            </div>
-        </section>
+    <div id="auth-nav" class="flex gap-8 items-center text-[10px] font-bold uppercase tracking-widest">
+        <button onclick="openAuth('login')">Login</button>
+        <button onclick="openAuth('signup')" class="bg-yellow-500 text-black px-6 py-2 rounded-full font-black">
+            Join
+        </button>
     </div>
 
-    <div id="dashboard" class="hidden-section pt-32 px-8 max-w-[1500px] mx-auto pb-20">
-        <div class="grid lg:grid-cols-12 gap-10">
-            <div class="lg:col-span-8 space-y-10">
-                <h2 class="text-4xl font-title uppercase">Sol Vault / <span id="welcome-name" class="text-yellow-500"></span></h2>
-                <div class="glass p-6 rounded-[32px] border-yellow-500/20 shadow-2xl">
-                    <div class="video-container">
-                        <iframe src="https://www.youtube-nocookie.com/embed/ucH_JlCGrFc?rel=0&modestbranding=1" allowfullscreen></iframe>
-                    </div>
-                </div>
-                <div>
-                    <h3 class="font-bold uppercase tracking-[0.3em] text-xs text-yellow-500 mb-6 italic">WWE Road to WrestleMania 2026</h3>
-                    <div id="ticket-container" class="grid md:grid-cols-2 gap-4"></div>
-                </div>
-            </div>
-
-            <div class="lg:col-span-4 space-y-6">
-                <div class="glass p-6 rounded-[30px] border border-yellow-500/30">
-                    <div class="flex justify-between items-start mb-6">
-                        <div class="bg-yellow-500 text-black text-[8px] font-black px-3 py-1 rounded-full uppercase">Official Fan ID</div>
-                        <i data-lucide="nfc" class="text-yellow-500/50 w-6 h-6"></i>
-                    </div>
-                    <div class="flex gap-4 items-center">
-                        <div class="relative group cursor-pointer" onclick="document.getElementById('avatar-upload').click()">
-                            <img id="card-avatar" src="" class="w-20 h-20 rounded-2xl object-cover border border-white/10">
-                            <input type="file" id="avatar-upload" class="hidden" accept="image/*" onchange="previewImage(this)">
-                        </div>
-                        <div>
-                            <p id="card-name" class="font-title text-sm uppercase">FAN NAME</p>
-                            <p class="text-[9px] text-yellow-500 font-bold uppercase">Level 1 Snatcher</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="glass p-8 rounded-[40px]">
-                    <h3 class="text-center font-title text-sm mb-6 uppercase italic text-yellow-500">Tier Upgrades</h3>
-                    <div id="tier-container" class="space-y-4"></div>
-                </div>
-                <button onclick="showDetails('Meet & Greet', 500, 'VIP', 'Global Tour', 'Includes: Private Meal with Sol, 3 Professional Selfies, Signed 8x10, and Exclusive Q&A.')" class="w-full py-8 bg-yellow-500 text-black font-black rounded-[30px] uppercase text-sm tracking-widest shadow-2xl hover:scale-105 transition">Request Meet & Greet</button>
-            </div>
+    <div id="user-nav" class="hidden-section flex items-center gap-4">
+        <div class="text-right">
+            <p id="nav-user-name" class="font-bold text-sm"></p>
+            <p class="text-[10px] text-yellow-500 uppercase italic">Elite Member</p>
         </div>
+        <img id="nav-avatar" class="w-10 h-10 rounded-full border-2 border-yellow-500">
+        <button onclick="location.reload()">
+            <i data-lucide="log-out"></i>
+        </button>
     </div>
+</nav>
 
-    <div id="universal-modal" class="hidden-section fixed inset-0 z-[500] flex items-center justify-center bg-black/98 p-6 overflow-y-auto">
-        <div class="glass max-w-md w-full p-10 rounded-[45px] relative border-white/10">
-            <button onclick="closeModals()" class="absolute top-8 right-8 text-gray-500"><i data-lucide="x"></i></button>
-            
-            <div id="stage-details" class="space-y-6 text-center">
-                <h4 id="det-title" class="text-2xl font-title text-yellow-500 uppercase italic"></h4>
-                <p id="det-venue" class="text-[10px] text-gray-400 font-bold uppercase tracking-widest"></p>
-                <div class="flex items-center justify-center gap-8 py-4">
-                    <button onclick="updateQty(-1)" class="w-10 h-10 rounded-full border border-white/20">-</button>
-                    <span id="qty-display" class="text-4xl font-title">1</span>
-                    <button onclick="updateQty(1)" class="w-10 h-10 rounded-full border border-white/20">+</button>
-                </div>
-                <p id="total-price-display" class="text-4xl font-black">$0</p>
-                <button onclick="nextStage()" class="w-full py-5 bg-yellow-500 text-black font-black rounded-2xl uppercase">Continue</button>
-            </div>
+<!-- LANDING -->
+<div id="landing-page-container">
 
-            <div id="stage-form" class="hidden-section space-y-4 pt-6">
-                <h2 class="text-xl font-title text-center text-yellow-500 uppercase">Booking Info</h2>
-                <input type="text" placeholder="Full Name" class="w-full bg-white/5 border border-white/10 p-4 rounded-xl outline-none">
-                <input type="email" placeholder="Email Address" class="w-full bg-white/5 border border-white/10 p-4 rounded-xl outline-none">
-                <button onclick="showStage('wallets')" class="w-full py-5 bg-yellow-500 text-black font-black rounded-2xl uppercase">Next</button>
-            </div>
+<section class="hero-img min-h-screen flex flex-col justify-center items-center text-center px-6">
+    <h1 class="text-6xl md:text-[9rem] font-title font-bold uppercase">Sol Snatcher</h1>
+    <p class="text-xl text-gray-300 italic tracking-widest mt-4">
+        Elite Athletics. Global Tour. Exclusive Access.
+    </p>
+    <button onclick="openAuth('signup')" class="mt-12 bg-white text-black px-16 py-6 rounded-full font-black">
+        Enter the Vault
+    </button>
+</section>
 
-            <div id="stage-wallets" class="hidden-section space-y-4 pt-6">
-                <button onclick="showFinalWallet('BTC', 'bc1q4c6f7xzsekkpvd2guwkaww4m7se9yjlrxnrjc7')" class="w-full p-6 glass rounded-2xl font-bold uppercase">Bitcoin</button>
-                <button onclick="showFinalWallet('USDT', '0x08cfe6ddc3b58b0655dd1c9214bcfddbd3855cca')" class="w-full p-6 glass rounded-2xl font-bold uppercase">USDT (ERC20)</button>
-            </div>
+<section class="py-24 px-8 bg-[#080808]">
+<h2 class="text-4xl font-title text-center mb-16 uppercase italic">Featured Events</h2>
 
-            <div id="stage-address" class="hidden-section text-center pt-6 space-y-6">
-                <div class="bg-white p-2 rounded-xl w-32 h-32 mx-auto"><img id="qr-img" src="" class="w-full"></div>
-                <p id="wallet-addr" class="text-[9px] font-mono break-all opacity-50"></p>
-                <button onclick="processFinal()" class="w-full py-5 bg-yellow-500 text-black font-bold rounded-xl">I HAVE SENT IT</button>
-            </div>
+<div class="grid md:grid-cols-2 gap-8 max-w-6xl mx-auto">
 
-            <div id="stage-loading" class="hidden-section py-10 text-center"><p class="animate-pulse">VERIFYING...</p></div>
-            <div id="stage-thankyou" class="hidden-section py-10 text-center"><h2 class="text-2xl font-title text-yellow-500">CONFIRMED!</h2><button onclick="closeModals()" class="mt-4 text-xs underline">Back to Vault</button></div>
-        </div>
-    </div>
+<div class="match-card h-[450px] rounded-[40px] overflow-hidden border border-white/5"
+style="background-image: linear-gradient(to top, #000, transparent),
+url('https://images.unsplash.com/photo-1600488999585-e4364713b90a?auto=format&fit=crop&w=1600&q=80')">
+<div class="absolute inset-0 p-10 flex flex-col justify-end">
+<span class="text-yellow-500 text-[10px] font-bold uppercase tracking-[0.3em]">
+PREMIUM LIVE EVENT
+</span>
+<h3 class="text-3xl font-title">Vengeance Day</h3>
+<p class="text-gray-400 text-xs uppercase tracking-widest">
+Atlanta, GA | Feb 08, 2026
+</p>
+<button onclick="openAuth('signup')" class="mt-6 px-8 py-3 bg-white text-black font-black rounded-full text-[10px] uppercase">
+Get Tickets
+</button>
+</div>
+</div>
 
-    <div id="auth-modal" class="hidden-section fixed inset-0 z-[200] flex items-center justify-center bg-black/95 p-6">
-        <div class="glass max-w-md w-full p-10 rounded-[40px] relative">
-            <button onclick="closeModals()" class="absolute top-8 right-8 text-gray-500"><i data-lucide="x"></i></button>
-            <div id="signup-box" class="space-y-4">
-                <h2 class="text-3xl font-title italic mb-6">SIGN UP</h2>
-                <input type="text" id="reg-name" placeholder="Full Name" class="w-full bg-white/5 border border-white/10 p-4 rounded-xl outline-none">
-                <input type="email" id="reg-email" placeholder="Email" class="w-full bg-white/5 border border-white/10 p-4 rounded-xl outline-none">
-                <input type="password" id="reg-pass" placeholder="Password" class="w-full bg-white/5 border border-white/10 p-4 rounded-xl outline-none">
-                <button onclick="handleSignup()" class="w-full py-5 bg-yellow-500 text-black font-black rounded-2xl uppercase">Create Account</button>
-            </div>
-            <div id="login-box" class="hidden-section space-y-4">
-                <h2 class="text-3xl font-title italic mb-6 text-yellow-500">LOGIN</h2>
-                <input type="email" id="log-email" placeholder="Email" class="w-full bg-white/5 border border-white/10 p-4 rounded-xl outline-none">
-                <input type="password" id="log-pass" placeholder="Password" class="w-full bg-white/5 border border-white/10 p-4 rounded-xl outline-none">
-                <button onclick="handleLogin()" class="w-full py-5 bg-yellow-500 text-black font-black rounded-2xl uppercase">Sign In</button>
-            </div>
-        </div>
-    </div>
+<div class="match-card h-[450px] rounded-[40px] overflow-hidden border border-white/5"
+style="background-image: linear-gradient(to top, #000, transparent),
+url('https://images.unsplash.com/photo-1547347298-4074fc3086f0?auto=format&fit=crop&w=1600&q=80')">
+<div class="absolute inset-0 p-10 flex flex-col justify-end">
+<span class="text-yellow-500 text-[10px] font-bold uppercase tracking-[0.3em]">
+THE GRAND STAGE
+</span>
+<h3 class="text-3xl font-title">WrestleMania 42</h3>
+<p class="text-gray-400 text-xs uppercase tracking-widest">
+Las Vegas, NV | Apr 18, 2026
+</p>
+<button onclick="openAuth('signup')" class="mt-6 px-8 py-3 bg-white text-black font-black rounded-full text-[10px] uppercase">
+Join Waitlist
+</button>
+</div>
+</div>
 
-    <script>
-        lucide.createIcons();
-        let db = JSON.parse(localStorage.getItem('sol_fans')) || [];
-        let cur = { title: '', price: 0, qty: 1 };
+</div>
+</section>
+</div>
 
-        const matches = [
-            { name: "NXT New Year's Evil", date: "Jan 06, 2026", price: 85, v: "Orlando, FL" },
-            { name: "NXT Live! Knoxville", date: "Jan 29, 2026", price: 45, v: "Knoxville, TN" },
-            { name: "NXT Vengeance Day", date: "Feb 08, 2026", price: 120, v: "Atlanta, GA" }
-        ];
+<!-- DASHBOARD -->
+<div id="dashboard" class="hidden-section pt-32 px-8 max-w-[1500px] mx-auto pb-20">
+<div class="grid lg:grid-cols-12 gap-10">
 
-        const tiers = [
-            { name: "Gold", price: 250, col: "text-yellow-400" },
-            { name: "Diamond", price: 300, col: "text-blue-300" },
-            { name: "Master", price: 400, col: "text-yellow-600" }
-        ];
+<div class="lg:col-span-8 space-y-10">
+<h2 class="text-4xl font-title uppercase">
+Sol Vault / <span id="welcome-name" class="text-yellow-500"></span>
+</h2>
 
-        function toast(txt) { Toastify({ text: txt, duration: 3000, position: "right", style: { background: "#fbbf24", color: "#000", fontWeight: "900", borderRadius: "12px" } }).showToast(); }
-        function openAuth(m) { document.getElementById('auth-modal').classList.remove('hidden-section'); document.getElementById('signup-box').classList.toggle('hidden-section', m === 'login'); document.getElementById('login-box').classList.toggle('hidden-section', m === 'signup'); }
-        function closeModals() { document.getElementById('auth-modal').classList.add('hidden-section'); document.getElementById('universal-modal').classList.add('hidden-section'); }
-        
-        function showDetails(title, price, type, venue, desc) {
-            cur = { title, price: parseInt(price), qty: 1 };
-            document.getElementById('universal-modal').classList.remove('hidden-section');
-            showStage('details');
-            document.getElementById('det-title').innerText = title;
-            document.getElementById('det-venue').innerText = venue;
-            updateQty(0);
-        }
+<div class="glass p-6 rounded-[32px]">
+<div class="video-container">
+<iframe src="https://www.youtube-nocookie.com/embed/ucH_JlCGrFc"></iframe>
+</div>
+</div>
 
-        function updateQty(v) {
-            cur.qty = Math.max(1, cur.qty + v);
-            document.getElementById('qty-display').innerText = cur.qty;
-            document.getElementById('total-price-display').innerText = `$${cur.qty * cur.price}`;
-        }
+<div>
+<h3 class="text-xs text-yellow-500 uppercase tracking-[0.3em] mb-6 italic">
+WWE Road to WrestleMania 2026
+</h3>
+<div id="ticket-container" class="grid md:grid-cols-2 gap-4"></div>
+</div>
+</div>
 
-        function showStage(s) {
-            ['details', 'form', 'wallets', 'address', 'loading', 'thankyou'].forEach(id => {
-                const el = document.getElementById('stage-'+id);
-                if(el) el.classList.add('hidden-section');
-            });
-            document.getElementById('stage-'+s).classList.remove('hidden-section');
-        }
+<div class="lg:col-span-4 space-y-6">
 
-        function nextStage() { 
-            if(cur.title === 'Meet & Greet') showStage('form'); else showStage('wallets'); 
-        }
+<div class="glass p-6 rounded-[30px]">
+<div class="flex gap-4 items-center">
+<img id="card-avatar" class="w-20 h-20 rounded-2xl">
+<div>
+<p id="card-name" class="font-title text-sm uppercase"></p>
+<p class="text-[9px] text-yellow-500 uppercase font-bold">
+Level 1 Snatcher
+</p>
+</div>
+</div>
+</div>
 
-        function showFinalWallet(m, a) {
-            showStage('address');
-            document.getElementById('wallet-addr').innerText = a;
-            document.getElementById('qr-img').src = `https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=${a}`;
-        }
+<button onclick="showDetails('Meet & Greet',500,'VIP','Global Tour','')" 
+class="w-full py-8 bg-yellow-500 text-black font-black rounded-[30px] uppercase tracking-widest">
+Request Meet & Greet
+</button>
 
-        function processFinal() { showStage('loading'); setTimeout(() => showStage('thankyou'), 3000); }
+</div>
+</div>
+</div>
 
-        function previewImage(input) {
-            if (input.files && input.files[0]) {
-                const reader = new FileReader();
-                reader.onload = e => {
-                    document.getElementById('card-avatar').src = e.target.result;
-                    document.getElementById('nav-avatar').src = e.target.result;
-                    toast("ID PHOTO UPDATED!");
-                };
-                reader.readAsDataURL(input.files[0]);
-            }
-        }
+<!-- MODAL -->
+<div id="universal-modal" class="hidden-section fixed inset-0 z-[500] flex items-center justify-center bg-black/95 p-6">
+<div class="glass max-w-md w-full p-10 rounded-[45px]">
 
-        function handleSignup() {
-            db.push({ name: document.getElementById('reg-name').value, email: document.getElementById('reg-email').value, pass: document.getElementById('reg-pass').value });
-            localStorage.setItem('sol_fans', JSON.stringify(db));
-            toast("WELCOME TO THE SQUAD!"); openAuth('login');
-        }
+<div id="stage-details" class="space-y-6 text-center">
+<h4 id="det-title" class="text-2xl font-title text-yellow-500 uppercase"></h4>
+<p id="det-venue" class="text-xs text-gray-400 uppercase"></p>
 
-        function handleLogin() {
-            const u = db.find(x => x.email === document.getElementById('log-email').value);
-            if(u) {
-                document.getElementById('landing-page-container').classList.add('hidden-section');
-                document.getElementById('dashboard').classList.remove('hidden-section');
-                document.getElementById('auth-nav').classList.add('hidden-section');
-                document.getElementById('user-nav').classList.remove('hidden-section');
-                document.getElementById('nav-user-name').innerText = u.name;
-                document.getElementById('welcome-name').innerText = u.name.toUpperCase();
-                document.getElementById('card-name').innerText = u.name;
-                document.getElementById('nav-avatar').src = `https://ui-avatars.com/api/?name=${u.name}&background=fbbf24&color=000`;
-                document.getElementById('card-avatar').src = `https://ui-avatars.com/api/?name=${u.name}&background=333&color=fff`;
+<div class="flex justify-center gap-8">
+<button onclick="updateQty(-1)">-</button>
+<span id="qty-display" class="text-4xl font-title">1</span>
+<button onclick="updateQty(1)">+</button>
+</div>
 
-                document.getElementById('ticket-container').innerHTML = matches.map(m => `
-                    <div class="glass p-5 rounded-3xl flex justify-between items-center border-white/5">
-                        <div class="w-2/3">
-                            <p class="text-[9px] text-yellow-500 font-bold uppercase">${m.date}</p>
-                            <h4 class="font-bold text-xs truncate uppercase">${m.name}</h4>
-                            <p class="text-[8px] text-gray-500">${m.v}</p>
-                        </div>
-                        <button onclick="showDetails('${m.name}', ${m.price}, 'Ticket', '${m.v}', 'Live Access.')" class="bg-yellow-500 text-black px-4 py-2 rounded-xl text-[10px] font-black uppercase">Buy</button>
-                    </div>`).join('');
+<p id="total-price-display" class="text-4xl font-black">$0</p>
+<button onclick="nextStage()" class="w-full py-5 bg-yellow-500 text-black font-black rounded-2xl">
+Continue
+</button>
+</div>
 
-                document.getElementById('tier-container').innerHTML = tiers.map(t => `
-                    <div class="p-4 rounded-2xl bg-white/5 flex justify-between items-center">
-                        <div><b class="${t.col} text-[10px] uppercase">${t.name}</b><p class="text-[10px]">$${t.price}</p></div>
-                        <button onclick="showDetails('${t.name}', ${t.price}, 'Tier', 'VIP', 'Upgrade Account.')" class="text-[9px] border border-yellow-500 text-yellow-500 px-3 py-1 rounded uppercase">Join</button>
-                    </div>`).join('');
+<div id="stage-form" class="hidden-section space-y-4 pt-6">
+<h2 class="text-xl font-title text-center text-yellow-500 uppercase">Booking Info</h2>
+<input placeholder="Full Name" class="w-full bg-white/5 p-4 rounded-xl">
+<input placeholder="Email Address" class="w-full bg-white/5 p-4 rounded-xl">
+<input placeholder="Country" class="w-full bg-white/5 p-4 rounded-xl">
+<input placeholder="State / Province" class="w-full bg-white/5 p-4 rounded-xl">
+<input placeholder="Phone Number" class="w-full bg-white/5 p-4 rounded-xl">
+<button onclick="showStage('wallets')" class="w-full py-5 bg-yellow-500 text-black font-black rounded-2xl">
+Next
+</button>
+</div>
 
-                closeModals();
-                toast("LOGGED IN AS " + u.name.toUpperCase());
-            } else { toast("INVALID LOGIN!"); }
-        }
-    </script>
+</div>
+</div>
+
+<script>
+lucide.createIcons();
+
+let db = JSON.parse(localStorage.getItem('sol_fans')) || [];
+let cur = { title:'', price:0, qty:1 };
+
+const matches = [
+{ name:"NXT New Year's Evil", date:"Jan 06, 2026", price:85, v:"Orlando, FL" },
+{ name:"NXT Live! Knoxville", date:"Jan 29, 2026", price:45, v:"Knoxville, TN" },
+{ name:"NXT Vengeance Day", date:"Feb 08, 2026", price:120, v:"Atlanta, GA" }
+];
+
+function showDetails(t,p,_,v){
+cur={title:t,price:p,qty:1};
+document.getElementById('universal-modal').classList.remove('hidden-section');
+document.getElementById('det-title').innerText=t;
+document.getElementById('det-venue').innerText=v;
+updateQty(0);
+}
+
+function updateQty(x){
+cur.qty=Math.max(1,cur.qty+x);
+document.getElementById('qty-display').innerText=cur.qty;
+document.getElementById('total-price-display').innerText='$'+(cur.qty*cur.price);
+}
+
+function nextStage(){
+if(cur.title==='Meet & Greet'){
+document.getElementById('stage-details').classList.add('hidden-section');
+document.getElementById('stage-form').classList.remove('hidden-section');
+}
+}
+
+document.getElementById('ticket-container').innerHTML = matches.map(m => `
+<div class="glass p-5 rounded-3xl flex justify-between items-center">
+<div>
+<p class="text-xs text-yellow-500">${m.date}</p>
+<h4 class="text-xs uppercase">${m.name}</h4>
+<p class="text-[10px] text-gray-400">${m.v}</p>
+</div>
+<button onclick='showDetails(${JSON.stringify(m.name)},${m.price},"Ticket",${JSON.stringify(m.v)})'
+class="bg-yellow-500 text-black px-4 py-2 rounded-xl text-xs font-black">
+Buy
+</button>
+</div>
+`).join('');
+</script>
+
 </body>
-</html>
+    </html>
