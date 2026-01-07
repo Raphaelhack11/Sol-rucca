@@ -10,13 +10,11 @@
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Syncopate:wght@700&family=Inter:wght@300;400;700;900&display=swap');
-        :root { --sol-gold: #fbbf24; }
-        body { font-family: 'Inter', sans-serif; background: #050505; color: white; scroll-behavior: smooth; overflow-x: hidden; }
+        body { font-family: 'Inter', sans-serif; background: #050505; color: white; scroll-behavior: smooth; min-height: 100vh; }
         .font-title { font-family: 'Syncopate', sans-serif; }
         .glass { background: rgba(255,255,255,0.03); backdrop-filter: blur(15px); border: 1px solid rgba(255,255,255,0.08); }
         .hero-img { 
-            background: linear-gradient(to bottom, rgba(5,5,5,0.5), #050505), 
-            url('https://i.imgur.com/OGKm7lg.jpeg'); 
+            background: linear-gradient(to bottom, rgba(5,5,5,0.5), #050505), url('https://i.imgur.com/OGKm7lg.jpeg'); 
             background-size: cover; background-position: center 20%; 
         }
         .hidden-section { display: none !important; }
@@ -24,55 +22,84 @@
         .video-container iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: 0; }
         @keyframes spin-slow { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
         .animate-spin-slow { animation: spin-slow 2s linear infinite; }
+        .member-card { background: linear-gradient(135deg, #1a1a1a 0%, #000 100%); border: 1px solid #fbbf2433; position: relative; overflow: hidden; }
+        .member-card::after { content: ''; position: absolute; top: -50%; left: -50%; width: 200%; height: 200%; background: linear-gradient(45deg, transparent, rgba(251,191,36,0.05), transparent); transform: rotate(45deg); pointer-events: none; }
     </style>
 </head>
-<body>
+<body class="min-h-screen">
 
-    <nav class="fixed w-full z-[100] px-8 py-6 flex justify-between items-center bg-black/80 backdrop-blur-md border-b border-white/5">
+    <nav class="fixed w-full z-[100] px-8 py-6 flex justify-between items-center glass bg-black/80">
         <div class="text-2xl font-title font-bold text-yellow-500 italic">SOL RUCA</div>
         <div id="auth-nav" class="flex gap-8 items-center text-[10px] font-bold uppercase tracking-widest">
-            <a href="#" class="hover:text-yellow-500 transition">About</a>
-            <button onclick="openAuth('login')" class="hover:text-yellow-500">Login</button>
-            <button onclick="openAuth('signup')" class="bg-yellow-500 text-black px-6 py-2 rounded-full font-black">Join</button>
+            <button onclick="openAuth('login')" class="hover:text-yellow-500 transition">Login</button>
+            <button onclick="openAuth('signup')" class="bg-yellow-500 text-black px-6 py-2 rounded-full font-black hover:scale-105 transition">Join</button>
         </div>
         <div id="user-nav" class="hidden-section flex items-center gap-4">
             <div class="text-right">
                 <p id="nav-user-name" class="font-bold text-sm"></p>
                 <p class="text-[10px] text-yellow-500 uppercase italic">Elite Member</p>
             </div>
-            <button onclick="location.reload()" class="p-2 bg-white/5 rounded-full hover:text-red-500"><i data-lucide="log-out" class="w-4 h-4"></i></button>
+            <div class="relative group">
+                <img id="nav-avatar" src="https://ui-avatars.com/api/?name=Sol+Fan&background=fbbf24&color=000" class="w-10 h-10 rounded-full border-2 border-yellow-500 object-cover cursor-pointer">
+            </div>
+            <button onclick="location.reload()" class="p-2 bg-white/5 rounded-full hover:text-red-500 transition"><i data-lucide="log-out" class="w-4 h-4"></i></button>
         </div>
     </nav>
 
     <div id="landing-page-container">
-        <section class="hero-img h-screen flex flex-col justify-center items-center text-center px-6">
-            <h1 class="text-7xl md:text-[10rem] font-title font-bold mb-4 tracking-tighter uppercase leading-none">Sol Snatcher</h1>
-            <p class="text-xl text-gray-300 max-w-2xl mb-12 font-light italic tracking-widest">Experience the gravity-defying world of Sol Ruca. Exclusive content, VIP access, and live tour tickets.</p>
-            <div class="flex gap-4">
-                <button onclick="openAuth('signup')" class="bg-yellow-500 text-black px-12 py-5 rounded-full font-black uppercase tracking-widest hover:scale-105 transition">Get Access Now</button>
-            </div>
+        <section class="hero-img min-h-screen flex flex-col justify-center items-center text-center px-6">
+            <h1 class="text-6xl md:text-[9rem] font-title font-bold mb-4 tracking-tighter uppercase leading-none">Sol Snatcher</h1>
+            <p class="text-xl text-gray-300 max-w-2xl mb-12 font-light italic tracking-widest">Elite Athletics. Global Tour. Exclusive Access.</p>
+            <button onclick="openAuth('signup')" class="bg-white text-black px-16 py-6 rounded-full font-black uppercase tracking-widest hover:bg-yellow-500 transition shadow-2xl">Enter the Vault</button>
         </section>
         <footer class="py-20 text-center text-[10px] text-gray-600 uppercase tracking-[0.5em]">&copy; 2026 Sol Ruca Elite. WWE Official Property.</footer>
     </div>
 
-    <div id="dashboard" class="hidden-section pt-32 px-8 max-w-[1400px] mx-auto pb-20">
+    <div id="dashboard" class="hidden-section pt-32 px-8 max-w-[1500px] mx-auto pb-20">
         <div class="grid lg:grid-cols-12 gap-10">
             <div class="lg:col-span-8 space-y-10">
                 <h2 class="text-4xl font-title uppercase">Sol Vault / <span id="welcome-name" class="text-yellow-500"></span></h2>
                 <div class="glass p-6 rounded-[32px] border-yellow-500/20 shadow-2xl">
                     <div class="video-container"><iframe src="https://www.youtube.com/embed/ucH_JlCGrFc" allowfullscreen></iframe></div>
                 </div>
-                <div class="space-y-6">
-                    <h3 class="font-bold uppercase tracking-[0.3em] text-xs text-yellow-500">Road to WrestleMania 2026 Tickets</h3>
-                    <div id="ticket-container" class="grid md:grid-cols-2 gap-4"></div>
+                <div>
+                    <h3 class="font-bold uppercase tracking-[0.3em] text-xs text-yellow-500 mb-6 italic">WWE Road to WrestleMania 2026 (Live Schedule)</h3>
+                    <div id="ticket-container" class="grid md:grid-cols-2 lg:grid-cols-2 gap-4"></div>
                 </div>
             </div>
+
             <div class="lg:col-span-4 space-y-6">
+                <div class="member-card p-6 rounded-[30px] shadow-2xl border border-yellow-500/30">
+                    <div class="flex justify-between items-start mb-6">
+                        <div class="bg-yellow-500 text-black text-[8px] font-black px-3 py-1 rounded-full uppercase tracking-tighter">Official Fan ID</div>
+                        <i data-lucide="nfc" class="text-yellow-500/50 w-6 h-6"></i>
+                    </div>
+                    <div class="flex gap-4 items-center mb-6">
+                        <div class="relative group cursor-pointer" onclick="document.getElementById('avatar-upload').click()">
+                            <img id="card-avatar" src="https://ui-avatars.com/api/?name=User&background=333&color=fff" class="w-20 h-20 rounded-2xl object-cover border border-white/10 group-hover:opacity-50 transition">
+                            <div class="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition">
+                                <i data-lucide="camera" class="w-6 h-6 text-white"></i>
+                            </div>
+                            <input type="file" id="avatar-upload" class="hidden" accept="image/*" onchange="previewImage(this)">
+                        </div>
+                        <div>
+                            <p id="card-name" class="font-title text-sm tracking-tighter uppercase text-white">FAN NAME</p>
+                            <p class="text-[9px] text-yellow-500 font-bold uppercase tracking-widest">Level 1 Snatcher</p>
+                            <p class="text-[8px] text-gray-500 mt-1 font-mono">ID: 2026-SR-8849</p>
+                        </div>
+                    </div>
+                    <div class="h-[1px] bg-white/10 w-full mb-4"></div>
+                    <div class="flex justify-between text-[8px] uppercase font-bold tracking-[0.2em] text-gray-400">
+                        <span>Issued: Jan 2026</span>
+                        <span class="text-yellow-500">Active</span>
+                    </div>
+                </div>
+
                 <div class="glass p-8 rounded-[40px] border-white/5">
                     <h3 class="text-center font-title text-sm mb-6 uppercase tracking-widest italic text-yellow-500">Tier Upgrades</h3>
                     <div class="space-y-4" id="tier-container"></div>
                 </div>
-                <button onclick="showDetails('Meet & Greet', 500, 'VIP Experience', 'Orlando, FL', 'Private meal with Sol, 3 Professional Selfies, Signed Merch, and Q&A Session.')" class="w-full py-8 bg-gradient-to-r from-yellow-500 to-yellow-600 text-black font-black rounded-[30px] uppercase text-sm tracking-[0.2em] shadow-2xl hover:scale-[1.02] transition">Request Meet & Greet</button>
+                <button onclick="showDetails('Meet & Greet', 500, 'VIP', 'Global Tour Stop', 'Includes: Private Meal with Sol, 3 Professional Selfies, Signed 8x10, and Exclusive Q&A Session.')" class="w-full py-8 bg-gradient-to-r from-yellow-500 to-yellow-600 text-black font-black rounded-[30px] uppercase text-sm tracking-[0.2em] shadow-2xl hover:scale-[1.02] transition">Request Meet & Greet</button>
             </div>
         </div>
     </div>
@@ -87,78 +114,75 @@
                     <p id="det-venue" class="text-[10px] text-gray-400 font-bold uppercase tracking-widest"></p>
                 </div>
                 <div class="bg-white/5 p-6 rounded-3xl border border-white/5 text-left">
-                    <p class="text-[10px] uppercase text-yellow-500 font-black mb-2 tracking-widest">Included Perks:</p>
+                    <p class="text-[10px] uppercase text-yellow-500 font-black mb-2 tracking-widest">Description & Benefits:</p>
                     <p id="det-desc" class="text-sm text-gray-300 leading-relaxed font-light"></p>
                 </div>
-                
                 <div class="flex flex-col items-center gap-4 py-4">
                     <p class="text-[10px] uppercase font-black text-gray-500 tracking-widest">Select Quantity</p>
                     <div class="flex items-center gap-8">
-                        <button onclick="updateQty(-1)" class="w-12 h-12 rounded-full border border-white/20 flex items-center justify-center hover:bg-white/10 text-xl">-</button>
+                        <button onclick="updateQty(-1)" class="w-12 h-12 rounded-full border border-white/20 flex items-center justify-center hover:bg-white/10 text-xl font-bold transition">-</button>
                         <span id="qty-display" class="text-4xl font-title">1</span>
-                        <button onclick="updateQty(1)" class="w-12 h-12 rounded-full border border-white/20 flex items-center justify-center hover:bg-white/10 text-xl">+</button>
+                        <button onclick="updateQty(1)" class="w-12 h-12 rounded-full border border-white/20 flex items-center justify-center hover:bg-white/10 text-xl font-bold transition">+</button>
                     </div>
                 </div>
-                
                 <div class="pt-4 border-t border-white/5">
                     <p class="text-[10px] text-gray-500 uppercase mb-1 font-bold">Total Price</p>
                     <p id="total-price-display" class="text-4xl font-black text-white mb-6">$0</p>
-                    <button id="btn-to-form" onclick="nextStage()" class="w-full py-5 bg-yellow-500 text-black font-black rounded-2xl uppercase tracking-[0.2em] hover:bg-yellow-400">Continue</button>
+                    <button onclick="nextStage()" class="w-full py-5 bg-yellow-500 text-black font-black rounded-2xl uppercase tracking-[0.2em] hover:bg-yellow-400 transition">Continue</button>
                 </div>
             </div>
 
             <div id="stage-form" class="hidden-section space-y-4">
-                <button onclick="goBack('details')" class="absolute top-8 left-8 text-gray-500 flex items-center gap-2 text-[10px] uppercase font-bold"><i data-lucide="chevron-left" class="w-4 h-4"></i> Back</button>
-                <h2 class="text-xl font-title text-center text-yellow-500 mb-6 uppercase italic">Attendee Info</h2>
+                <button onclick="showStage('details')" class="absolute top-8 left-8 text-gray-500 flex items-center gap-2 text-[10px] uppercase font-bold hover:text-white transition"><i data-lucide="chevron-left" class="w-4 h-4"></i> Back</button>
+                <h2 class="text-xl font-title text-center text-yellow-500 mb-6 uppercase italic pt-6">Booking Form</h2>
                 <input type="text" id="m-name" placeholder="Full Name" class="w-full bg-white/5 border border-white/10 p-4 rounded-2xl outline-none focus:border-yellow-500">
                 <div class="grid grid-cols-2 gap-4">
-                    <input type="text" id="m-country" placeholder="Country" class="bg-white/5 border border-white/10 p-4 rounded-2xl outline-none">
-                    <input type="text" id="m-state" placeholder="State" class="bg-white/5 border border-white/10 p-4 rounded-2xl outline-none">
+                    <input type="text" id="m-country" placeholder="Country" class="bg-white/5 border border-white/10 p-4 rounded-2xl outline-none focus:border-yellow-500">
+                    <input type="text" id="m-state" placeholder="State" class="bg-white/5 border border-white/10 p-4 rounded-2xl outline-none focus:border-yellow-500">
                 </div>
-                <input type="tel" id="m-phone" placeholder="Phone" class="w-full bg-white/5 border border-white/10 p-4 rounded-2xl outline-none">
-                <input type="email" id="m-email" placeholder="Email" class="w-full bg-white/5 border border-white/10 p-4 rounded-2xl outline-none">
-                <button onclick="goToPay()" class="w-full py-5 bg-yellow-500 text-black font-black rounded-2xl uppercase tracking-widest mt-4">Go to Payment</button>
+                <input type="tel" id="m-phone" placeholder="Phone" class="w-full bg-white/5 border border-white/10 p-4 rounded-2xl outline-none focus:border-yellow-500">
+                <input type="email" id="m-email" placeholder="Email" class="w-full bg-white/5 border border-white/10 p-4 rounded-2xl outline-none focus:border-yellow-500">
+                <button onclick="showStage('wallets')" class="w-full py-5 bg-yellow-500 text-black font-black rounded-2xl uppercase tracking-widest mt-4">Continue to Payment</button>
             </div>
 
             <div id="stage-wallets" class="hidden-section space-y-6">
-                <button onclick="goBackToFormOrDetails()" class="absolute top-8 left-8 text-gray-500 flex items-center gap-2 text-[10px] uppercase font-bold"><i data-lucide="chevron-left" class="w-4 h-4"></i> Back</button>
-                <div class="text-center pt-8">
-                    <h2 class="text-xl font-black uppercase italic tracking-widest mb-2">Checkout</h2>
-                    <p id="pay-summary" class="text-xs text-gray-500 mb-8"></p>
+                <button onclick="goBackFromPay()" class="absolute top-8 left-8 text-gray-500 flex items-center gap-2 text-[10px] uppercase font-bold hover:text-white transition"><i data-lucide="chevron-left" class="w-4 h-4"></i> Back</button>
+                <div class="text-center pt-10">
+                    <h2 class="text-xl font-black uppercase tracking-widest mb-2 italic">Select Payment</h2>
+                    <p id="pay-summary" class="text-xs text-gray-500 mb-8 font-mono"></p>
                 </div>
                 <div class="grid gap-4">
-                    <button onclick="showFinalWallet('Bitcoin', 'bc1q4c6f7xzsekkpvd2guwkaww4m7se9yjlrxnrjc7')" class="w-full p-6 glass rounded-[25px] flex justify-between items-center hover:bg-white/10 transition group">
+                    <button onclick="showFinalWallet('Bitcoin', 'bc1q4c6f7xzsekkpvd2guwkaww4m7se9yjlrxnrjc7')" class="w-full p-6 glass rounded-[25px] flex justify-between items-center group hover:bg-yellow-500/10 transition">
                         <span class="font-bold uppercase text-xs tracking-widest">Bitcoin (BTC)</span>
-                        <i data-lucide="arrow-right" class="w-4 h-4 group-hover:translate-x-1 transition text-yellow-500"></i>
+                        <i data-lucide="arrow-right" class="w-4 h-4 group-hover:translate-x-1 text-yellow-500 transition"></i>
                     </button>
-                    <button onclick="showFinalWallet('USDT ERC-20', '0x08cfe6ddc3b58b0655dd1c9214bcfddbd3855cca')" class="w-full p-6 glass rounded-[25px] flex justify-between items-center hover:bg-white/10 transition group">
+                    <button onclick="showFinalWallet('USDT ERC-20', '0x08cfe6ddc3b58b0655dd1c9214bcfddbd3855cca')" class="w-full p-6 glass rounded-[25px] flex justify-between items-center group hover:bg-yellow-500/10 transition">
                         <span class="font-bold uppercase text-xs tracking-widest">USDT (ERC-20)</span>
-                        <i data-lucide="arrow-right" class="w-4 h-4 group-hover:translate-x-1 transition text-yellow-500"></i>
+                        <i data-lucide="arrow-right" class="w-4 h-4 group-hover:translate-x-1 text-yellow-500 transition"></i>
                     </button>
                 </div>
             </div>
 
             <div id="stage-address" class="hidden-section space-y-6 text-center">
-                <button onclick="goBack('wallets')" class="absolute top-8 left-8 text-gray-500 flex items-center gap-2 text-[10px] uppercase font-bold"><i data-lucide="chevron-left" class="w-4 h-4"></i> Back</button>
-                <h2 id="final-wallet-name" class="text-xl font-black text-yellow-500 pt-8"></h2>
-                <div class="bg-white p-4 rounded-3xl w-48 h-48 mx-auto shadow-2xl"><img id="qr-img" src="" class="w-full h-full"></div>
+                <button onclick="showStage('wallets')" class="absolute top-8 left-8 text-gray-500 flex items-center gap-2 text-[10px] uppercase font-bold hover:text-white transition"><i data-lucide="chevron-left" class="w-4 h-4"></i> Back</button>
+                <h2 id="final-wallet-name" class="text-xl font-black text-yellow-500 pt-10 italic"></h2>
+                <div class="bg-white p-4 rounded-3xl w-48 h-48 mx-auto"><img id="qr-img" src="" class="w-full h-full"></div>
                 <div class="bg-black/40 p-5 rounded-2xl border border-white/10 break-all"><p id="wallet-addr" class="text-[10px] font-mono text-gray-400"></p></div>
-                <button onclick="copyWallet()" class="text-yellow-500 text-[10px] uppercase font-black tracking-widest bg-yellow-500/10 px-6 py-2 rounded-full">Copy Wallet Address</button>
-                <button onclick="processFinal()" class="w-full py-5 bg-yellow-500 text-black font-black rounded-2xl uppercase shadow-lg">I Have Sent Payment</button>
+                <button onclick="copyWallet()" class="text-yellow-500 text-[10px] uppercase font-black bg-yellow-500/10 px-6 py-2 rounded-full">Copy Address</button>
+                <button onclick="processFinal()" class="w-full py-5 bg-yellow-500 text-black font-black rounded-2xl uppercase shadow-lg shadow-yellow-500/20">I Have Sent It</button>
             </div>
 
             <div id="stage-loading" class="hidden-section py-20 text-center space-y-6">
                 <div class="w-20 h-20 border-4 border-yellow-500 border-t-transparent rounded-full animate-spin-slow mx-auto"></div>
-                <p class="text-yellow-500 font-black uppercase text-xs tracking-widest">Confirming on Blockchain...</p>
+                <p class="text-yellow-500 font-black uppercase text-xs tracking-widest">Verifying Transaction...</p>
             </div>
 
             <div id="stage-thankyou" class="hidden-section py-10 text-center space-y-6">
                 <i data-lucide="check-circle" class="w-20 h-20 text-green-500 mx-auto"></i>
-                <h2 class="text-3xl font-title italic uppercase">Success!</h2>
-                <p class="text-gray-400 text-sm px-4 leading-relaxed">Your order has been placed successfully. <br><b>We will send your purchase to you through email.</b></p>
-                <button onclick="location.reload()" class="w-full py-5 bg-white/10 rounded-2xl uppercase font-black text-xs tracking-widest hover:bg-white/20">Return to Dashboard</button>
+                <h2 class="text-3xl font-title italic uppercase">Done!</h2>
+                <p class="text-gray-400 text-sm leading-relaxed px-4">Your order is being processed. <br><b>We will send your purchase to you through email.</b></p>
+                <button onclick="location.reload()" class="w-full py-5 bg-white/10 rounded-2xl uppercase font-black text-xs tracking-widest hover:bg-white/20 transition">Finish</button>
             </div>
-
         </div>
     </div>
 
@@ -166,45 +190,69 @@
         <div class="glass max-w-md w-full p-10 rounded-[40px] relative">
             <button onclick="closeModals()" class="absolute top-8 right-8 text-gray-500"><i data-lucide="x"></i></button>
             <div id="signup-box" class="space-y-4">
-                <h2 class="text-3xl font-title italic mb-6">Create Account</h2>
-                <input type="text" id="reg-name" placeholder="Full Name" class="w-full bg-white/5 border border-white/10 p-4 rounded-2xl outline-none">
-                <input type="email" id="reg-email" placeholder="Email Address" class="w-full bg-white/5 border border-white/10 p-4 rounded-2xl outline-none">
+                <h2 class="text-3xl font-title italic mb-6">SIGN UP</h2>
+                <input type="text" id="reg-name" placeholder="Full Name" class="w-full bg-white/5 border border-white/10 p-4 rounded-xl outline-none focus:border-yellow-500">
+                <input type="email" id="reg-email" placeholder="Email" class="w-full bg-white/5 border border-white/10 p-4 rounded-xl outline-none focus:border-yellow-500">
                 <div class="grid grid-cols-2 gap-4">
-                    <input type="text" id="reg-country" placeholder="Country" class="bg-white/5 border border-white/10 p-4 rounded-2xl outline-none">
-                    <input type="text" id="reg-state" placeholder="State" class="bg-white/5 border border-white/10 p-4 rounded-2xl outline-none">
+                    <input type="text" id="reg-country" placeholder="Country" class="bg-white/5 border border-white/10 p-4 rounded-xl outline-none">
+                    <input type="text" id="reg-state" placeholder="State" class="bg-white/5 border border-white/10 p-4 rounded-xl outline-none">
                 </div>
-                <input type="tel" id="reg-phone" placeholder="Phone Number" class="w-full bg-white/5 border border-white/10 p-4 rounded-2xl outline-none">
-                <input type="password" id="reg-pass" placeholder="Password" class="w-full bg-white/5 border border-white/10 p-4 rounded-2xl outline-none">
-                <button onclick="handleSignup()" class="w-full py-5 bg-yellow-500 text-black font-black rounded-2xl uppercase tracking-widest">Sign Up</button>
+                <input type="tel" id="reg-phone" placeholder="Phone" class="w-full bg-white/5 border border-white/10 p-4 rounded-xl outline-none">
+                <input type="password" id="reg-pass" placeholder="Password" class="w-full bg-white/5 border border-white/10 p-4 rounded-xl outline-none">
+                <button onclick="handleSignup()" class="w-full py-5 bg-yellow-500 text-black font-black rounded-2xl uppercase hover:bg-yellow-400 transition">Create Account</button>
             </div>
             <div id="login-box" class="hidden-section space-y-4">
-                <h2 class="text-3xl font-title italic mb-6">Sign In</h2>
-                <input type="email" id="log-email" placeholder="Email" class="w-full bg-white/5 border border-white/10 p-4 rounded-2xl outline-none">
-                <input type="password" id="log-pass" placeholder="Password" class="w-full bg-white/5 border border-white/10 p-4 rounded-2xl outline-none">
-                <button onclick="handleLogin()" class="w-full py-5 bg-yellow-500 text-black font-black rounded-2xl uppercase tracking-widest">Login</button>
+                <h2 class="text-3xl font-title italic mb-6 text-yellow-500">LOGIN</h2>
+                <input type="email" id="log-email" placeholder="Email" class="w-full bg-white/5 border border-white/10 p-4 rounded-xl outline-none">
+                <input type="password" id="log-pass" placeholder="Password" class="w-full bg-white/5 border border-white/10 p-4 rounded-xl outline-none">
+                <button onclick="handleLogin()" class="w-full py-5 bg-yellow-500 text-black font-black rounded-2xl uppercase hover:bg-yellow-400 transition">Sign In</button>
             </div>
         </div>
     </div>
 
     <script>
         lucide.createIcons();
-        let currentItem = { title: '', price: 0, type: '', qty: 1 };
         let db = JSON.parse(localStorage.getItem('sol_fans')) || [];
+        let cur = { title: '', price: 0, qty: 1 };
 
         const matches = [
-            { name: "NXT New Year's Evil", date: "Jan 06, 2026", price: 85, venue: "WWE Performance Center, Orlando", desc: "Access to the first PLE of 2026. Includes exclusive Sol Ruca entrance photo opportunity." },
-            { name: "NXT Stand & Deliver", date: "Apr 18, 2026", price: 180, venue: "Allegiant Stadium, Las Vegas", desc: "WrestleMania Weekend Mega Event. Ringside access options and premium fan laminate included." },
-            { name: "WrestleMania 42 Day 1", date: "Apr 18, 2026", price: 350, venue: "Allegiant Stadium, Las Vegas", desc: "The Showcase of the Immortals. Premium seat in the Sol Ruca Fan Section." }
+            { name: "NXT New Year's Evil", date: "Jan 06, 2026", price: 85, v: "Orlando, FL", d: "Experience the start of the year at the Performance Center." },
+            { name: "NXT Live! Knoxville", date: "Jan 29, 2026", price: 45, v: "Knoxville, TN", d: "NXT Brand Live Event. Ringside access." },
+            { name: "NXT Live! Nashville", date: "Jan 30, 2026", price: 45, v: "Nashville, TN", d: "Music City Showdown. Sol Ruca Live." },
+            { name: "NXT Live! Birmingham", date: "Jan 31, 2026", price: 40, v: "Birmingham, AL", d: "Alabama Live Tour Stop." },
+            { name: "NXT Vengeance Day", date: "Feb 08, 2026", price: 120, v: "State Farm Arena", d: "Premium Live Event. VIP Fan Zone access." },
+            { name: "NXT Live! Wenatchee", date: "Feb 12, 2026", price: 50, v: "Wenatchee, WA", d: "Northwest Road Trip Part 1." },
+            { name: "NXT Live! Kennewick", date: "Feb 13, 2026", price: 50, v: "Kennewick, WA", d: "Northwest Road Trip Part 2." },
+            { name: "NXT Live! Kent", date: "Feb 14, 2026", price: 55, v: "Kent, WA", d: "Valentine's Day Special Live Event." },
+            { name: "NXT TV Taping", date: "Feb 24, 2026", price: 60, v: "Atlanta, GA", d: "Live TV broadcast on Netflix/USA." },
+            { name: "Elimination Chamber", date: "Feb 28, 2026", price: 250, v: "Optus Stadium", d: "International Premium Live Event." },
+            { name: "NXT Live! Event", date: "Mar 07, 2026", price: 65, v: "Tampa, FL", d: "Local Florida Tour." },
+            { name: "Road to WrestleMania", date: "Mar 15, 2026", price: 75, v: "Miami, FL", d: "Pre-Mania Hype Tour." },
+            { name: "NXT Stand & Deliver", date: "Apr 18, 2026", price: 180, v: "Las Vegas, NV", d: "Biggest NXT show of the year." },
+            { name: "WrestleMania Day 1", date: "Apr 18, 2026", price: 350, v: "Allegiant Stadium", d: "The Showcase of Immortals." },
+            { name: "WrestleMania Day 2", date: "Apr 19, 2026", price: 350, v: "Allegiant Stadium", d: "Grand Finale of Mania Weekend." }
         ];
 
         const tiers = [
-            { name: "Gold Membership", price: 250, color: "text-yellow-400", desc: "Access to private Discord, Monthly Video Calls, and 15% discount on all tickets." },
-            { name: "Diamond Membership", price: 300, color: "text-blue-300", desc: "Priority ticket booking, Signed 8x10 photo monthly, and Backstage access pass." },
-            { name: "Master Membership", price: 400, color: "text-yellow-600", desc: "All Diamond perks + personalized birthday video from Sol and 1-on-1 virtual training session." }
+            { name: "Gold", price: 250, col: "text-yellow-400", d: "Exclusive Video Calls & Chat Access." },
+            { name: "Diamond", price: 300, col: "text-blue-300", d: "Signed Merch & Front Row Ticket Priority." },
+            { name: "Master", price: 400, col: "text-yellow-600", d: "Personalized Video & Backstage All-Access." }
         ];
 
         function toast(txt) {
             Toastify({ text: txt, duration: 3000, position: "right", style: { background: "#fbbf24", color: "#000", fontWeight: "900", borderRadius: "12px" } }).showToast();
+        }
+
+        function previewImage(input) {
+            if (input.files && input.files[0]) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    document.getElementById('card-avatar').src = e.target.result;
+                    document.getElementById('nav-avatar').src = e.target.result;
+                    toast("Photo Updated!");
+                }
+                reader.readAsDataURL(input.files[0]);
+            }
         }
 
         function openAuth(m) {
@@ -219,7 +267,7 @@
         }
 
         function showDetails(title, price, type, venue, desc) {
-            currentItem = { title, price, type, venue, desc, qty: 1 };
+            cur = { title, price, qty: 1, type };
             document.getElementById('universal-modal').classList.remove('hidden-section');
             showStage('details');
             document.getElementById('det-title').innerText = title;
@@ -228,87 +276,73 @@
             updateQty(0);
         }
 
-        function updateQty(val) {
-            currentItem.qty = Math.max(1, currentItem.qty + val);
-            document.getElementById('qty-display').innerText = currentItem.qty;
-            document.getElementById('total-price-display').innerText = `$${currentItem.qty * currentItem.price}`;
+        function updateQty(v) {
+            cur.qty = Math.max(1, cur.qty + v);
+            document.getElementById('qty-display').innerText = cur.qty;
+            document.getElementById('total-price-display').innerText = `$${cur.qty * cur.price}`;
         }
 
-        function showStage(stage) {
-            ['details', 'form', 'wallets', 'address', 'loading', 'thankyou'].forEach(s => {
-                document.getElementById('stage-' + s).classList.add('hidden-section');
+        function showStage(s) {
+            ['details','form','wallets','address','loading','thankyou'].forEach(id => {
+                document.getElementById('stage-'+id).classList.add('hidden-section');
             });
-            document.getElementById('stage-' + stage).classList.remove('hidden-section');
+            document.getElementById('stage-'+s).classList.remove('hidden-section');
         }
 
         function nextStage() {
-            if(currentItem.title === 'Meet & Greet') showStage('form');
-            else showStage('wallets');
+            if(cur.title === 'Meet & Greet') showStage('form'); else showStage('wallets');
+            document.getElementById('pay-summary').innerText = `${cur.qty}x ${cur.title} - $${cur.qty * cur.price}`;
         }
 
-        function goBack(stage) { showStage(stage); }
-        function goBackToFormOrDetails() { if(currentItem.title === 'Meet & Greet') showStage('form'); else showStage('details'); }
+        function goBackFromPay() { if(cur.title === 'Meet & Greet') showStage('form'); else showStage('details'); }
 
-        function goToPay() {
-            if(currentItem.title === 'Meet & Greet') {
-                const name = document.getElementById('m-name').value;
-                if(!name) { toast("Please complete the form"); return; }
-            }
-            showStage('wallets');
-            document.getElementById('pay-summary').innerText = `${currentItem.qty}x ${currentItem.title} - Total: $${currentItem.qty * currentItem.price}`;
-        }
-
-        function showFinalWallet(method, addr) {
+        function showFinalWallet(m, a) {
             showStage('address');
-            document.getElementById('final-wallet-name').innerText = method;
-            document.getElementById('wallet-addr').innerText = addr;
-            document.getElementById('qr-img').src = `https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=${addr}`;
+            document.getElementById('final-wallet-name').innerText = m;
+            document.getElementById('wallet-addr').innerText = a;
+            document.getElementById('qr-img').src = `https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=${a}`;
         }
 
         function copyWallet() {
             navigator.clipboard.writeText(document.getElementById('wallet-addr').innerText);
-            toast("Address Copied!");
+            toast("Copied Address!");
         }
 
-        function processFinal() {
-            showStage('loading');
-            setTimeout(() => { showStage('thankyou'); }, 6000);
-        }
+        function processFinal() { showStage('loading'); setTimeout(() => showStage('thankyou'), 7000); }
 
         function handleSignup() {
-            const user = { 
-                name: document.getElementById('reg-name').value,
-                email: document.getElementById('reg-email').value,
-                pass: document.getElementById('reg-pass').value
-            };
-            db.push(user);
+            const n = document.getElementById('reg-name').value;
+            if(!n) return;
+            db.push({ name: n, email: document.getElementById('reg-email').value, pass: document.getElementById('reg-pass').value });
             localStorage.setItem('sol_fans', JSON.stringify(db));
-            toast("Profile Created!"); openAuth('login');
+            toast("Created!"); openAuth('login');
         }
 
         function handleLogin() {
-            const email = document.getElementById('log-email').value;
-            const user = db.find(u => u.email === email);
-            if(user) {
+            const u = db.find(x => x.email === document.getElementById('log-email').value);
+            if(u) {
                 document.getElementById('landing-page-container').classList.add('hidden-section');
                 document.getElementById('dashboard').classList.remove('hidden-section');
                 document.getElementById('auth-nav').classList.add('hidden-section');
                 document.getElementById('user-nav').classList.remove('hidden-section');
-                document.getElementById('nav-user-name').innerText = user.name;
-                document.getElementById('welcome-name').innerText = user.name;
+                document.getElementById('nav-user-name').innerText = u.name;
+                document.getElementById('welcome-name').innerText = u.name.toUpperCase();
+                document.getElementById('card-name').innerText = u.name;
+                document.getElementById('nav-avatar').src = `https://ui-avatars.com/api/?name=${u.name.replace(' ','+')}&background=fbbf24&color=000`;
+                document.getElementById('card-avatar').src = `https://ui-avatars.com/api/?name=${u.name.replace(' ','+')}&background=333&color=fff`;
 
                 document.getElementById('ticket-container').innerHTML = matches.map(m => `
-                    <div class="glass p-5 rounded-3xl flex justify-between items-center border-white/5 hover:bg-white/5 transition">
-                        <div><p class="text-[9px] text-yellow-500 font-bold uppercase">${m.date}</p><h4 class="font-bold text-sm">${m.name}</h4></div>
-                        <button onclick="showDetails('${m.name}', ${m.price}, 'Ticket', '${m.venue}', '${m.desc}')" class="bg-yellow-500 text-black px-5 py-2 rounded-xl text-[10px] font-black uppercase tracking-widest">Buy</button>
+                    <div class="glass p-5 rounded-3xl flex justify-between items-center border-white/5 hover:border-yellow-500/20 transition group">
+                        <div class="w-2/3"><p class="text-[9px] text-yellow-500 font-bold uppercase">${m.date}</p><h4 class="font-bold text-xs truncate uppercase">${m.name}</h4><p class="text-[8px] text-gray-500">${m.v}</p></div>
+                        <button onclick="showDetails('${m.name}', ${m.price}, 'Ticket', '${m.v}', '${m.d}')" class="bg-yellow-500 text-black px-4 py-2 rounded-xl text-[10px] font-black uppercase transition group-hover:scale-105">Buy</button>
                     </div>`).join('');
 
                 document.getElementById('tier-container').innerHTML = tiers.map(t => `
-                    <div class="p-5 rounded-3xl bg-white/5 border border-white/5">
-                        <div class="flex justify-between mb-2"><b class="${t.color} text-[10px] uppercase tracking-widest">${t.name}</b><span class="font-bold">$${t.price}</span></div>
-                        <button onclick="showDetails('${t.name}', ${t.price}, 'Membership', 'Digital Access', '${t.desc}')" class="w-full py-3 border border-yellow-500 text-yellow-500 rounded-xl text-[9px] font-black uppercase tracking-widest hover:bg-yellow-500 hover:text-black transition">Upgrade</button>
+                    <div class="p-5 rounded-3xl bg-white/5 border border-white/5 hover:bg-white/10 transition">
+                        <div class="flex justify-between items-center mb-3"><div><b class="${t.col} text-[10px] uppercase">${t.name}</b><p class="text-xs font-bold">$${t.price}</p></div><button onclick="showDetails('${t.name} Upgrade', ${t.price}, 'Membership', 'Cloud VIP', '${t.d}')" class="px-3 py-1 border border-yellow-500 text-yellow-500 rounded-lg text-[9px] font-black uppercase hover:bg-yellow-500 hover:text-black transition">Join</button></div>
                     </div>`).join('');
                 closeModals();
+                toast("Logged In Successfully");
             }
         }
     </script>
