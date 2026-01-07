@@ -10,211 +10,181 @@
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Syncopate:wght@700&family=Inter:wght@300;400;700;900&display=swap');
-        body { font-family: 'Inter', sans-serif; background: #050505; color: white; scroll-behavior: smooth; min-height: 100vh; }
-        .font-title { font-family: 'Syncopate', sans-serif; }
-        .glass { background: rgba(255,255,255,0.03); backdrop-filter: blur(15px); border: 1px solid rgba(255,255,255,0.08); }
-        .hero-img { 
-            background: linear-gradient(to bottom, rgba(5,5,5,0.5), #050505), url('https://i.imgur.com/OGKm7lg.jpeg'); 
-            background-size: cover; background-position: center 20%; 
+        
+        :root { scroll-behavior: smooth; }
+        body { 
+            font-family: 'Inter', sans-serif; 
+            background: #050505; 
+            color: white; 
+            overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
         }
+
+        /* Custom Ultra-Fast Scrollbar */
+        ::-webkit-scrollbar { width: 5px; }
+        ::-webkit-scrollbar-track { background: #050505; }
+        ::-webkit-scrollbar-thumb { background: #fbbf24; border-radius: 10px; }
+
+        .font-title { font-family: 'Syncopate', sans-serif; }
+        .glass { background: rgba(255,255,255,0.02); backdrop-filter: blur(10px); border: 1px solid rgba(255,255,255,0.05); }
+        
+        /* GPU Accelerated Transitions */
+        .hero-img { 
+            background: linear-gradient(to bottom, rgba(5,5,5,0.7), #050505), url('https://images.unsplash.com/photo-1551927336-09d50efd69cd?q=80&w=2000&auto=format&fit=crop'); 
+            background-size: cover; background-position: center 20%; 
+            will-change: transform;
+        }
+
+        .match-card { 
+            background-size: cover; 
+            background-position: center; 
+            transition: transform 0.3s cubic-bezier(0.2, 0, 0.2, 1);
+            will-change: transform;
+        }
+
+        .match-card:hover { transform: translateY(-5px); }
         .hidden-section { display: none !important; }
+        
         .video-container { position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; border-radius: 20px; }
         .video-container iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: 0; }
-        @keyframes spin-slow { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
-        .animate-spin-slow { animation: spin-slow 2s linear infinite; }
-        .member-card { background: linear-gradient(135deg, #1a1a1a 0%, #000 100%); border: 1px solid #fbbf2433; position: relative; overflow: hidden; }
-        .match-card { background-size: cover; background-position: center; transition: transform 0.5s ease; }
-        .match-card:hover { transform: scale(1.02); }
     </style>
 </head>
 <body class="min-h-screen">
 
-    <nav class="fixed w-full z-[100] px-8 py-6 flex justify-between items-center glass bg-black/80">
-        <div class="text-2xl font-title font-bold text-yellow-500 italic">SOL RUCA</div>
-        <div id="auth-nav" class="flex gap-8 items-center text-[10px] font-bold uppercase tracking-widest">
+    <nav class="fixed w-full z-[100] px-4 md:px-8 py-4 flex justify-between items-center glass bg-black/60 backdrop-blur-md">
+        <div class="text-xl md:text-2xl font-title font-bold text-yellow-500 italic">SOL RUCA</div>
+        <div id="auth-nav" class="flex gap-4 md:gap-8 items-center text-[10px] font-bold uppercase tracking-widest">
             <button onclick="openAuth('login')" class="hover:text-yellow-500 transition">Login</button>
-            <button onclick="openAuth('signup')" class="bg-yellow-500 text-black px-6 py-2 rounded-full font-black hover:scale-105 transition">Join</button>
+            <button onclick="openAuth('signup')" class="bg-yellow-500 text-black px-4 md:px-6 py-2 rounded-full font-black hover:scale-105 transition">Join</button>
         </div>
-        <div id="user-nav" class="hidden-section flex items-center gap-4">
-            <div class="text-right">
-                <p id="nav-user-name" class="font-bold text-sm"></p>
-                <p class="text-[10px] text-yellow-500 uppercase italic">Elite Member</p>
+        <div id="user-nav" class="hidden-section flex items-center gap-3">
+            <div class="text-right hidden sm:block">
+                <p id="nav-user-name" class="font-bold text-xs"></p>
+                <p class="text-[8px] text-yellow-500 uppercase italic">Elite Member</p>
             </div>
-            <div class="relative group">
-                <img id="nav-avatar" src="https://ui-avatars.com/api/?name=Sol+Fan&background=fbbf24&color=000" class="w-10 h-10 rounded-full border-2 border-yellow-500 object-cover cursor-pointer">
-            </div>
+            <img id="nav-avatar" src="" class="w-8 h-8 rounded-full border border-yellow-500 object-cover">
             <button onclick="location.reload()" class="p-2 bg-white/5 rounded-full hover:text-red-500 transition"><i data-lucide="log-out" class="w-4 h-4"></i></button>
         </div>
     </nav>
 
     <div id="landing-page-container">
         <section class="hero-img min-h-screen flex flex-col justify-center items-center text-center px-6">
-            <h1 class="text-6xl md:text-[9rem] font-title font-bold mb-4 tracking-tighter uppercase leading-none">Sol Snatcher</h1>
-            <p class="text-xl text-gray-300 max-w-2xl mb-12 font-light italic tracking-widest">Elite Athletics. Global Tour. Exclusive Access.</p>
-            <button onclick="openAuth('signup')" class="bg-white text-black px-16 py-6 rounded-full font-black uppercase tracking-widest hover:bg-yellow-500 transition shadow-2xl">Enter the Vault</button>
+            <h1 class="text-5xl md:text-[8rem] font-title font-bold mb-4 tracking-tighter uppercase leading-none">Sol Snatcher</h1>
+            <p class="text-lg md:text-xl text-gray-300 max-w-2xl mb-12 font-light italic tracking-widest">Elite Athletics • Global Access</p>
+            <button onclick="openAuth('signup')" class="bg-white text-black px-10 md:px-16 py-4 md:py-6 rounded-full font-black uppercase tracking-widest hover:bg-yellow-500 transition shadow-2xl">Enter the Vault</button>
         </section>
 
-        <section class="py-24 px-8 bg-[#080808]">
-            <h2 class="text-4xl font-title text-center mb-16 uppercase italic">Featured Events</h2>
-            <div class="grid md:grid-cols-2 gap-8 max-w-6xl mx-auto">
-                <div class="match-card h-[400px] rounded-[40px] relative overflow-hidden group border border-white/5" style="background-image: url('https://i.imgur.com/GisLskU.jpeg')">
-                    <div class="absolute inset-0 bg-gradient-to-t from-black via-black/40 to-transparent p-10 flex flex-col justify-end">
-                        <span class="text-yellow-500 font-bold tracking-[0.3em] text-[10px] mb-2">PREMIUM LIVE EVENT</span>
-                        <h3 class="text-3xl font-title mb-2">Vengeance Day</h3>
-                        <p class="text-gray-400 text-xs mb-6 uppercase tracking-widest">State Farm Arena | Feb 08, 2026</p>
-                        <button onclick="openAuth('signup')" class="w-fit px-8 py-3 bg-white text-black font-black rounded-full text-[10px] uppercase">Get Tickets</button>
+        <section class="py-20 px-4 md:px-8 bg-[#080808]">
+            <h2 class="text-3xl md:text-4xl font-title text-center mb-12 uppercase italic">Featured Events</h2>
+            <div class="grid lg:grid-cols-2 gap-6 max-w-6xl mx-auto">
+                <div class="match-card h-[400px] md:h-[500px] rounded-[30px] md:rounded-[40px] relative overflow-hidden border border-white/5" style="background-image: linear-gradient(to top, #000, transparent), url('https://images.unsplash.com/photo-1595435063784-750d03b0c541?q=80&w=1000&auto=format&fit=crop')">
+                    <div class="absolute inset-0 p-8 md:p-10 flex flex-col justify-end">
+                        <span class="text-yellow-500 font-bold tracking-[0.3em] text-[9px] mb-2 uppercase">Premium Event</span>
+                        <h3 class="text-2xl md:text-3xl font-title mb-2">Vengeance Day</h3>
+                        <p class="text-gray-400 text-[10px] mb-6 uppercase tracking-widest">Feb 08, 2026</p>
+                        <button onclick="openAuth('signup')" class="w-fit px-6 py-2 md:py-3 bg-white text-black font-black rounded-full text-[9px] uppercase">Tickets</button>
                     </div>
                 </div>
-                <div class="match-card h-[400px] rounded-[40px] relative overflow-hidden group border border-white/5" style="background-image: url('https://i.imgur.com/8QWv8Hq.jpeg')">
-                    <div class="absolute inset-0 bg-gradient-to-t from-black via-black/40 to-transparent p-10 flex flex-col justify-end">
-                        <span class="text-yellow-500 font-bold tracking-[0.3em] text-[10px] mb-2">THE GRAND STAGE</span>
-                        <h3 class="text-3xl font-title mb-2">WrestleMania XLII</h3>
-                        <p class="text-gray-400 text-xs mb-6 uppercase tracking-widest">Allegiant Stadium | Apr 18, 2026</p>
-                        <button onclick="openAuth('signup')" class="w-fit px-8 py-3 bg-white text-black font-black rounded-full text-[10px] uppercase">Join the Waitlist</button>
+                <div class="match-card h-[400px] md:h-[500px] rounded-[30px] md:rounded-[40px] relative overflow-hidden border border-white/5" style="background-image: linear-gradient(to top, #000, transparent), url('https://images.unsplash.com/photo-1504450758481-7338eba7524a?q=80&w=1000&auto=format&fit=crop')">
+                    <div class="absolute inset-0 p-8 md:p-10 flex flex-col justify-end">
+                        <span class="text-yellow-500 font-bold tracking-[0.3em] text-[9px] mb-2 uppercase">Global Stage</span>
+                        <h3 class="text-2xl md:text-3xl font-title mb-2">WrestleMania 42</h3>
+                        <p class="text-gray-400 text-[10px] mb-6 uppercase tracking-widest">Apr 18, 2026</p>
+                        <button onclick="openAuth('signup')" class="w-fit px-6 py-2 md:py-3 bg-white text-black font-black rounded-full text-[9px] uppercase">Waitlist</button>
                     </div>
                 </div>
             </div>
         </section>
 
-        <section class="py-24 px-8 max-w-5xl mx-auto grid md:grid-cols-2 gap-16 items-center">
-            <div>
-                <h2 class="text-5xl font-title text-yellow-500 mb-8 italic uppercase leading-none">The Era of <br>Sol Ruca</h2>
-                <p class="text-gray-400 leading-relaxed mb-6 font-light">Combining elite gymnastics background with high-impact professional wrestling, Sol Ruca is redefining the NXT women's division. Known for her gravity-defying "Sol Snatcher," she brings a unique athletic flair that captures audiences worldwide.</p>
+        <section class="py-24 px-4 md:px-8 max-w-6xl mx-auto grid md:grid-cols-2 gap-12 items-center">
+            <div class="order-2 md:order-1">
+                <h2 class="text-4xl md:text-6xl font-title text-yellow-500 mb-6 italic uppercase leading-none">The Era of <br>Sol Ruca</h2>
+                <p class="text-gray-400 text-base md:text-lg leading-relaxed mb-8 font-light">Redefining the standard of elite women's wrestling through gymnastic mastery and high-impact innovation.</p>
                 <div class="flex gap-8 border-t border-white/10 pt-8">
-                    <div><p class="text-2xl font-title text-white">100%</p><p class="text-[9px] text-gray-500 uppercase tracking-widest">Athleticism</p></div>
-                    <div><p class="text-2xl font-title text-white">0%</p><p class="text-[9px] text-gray-500 uppercase tracking-widest">Fear</p></div>
-                    <div><p class="text-2xl font-title text-white">Top</p><p class="text-[9px] text-gray-500 uppercase tracking-widest">Tier Talent</p></div>
+                    <div><p class="text-2xl font-title text-white">100%</p><p class="text-[8px] text-gray-500 uppercase tracking-widest">Impact</p></div>
+                    <div><p class="text-2xl font-title text-white">Top</p><p class="text-[8px] text-gray-500 uppercase tracking-widest">Tier</p></div>
                 </div>
             </div>
-            <div class="glass p-4 rounded-[50px] rotate-3">
-                <img src="https://i.imgur.com/mO6pP8x.jpeg" class="rounded-[40px] grayscale hover:grayscale-0 transition duration-700">
+            <div class="order-1 md:order-2 glass p-4 rounded-[40px] md:rounded-[60px] transform rotate-1">
+                <img src="https://images.unsplash.com/photo-1517836357463-d25dfeac3438?q=80&w=1000&auto=format&fit=crop" class="rounded-[30px] md:rounded-[40px] grayscale hover:grayscale-0 transition duration-500">
             </div>
         </section>
 
-        <section class="py-24 px-8 bg-white text-black">
-            <div class="max-w-4xl mx-auto text-center">
-                <h2 class="text-4xl font-title mb-4 uppercase">Direct Contact</h2>
-                <p class="text-gray-500 mb-12 uppercase tracking-widest text-[10px] font-bold">For Booking, Inquiries, or Fan Mail</p>
-                <div class="grid md:grid-cols-2 gap-4 text-left">
-                    <input type="text" placeholder="Your Name" class="p-6 bg-gray-100 rounded-3xl outline-none focus:ring-2 ring-yellow-500">
-                    <input type="email" placeholder="Your Email" class="p-6 bg-gray-100 rounded-3xl outline-none focus:ring-2 ring-yellow-500">
-                    <textarea placeholder="Message" class="md:col-span-2 p-6 bg-gray-100 rounded-3xl h-40 outline-none focus:ring-2 ring-yellow-500"></textarea>
-                    <button onclick="toast('Message Sent Locally')" class="md:col-span-2 py-6 bg-black text-white font-black uppercase rounded-3xl tracking-widest hover:bg-yellow-500 hover:text-black transition">Send Message</button>
-                </div>
-            </div>
-        </section>
-
-        <footer class="py-20 text-center text-[10px] text-gray-600 uppercase tracking-[0.5em]">&copy; 2026 Sol Ruca Elite. WWE Official Property.</footer>
+        <footer class="py-12 text-center text-[8px] text-gray-600 uppercase tracking-[0.4em]">&copy; 2026 Sol Ruca Elite</footer>
     </div>
 
-    <div id="dashboard" class="hidden-section pt-32 px-8 max-w-[1500px] mx-auto pb-20">
-        <div class="grid lg:grid-cols-12 gap-10">
-            <div class="lg:col-span-8 space-y-10">
-                <h2 class="text-4xl font-title uppercase">Sol Vault / <span id="welcome-name" class="text-yellow-500"></span></h2>
-                <div class="glass p-6 rounded-[32px] border-yellow-500/20 shadow-2xl">
+    <div id="dashboard" class="hidden-section pt-24 md:pt-32 px-4 md:px-8 max-w-[1400px] mx-auto pb-20">
+        <div class="grid lg:grid-cols-12 gap-8 md:gap-10">
+            <div class="lg:col-span-8 space-y-8 md:space-y-10">
+                <h2 class="text-2xl md:text-4xl font-title uppercase">Sol Vault / <span id="welcome-name" class="text-yellow-500"></span></h2>
+                <div class="glass p-3 md:p-6 rounded-[24px] md:rounded-[32px] border-yellow-500/10">
                     <div class="video-container"><iframe src="https://www.youtube.com/embed/ucH_JlCGrFc" allowfullscreen></iframe></div>
                 </div>
                 <div>
-                    <h3 class="font-bold uppercase tracking-[0.3em] text-xs text-yellow-500 mb-6 italic">WWE Road to WrestleMania 2026 (Live Schedule)</h3>
-                    <div id="ticket-container" class="grid md:grid-cols-2 lg:grid-cols-2 gap-4"></div>
+                    <h3 class="font-bold uppercase tracking-widest text-[9px] text-yellow-500 mb-4 italic">Nearest 5 Tour Stops</h3>
+                    <div id="ticket-container" class="grid gap-3"></div>
                 </div>
             </div>
 
             <div class="lg:col-span-4 space-y-6">
-                <div class="member-card p-6 rounded-[30px] shadow-2xl border border-yellow-500/30">
+                <div class="member-card p-6 rounded-[30px] shadow-2xl">
                     <div class="flex justify-between items-start mb-6">
-                        <div class="bg-yellow-500 text-black text-[8px] font-black px-3 py-1 rounded-full uppercase tracking-tighter">Official Fan ID</div>
-                        <i data-lucide="nfc" class="text-yellow-500/50 w-6 h-6"></i>
+                        <div class="bg-yellow-500 text-black text-[8px] font-black px-3 py-1 rounded-full uppercase">Official ID</div>
+                        <i data-lucide="shield-check" class="text-yellow-500/50 w-5 h-5"></i>
                     </div>
-                    <div class="flex gap-4 items-center mb-6">
-                        <div class="relative group cursor-pointer" onclick="document.getElementById('avatar-upload').click()">
-                            <img id="card-avatar" src="https://ui-avatars.com/api/?name=User&background=333&color=fff" class="w-20 h-20 rounded-2xl object-cover border border-white/10 group-hover:opacity-50 transition">
-                            <div class="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition">
-                                <i data-lucide="camera" class="w-6 h-6 text-white"></i>
-                            </div>
-                            <input type="file" id="avatar-upload" class="hidden" accept="image/*" onchange="previewImage(this)">
-                        </div>
+                    <div class="flex gap-4 items-center">
+                        <img id="card-avatar" src="" class="w-16 h-16 rounded-2xl object-cover border border-white/10">
                         <div>
-                            <p id="card-name" class="font-title text-sm tracking-tighter uppercase text-white">FAN NAME</p>
-                            <p class="text-[9px] text-yellow-500 font-bold uppercase tracking-widest">Level 1 Snatcher</p>
-                            <p class="text-[8px] text-gray-500 mt-1 font-mono">ID: 2026-SR-8849</p>
+                            <p id="card-name" class="font-title text-xs uppercase">FAN NAME</p>
+                            <p class="text-[8px] text-yellow-500 font-bold uppercase">Snatcher Elite</p>
                         </div>
                     </div>
-                    <div class="h-[1px] bg-white/10 w-full mb-4"></div>
-                    <div class="flex justify-between text-[8px] uppercase font-bold tracking-[0.2em] text-gray-400">
-                        <span>Issued: Jan 2026</span>
-                        <span class="text-yellow-500">Active</span>
-                    </div>
                 </div>
-                <div class="glass p-8 rounded-[40px] border-white/5">
-                    <h3 class="text-center font-title text-sm mb-6 uppercase tracking-widest italic text-yellow-500">Tier Upgrades</h3>
-                    <div class="space-y-4" id="tier-container"></div>
-                </div>
-                <button onclick="showDetails('Meet & Greet', 500, 'VIP', 'Global Tour Stop', 'Includes: Private Meal with Sol, 3 Professional Selfies, Signed 8x10, and Exclusive Q&A Session.')" class="w-full py-8 bg-gradient-to-r from-yellow-500 to-yellow-600 text-black font-black rounded-[30px] uppercase text-sm tracking-[0.2em] shadow-2xl hover:scale-[1.02] transition">Request Meet & Greet</button>
+                <div id="tier-container" class="space-y-3"></div>
+                <button onclick="showDetails('Meet & Greet', 500, 'VIP', 'Exclusive Access', 'Private meal and photo session.')" class="w-full py-6 bg-yellow-500 text-black font-black rounded-[25px] uppercase text-[10px] tracking-widest shadow-xl hover:scale-[1.02] transition">Request Meet & Greet</button>
             </div>
         </div>
     </div>
 
-    <div id="universal-modal" class="hidden-section fixed inset-0 z-[500] flex items-center justify-center bg-black/98 p-6 overflow-y-auto">
-        <div class="glass max-w-md w-full p-10 rounded-[45px] relative border-white/10 shadow-[0_0_50px_rgba(251,191,36,0.1)]">
+    <div id="universal-modal" class="hidden-section fixed inset-0 z-[500] flex items-center justify-center bg-black/98 p-4 overflow-y-auto">
+        <div class="glass max-w-sm w-full p-8 md:p-10 rounded-[40px] relative border-white/10">
             <div id="stage-details" class="space-y-6 text-center">
-                <button onclick="closeModals()" class="absolute top-8 right-8 text-gray-500 hover:text-white"><i data-lucide="x"></i></button>
-                <h4 id="det-title" class="text-2xl font-title italic text-yellow-500 uppercase"></h4>
-                <p id="det-venue" class="text-[10px] text-gray-400 font-bold uppercase tracking-widest"></p>
-                <div class="bg-white/5 p-6 rounded-3xl border border-white/5 text-left">
-                    <p id="det-desc" class="text-sm text-gray-300 leading-relaxed font-light"></p>
+                <button onclick="closeModals()" class="absolute top-6 right-6 text-gray-500"><i data-lucide="x"></i></button>
+                <h4 id="det-title" class="text-xl font-title text-yellow-500 uppercase italic"></h4>
+                <div class="flex items-center justify-center gap-8 py-4">
+                    <button onclick="updateQty(-1)" class="w-10 h-10 rounded-full border border-white/20 hover:bg-white/10">-</button>
+                    <span id="qty-display" class="text-3xl font-title">1</span>
+                    <button onclick="updateQty(1)" class="w-10 h-10 rounded-full border border-white/20 hover:bg-white/10">+</button>
                 </div>
-                <div class="flex flex-col items-center gap-4 py-4">
-                    <div class="flex items-center gap-8">
-                        <button onclick="updateQty(-1)" class="w-12 h-12 rounded-full border border-white/20 flex items-center justify-center hover:bg-white/10">-</button>
-                        <span id="qty-display" class="text-4xl font-title">1</span>
-                        <button onclick="updateQty(1)" class="w-12 h-12 rounded-full border border-white/20 flex items-center justify-center hover:bg-white/10">+</button>
-                    </div>
-                </div>
-                <p id="total-price-display" class="text-4xl font-black text-white mb-6">$0</p>
-                <button onclick="nextStage()" class="w-full py-5 bg-yellow-500 text-black font-black rounded-2xl uppercase tracking-[0.2em]">Continue</button>
+                <p id="total-price-display" class="text-4xl font-black text-white"></p>
+                <button onclick="nextStage()" class="w-full py-4 bg-yellow-500 text-black font-black rounded-2xl uppercase text-[10px]">Continue</button>
             </div>
-            <div id="stage-form" class="hidden-section space-y-4">
-                <button onclick="showStage('details')" class="absolute top-8 left-8 text-gray-500 flex items-center gap-2 text-[10px] uppercase font-bold"><i data-lucide="chevron-left" class="w-4 h-4"></i> Back</button>
-                <h2 class="text-xl font-title text-center text-yellow-500 mb-6 uppercase italic pt-6">Booking Form</h2>
-                <input type="text" placeholder="Full Name" class="w-full bg-white/5 border border-white/10 p-4 rounded-2xl outline-none">
-                <input type="email" placeholder="Email" class="w-full bg-white/5 border border-white/10 p-4 rounded-2xl outline-none">
-                <button onclick="showStage('wallets')" class="w-full py-5 bg-yellow-500 text-black font-black rounded-2xl uppercase tracking-widest mt-4">Continue to Payment</button>
+            <div id="stage-wallets" class="hidden-section space-y-3 pt-6">
+                <button onclick="showFinalWallet('BTC', 'bc1q4c6f7xzsekkpvd2guwkaww4m7se9yjlrxnrjc7')" class="w-full p-5 glass rounded-2xl flex justify-between items-center text-[10px] font-bold">BITCOIN <i data-lucide="chevron-right"></i></button>
+                <button onclick="showFinalWallet('USDT', '0x08cfe6ddc3b58b0655dd1c9214bcfddbd3855cca')" class="w-full p-5 glass rounded-2xl flex justify-between items-center text-[10px] font-bold">USDT <i data-lucide="chevron-right"></i></button>
             </div>
-            <div id="stage-wallets" class="hidden-section space-y-6">
-                <button onclick="goBackFromPay()" class="absolute top-8 left-8 text-gray-500 flex items-center gap-2 text-[10px] uppercase font-bold"><i data-lucide="chevron-left" class="w-4 h-4"></i> Back</button>
-                <div class="text-center pt-10"><h2 class="text-xl font-black uppercase tracking-widest mb-2 italic">Select Payment</h2><p id="pay-summary" class="text-xs text-gray-500 mb-8"></p></div>
-                <button onclick="showFinalWallet('Bitcoin', 'bc1q4c6f7xzsekkpvd2guwkaww4m7se9yjlrxnrjc7')" class="w-full p-6 glass rounded-[25px] flex justify-between items-center group"><span class="font-bold text-xs uppercase tracking-widest">Bitcoin</span><i data-lucide="arrow-right"></i></button>
-                <button onclick="showFinalWallet('USDT', '0x08cfe6ddc3b58b0655dd1c9214bcfddbd3855cca')" class="w-full p-6 glass rounded-[25px] flex justify-between items-center group"><span class="font-bold text-xs uppercase tracking-widest">USDT (ERC-20)</span><i data-lucide="arrow-right"></i></button>
+            <div id="stage-address" class="hidden-section text-center space-y-6 pt-6">
+                <div class="bg-white p-3 rounded-2xl w-40 h-40 mx-auto"><img id="qr-img" class="w-full h-full"></div>
+                <p id="wallet-addr" class="text-[9px] font-mono text-gray-500 break-all"></p>
+                <button onclick="processFinal()" class="w-full py-4 bg-yellow-500 text-black font-black rounded-2xl uppercase text-[10px]">Confirm Payment</button>
             </div>
-            <div id="stage-address" class="hidden-section space-y-6 text-center">
-                <button onclick="showStage('wallets')" class="absolute top-8 left-8 text-gray-500 flex items-center gap-2 text-[10px] uppercase font-bold"><i data-lucide="chevron-left" class="w-4 h-4"></i> Back</button>
-                <h2 id="final-wallet-name" class="text-xl font-black text-yellow-500 pt-10 italic"></h2>
-                <div class="bg-white p-4 rounded-3xl w-48 h-48 mx-auto"><img id="qr-img" src="" class="w-full h-full"></div>
-                <div class="bg-black/40 p-5 rounded-2xl border border-white/10 break-all"><p id="wallet-addr" class="text-[10px] font-mono text-gray-400"></p></div>
-                <button onclick="copyWallet()" class="text-yellow-500 text-[10px] uppercase font-black bg-yellow-500/10 px-6 py-2 rounded-full">Copy Address</button>
-                <button onclick="processFinal()" class="w-full py-5 bg-yellow-500 text-black font-black rounded-2xl uppercase">I Have Sent It</button>
-            </div>
-            <div id="stage-loading" class="hidden-section py-20 text-center"><div class="w-20 h-20 border-4 border-yellow-500 border-t-transparent rounded-full animate-spin-slow mx-auto mb-4"></div><p class="text-yellow-500 uppercase text-xs">Verifying...</p></div>
-            <div id="stage-thankyou" class="hidden-section py-10 text-center space-y-6"><i data-lucide="check-circle" class="w-20 h-20 text-green-500 mx-auto"></i><h2 class="text-3xl font-title italic uppercase">Done!</h2><button onclick="location.reload()" class="w-full py-5 bg-white/10 rounded-2xl uppercase">Finish</button></div>
+            <div id="stage-loading" class="hidden-section py-20 text-center"><div class="w-12 h-12 border-2 border-yellow-500 border-t-transparent rounded-full animate-spin mx-auto"></div></div>
+            <div id="stage-thankyou" class="hidden-section py-10 text-center space-y-4"><i data-lucide="check-circle" class="w-16 h-16 text-green-500 mx-auto"></i><h2 class="text-xl font-title uppercase">Done</h2><button onclick="location.reload()" class="w-full py-4 bg-white/10 rounded-2xl uppercase text-[10px]">Finish</button></div>
         </div>
     </div>
 
-    <div id="auth-modal" class="hidden-section fixed inset-0 z-[200] flex items-center justify-center bg-black/95 p-6">
-        <div class="glass max-w-md w-full p-10 rounded-[40px] relative">
-            <button onclick="closeModals()" class="absolute top-8 right-8 text-gray-500"><i data-lucide="x"></i></button>
+    <div id="auth-modal" class="hidden-section fixed inset-0 z-[200] flex items-center justify-center bg-black/95 p-4">
+        <div class="glass max-w-sm w-full p-8 rounded-[30px] relative">
             <div id="signup-box" class="space-y-4">
-                <h2 class="text-3xl font-title italic mb-6">SIGN UP</h2>
-                <input type="text" id="reg-name" placeholder="Full Name" class="w-full bg-white/5 border border-white/10 p-4 rounded-xl outline-none focus:border-yellow-500">
-                <input type="email" id="reg-email" placeholder="Email" class="w-full bg-white/5 border border-white/10 p-4 rounded-xl outline-none">
-                <input type="password" id="reg-pass" placeholder="Password" class="w-full bg-white/5 border border-white/10 p-4 rounded-xl outline-none">
-                <button onclick="handleSignup()" class="w-full py-5 bg-yellow-500 text-black font-black rounded-2xl uppercase">Create Account</button>
+                <h2 class="text-2xl font-title italic mb-4">JOIN</h2>
+                <input type="text" id="reg-name" placeholder="Name" class="w-full bg-white/5 border border-white/10 p-4 rounded-xl text-sm outline-none">
+                <input type="email" id="reg-email" placeholder="Email" class="w-full bg-white/5 border border-white/10 p-4 rounded-xl text-sm outline-none">
+                <button onclick="handleSignup()" class="w-full py-4 bg-yellow-500 text-black font-black rounded-xl uppercase text-[10px]">Create</button>
             </div>
             <div id="login-box" class="hidden-section space-y-4">
-                <h2 class="text-3xl font-title italic mb-6 text-yellow-500">LOGIN</h2>
-                <input type="email" id="log-email" placeholder="Email" class="w-full bg-white/5 border border-white/10 p-4 rounded-xl outline-none">
-                <input type="password" id="log-pass" placeholder="Password" class="w-full bg-white/5 border border-white/10 p-4 rounded-xl outline-none">
-                <button onclick="handleLogin()" class="w-full py-5 bg-yellow-500 text-black font-black rounded-2xl uppercase">Sign In</button>
+                <h2 class="text-2xl font-title italic mb-4">LOGIN</h2>
+                <input type="email" id="log-email" placeholder="Email" class="w-full bg-white/5 border border-white/10 p-4 rounded-xl text-sm outline-none">
+                <button onclick="handleLogin()" class="w-full py-4 bg-yellow-500 text-black font-black rounded-xl uppercase text-[10px]">Sign In</button>
             </div>
         </div>
     </div>
@@ -225,63 +195,27 @@
         let cur = { title: '', price: 0, qty: 1 };
 
         const matches = [
-            { name: "NXT New Year's Evil", date: "Jan 06, 2026", price: 85, v: "Orlando, FL", d: "Experience the start of the year at the Performance Center." },
-            { name: "NXT Live! Knoxville", date: "Jan 29, 2026", price: 45, v: "Knoxville, TN", d: "NXT Brand Live Event. Ringside access." },
-            { name: "NXT Live! Nashville", date: "Jan 30, 2026", price: 45, v: "Nashville, TN", d: "Music City Showdown. Sol Ruca Live." },
-            { name: "NXT Live! Birmingham", date: "Jan 31, 2026", price: 40, v: "Birmingham, AL", d: "Alabama Live Tour Stop." },
-            { name: "NXT Vengeance Day", date: "Feb 08, 2026", price: 120, v: "State Farm Arena", d: "Premium Live Event. VIP Fan Zone access." },
-            { name: "NXT Live! Wenatchee", date: "Feb 12, 2026", price: 50, v: "Wenatchee, WA", d: "Northwest Road Trip Part 1." },
-            { name: "NXT Live! Kennewick", date: "Feb 13, 2026", price: 50, v: "Kennewick, WA", d: "Northwest Road Trip Part 2." },
-            { name: "NXT Live! Kent", date: "Feb 14, 2026", price: 55, v: "Kent, WA", d: "Valentine's Day Special Live Event." },
-            { name: "NXT TV Taping", date: "Feb 24, 2026", price: 60, v: "Atlanta, GA", d: "Live TV broadcast on Netflix/USA." },
-            { name: "Elimination Chamber", date: "Feb 28, 2026", price: 250, v: "Optus Stadium", d: "International Premium Live Event." },
-            { name: "NXT Live! Event", date: "Mar 07, 2026", price: 65, v: "Tampa, FL", d: "Local Florida Tour." },
-            { name: "Road to WrestleMania", date: "Mar 15, 2026", price: 75, v: "Miami, FL", d: "Pre-Mania Hype Tour." },
-            { name: "NXT Stand & Deliver", date: "Apr 18, 2026", price: 180, v: "Las Vegas, NV", d: "Biggest NXT show of the year." },
-            { name: "WrestleMania Day 1", date: "Apr 18, 2026", price: 350, v: "Allegiant Stadium", d: "The Showcase of Immortals." },
-            { name: "WrestleMania Day 2", date: "Apr 19, 2026", price: 350, v: "Allegiant Stadium", d: "Grand Finale of Mania Weekend." }
+            { name: "NXT New Year's Evil", date: "Jan 06, 2026", price: 85, v: "Orlando, FL" },
+            { name: "NXT Live! Knoxville", date: "Jan 29, 2026", price: 45, v: "Knoxville, TN" },
+            { name: "NXT Live! Nashville", date: "Jan 30, 2026", price: 45, v: "Nashville, TN" },
+            { name: "NXT Live! Birmingham", date: "Jan 31, 2026", price: 40, v: "Birmingham, AL" },
+            { name: "NXT Vengeance Day", date: "Feb 08, 2026", price: 120, v: "Atlanta, GA" }
         ];
 
         const tiers = [
-            { name: "Gold", price: 250, col: "text-yellow-400", d: "Exclusive Video Calls & Chat Access." },
-            { name: "Diamond", price: 300, col: "text-blue-300", d: "Signed Merch & Front Row Ticket Priority." },
-            { name: "Master", price: 400, col: "text-yellow-600", d: "Personalized Video & Backstage All-Access." }
+            { name: "Gold", price: 250, col: "text-yellow-400" },
+            { name: "Master", price: 400, col: "text-yellow-600" }
         ];
 
-        function toast(txt) {
-            Toastify({ text: txt, duration: 3000, position: "right", style: { background: "#fbbf24", color: "#000", fontWeight: "900", borderRadius: "12px" } }).showToast();
-        }
-
-        function previewImage(input) {
-            if (input.files && input.files[0]) {
-                const reader = new FileReader();
-                reader.onload = function(e) {
-                    document.getElementById('card-avatar').src = e.target.result;
-                    document.getElementById('nav-avatar').src = e.target.result;
-                    toast("Photo Updated!");
-                }
-                reader.readAsDataURL(input.files[0]);
-            }
-        }
-
-        function openAuth(m) {
-            document.getElementById('auth-modal').classList.remove('hidden-section');
-            document.getElementById('signup-box').classList.toggle('hidden-section', m === 'login');
-            document.getElementById('login-box').classList.toggle('hidden-section', m === 'signup');
-        }
-
-        function closeModals() { 
-            document.getElementById('auth-modal').classList.add('hidden-section');
-            document.getElementById('universal-modal').classList.add('hidden-section');
-        }
+        function toast(txt) { Toastify({ text: txt, duration: 2000, position: "right", style: { background: "#fbbf24", color: "#000", fontWeight: "bold", borderRadius: "10px" } }).showToast(); }
+        function openAuth(m) { document.getElementById('auth-modal').classList.remove('hidden-section'); document.getElementById('signup-box').classList.toggle('hidden-section', m === 'login'); document.getElementById('login-box').classList.toggle('hidden-section', m === 'signup'); }
+        function closeModals() { document.querySelectorAll('.hidden-section').forEach; document.getElementById('auth-modal').classList.add('hidden-section'); document.getElementById('universal-modal').classList.add('hidden-section'); }
 
         function showDetails(title, price, type, venue, desc) {
             cur = { title, price, qty: 1, type };
             document.getElementById('universal-modal').classList.remove('hidden-section');
             showStage('details');
             document.getElementById('det-title').innerText = title;
-            document.getElementById('det-venue').innerText = venue;
-            document.getElementById('det-desc').innerText = desc;
             updateQty(0);
         }
 
@@ -292,38 +226,23 @@
         }
 
         function showStage(s) {
-            ['details','form','wallets','address','loading','thankyou'].forEach(id => {
-                const el = document.getElementById('stage-'+id);
-                if(el) el.classList.add('hidden-section');
-            });
+            ['details','wallets','address','loading','thankyou'].forEach(id => document.getElementById('stage-'+id).classList.add('hidden-section'));
             document.getElementById('stage-'+s).classList.remove('hidden-section');
         }
 
-        function nextStage() {
-            if(cur.title === 'Meet & Greet') showStage('form'); else showStage('wallets');
-            document.getElementById('pay-summary').innerText = `${cur.qty}x ${cur.title} - $${cur.qty * cur.price}`;
-        }
-
-        function goBackFromPay() { if(cur.title === 'Meet & Greet') showStage('form'); else showStage('details'); }
+        function nextStage() { showStage('wallets'); }
 
         function showFinalWallet(m, a) {
             showStage('address');
-            document.getElementById('final-wallet-name').innerText = m;
             document.getElementById('wallet-addr').innerText = a;
-            document.getElementById('qr-img').src = `https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=${a}`;
+            document.getElementById('qr-img').src = `https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=${a}`;
         }
 
-        function copyWallet() {
-            navigator.clipboard.writeText(document.getElementById('wallet-addr').innerText);
-            toast("Copied Address!");
-        }
-
-        function processFinal() { showStage('loading'); setTimeout(() => showStage('thankyou'), 7000); }
+        function processFinal() { showStage('loading'); setTimeout(() => showStage('thankyou'), 2000); }
 
         function handleSignup() {
             const n = document.getElementById('reg-name').value;
-            if(!n) return;
-            db.push({ name: n, email: document.getElementById('reg-email').value, pass: document.getElementById('reg-pass').value });
+            db.push({ name: n, email: document.getElementById('reg-email').value });
             localStorage.setItem('sol_fans', JSON.stringify(db));
             toast("Created!"); openAuth('login');
         }
@@ -338,21 +257,21 @@
                 document.getElementById('nav-user-name').innerText = u.name;
                 document.getElementById('welcome-name').innerText = u.name.toUpperCase();
                 document.getElementById('card-name').innerText = u.name;
-                document.getElementById('nav-avatar').src = `https://ui-avatars.com/api/?name=${u.name.replace(' ','+')}&background=fbbf24&color=000`;
-                document.getElementById('card-avatar').src = `https://ui-avatars.com/api/?name=${u.name.replace(' ','+')}&background=333&color=fff`;
+                document.getElementById('nav-avatar').src = `https://ui-avatars.com/api/?name=${u.name}&background=fbbf24&color=000`;
+                document.getElementById('card-avatar').src = `https://ui-avatars.com/api/?name=${u.name}&background=333&color=fff`;
 
                 document.getElementById('ticket-container').innerHTML = matches.map(m => `
-                    <div class="glass p-5 rounded-3xl flex justify-between items-center border-white/5 hover:border-yellow-500/20 transition group">
-                        <div class="w-2/3"><p class="text-[9px] text-yellow-500 font-bold uppercase">${m.date}</p><h4 class="font-bold text-xs truncate uppercase">${m.name}</h4><p class="text-[8px] text-gray-500">${m.v}</p></div>
-                        <button onclick="showDetails('${m.name}', ${m.price}, 'Ticket', '${m.v}', '${m.d}')" class="bg-yellow-500 text-black px-4 py-2 rounded-xl text-[10px] font-black uppercase transition group-hover:scale-105">Buy</button>
+                    <div class="glass p-4 rounded-2xl flex justify-between items-center border-white/5">
+                        <div class="overflow-hidden"><p class="text-[8px] text-yellow-500 font-bold uppercase">${m.date}</p><h4 class="font-bold text-[10px] truncate uppercase">${m.name}</h4></div>
+                        <button onclick="showDetails('${m.name}', ${m.price}, 'Ticket', '${m.v}', '')" class="bg-yellow-500 text-black px-4 py-2 rounded-lg text-[9px] font-black uppercase">Buy</button>
                     </div>`).join('');
 
                 document.getElementById('tier-container').innerHTML = tiers.map(t => `
-                    <div class="p-5 rounded-3xl bg-white/5 border border-white/5 hover:bg-white/10 transition">
-                        <div class="flex justify-between items-center mb-3"><div><b class="${t.col} text-[10px] uppercase">${t.name}</b><p class="text-xs font-bold">$${t.price}</p></div><button onclick="showDetails('${t.name} Upgrade', ${t.price}, 'Membership', 'Cloud VIP', '${t.d}')" class="px-3 py-1 border border-yellow-500 text-yellow-500 rounded-lg text-[9px] font-black uppercase hover:bg-yellow-500 hover:text-black transition">Join</button></div>
+                    <div class="p-4 rounded-2xl bg-white/5 border border-white/5 flex justify-between items-center">
+                        <b class="${t.col} text-[10px] uppercase">${t.name} Tier</b>
+                        <button onclick="showDetails('${t.name} Upgrade', ${t.price}, 'Tier', '', '')" class="text-yellow-500 text-[9px] font-black uppercase underline">Join</button>
                     </div>`).join('');
                 closeModals();
-                toast("Logged In Successfully");
                 window.scrollTo(0,0);
             }
         }
