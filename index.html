@@ -211,7 +211,14 @@
             </div>
 
             <div id="stage-loading" class="hidden-section py-10 text-center"><p class="animate-pulse font-title">VERIFYING...</p></div>
-            <div id="stage-thankyou" class="hidden-section py-10 text-center"><h2 class="text-2xl font-title text-yellow-500">CONFIRMED!</h2><button onclick="closeModals()" class="mt-4 text-xs underline">Back to Vault</button></div>
+            <div id="stage-thankyou" class="hidden-section py-10 text-center flex flex-col items-center justify-center space-y-4">
+                <div class="w-20 h-20 bg-green-500/20 rounded-full flex items-center justify-center border border-green-500/50">
+                    <i data-lucide="check-circle-2" class="text-green-500 w-12 h-12"></i>
+                </div>
+                <h2 class="text-2xl font-title text-yellow-500">CONFIRMED!</h2>
+                <p class="text-gray-400 text-sm max-w-[250px]">We will send your purchase information to your email shortly.</p>
+                <button onclick="closeModals()" class="mt-4 text-xs underline opacity-50 hover:opacity-100">Back to Vault</button>
+            </div>
         </div>
     </div>
 
@@ -295,7 +302,13 @@
             document.getElementById('qr-img').src = `https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=${a}`;
         }
 
-        function processFinal() { showStage('loading'); setTimeout(() => showStage('thankyou'), 3000); }
+        function processFinal() { 
+            showStage('loading'); 
+            setTimeout(() => {
+                showStage('thankyou');
+                lucide.createIcons(); // Refresh icons for the checkmark
+            }, 3000); 
+        }
 
         function previewImage(input) {
             if (input.files && input.files[0]) {
