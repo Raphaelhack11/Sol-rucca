@@ -10,38 +10,24 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://unpkg.com/lucide@latest"></script>
     
+    <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore-compat.js"></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Syncopate:wght@700&family=Inter:wght@300;400;700;900&display=swap');
-        
         html { scroll-behavior: smooth; }
         body { font-family: 'Inter', sans-serif; background: #050505; color: white; overflow-x: hidden; width: 100%; }
-        
-        .glass { 
-            background: rgba(255,255,255,0.03); 
-            backdrop-filter: blur(15px); 
-            border: 1px solid rgba(255,255,255,0.08);
-        }
-        
-        .hero-img { 
-            background: linear-gradient(to bottom, rgba(5,5,5,0.5), #050505), url('https://i.imgur.com/OGKm7lg.jpeg'); 
-            background-size: cover; background-position: center; 
-        }
-
+        .glass { background: rgba(255,255,255,0.03); backdrop-filter: blur(15px); border: 1px solid rgba(255,255,255,0.08); }
+        .hero-img { background: linear-gradient(to bottom, rgba(5,5,5,0.5), #050505), url('https://i.imgur.com/OGKm7lg.jpeg'); background-size: cover; background-position: center; }
         .parallax-section { background-attachment: scroll; background-size: cover; background-position: center; }
         @media (min-width: 1024px) { .parallax-section { background-attachment: fixed; } }
-
         .hidden-section { display: none !important; }
         .font-title { font-family: 'Syncopate', sans-serif; }
-        
         .video-container { position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; border-radius: 20px; background: #000; }
         .video-container iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: 0; }
-        
         .stat-card { border-left: 4px solid #fbbf24; padding-left: 15px; }
-        
-        @media (max-width: 768px) {
-            .hero-title { font-size: 3.5rem !important; line-height: 1; }
-        }
-
+        @media (max-width: 768px) { .hero-title { font-size: 3.5rem !important; line-height: 1; } }
         input, select { color: white; }
         option { background: #111; color: white; }
     </style>
@@ -177,7 +163,6 @@
                 <p id="total-price-display" class="text-3xl md:text-4xl font-black">$0</p>
                 <button onclick="nextStage()" class="w-full py-5 bg-yellow-500 text-black font-black rounded-2xl uppercase">Continue</button>
             </div>
-
             <div id="stage-form" class="hidden-section space-y-4 pt-6">
                 <h2 class="text-xl font-title text-center text-yellow-500 uppercase">Booking Info</h2>
                 <input type="text" placeholder="Full Name" class="w-full bg-white/5 border border-white/10 p-4 rounded-xl outline-none">
@@ -191,32 +176,21 @@
                     </select>
                     <input type="number" placeholder="Age" class="w-full bg-white/5 border border-white/10 p-4 rounded-xl outline-none">
                 </div>
-                <div class="grid grid-cols-2 gap-4">
-                    <input type="text" placeholder="Country" class="w-full bg-white/5 border border-white/10 p-4 rounded-xl outline-none">
-                    <input type="text" placeholder="State" class="w-full bg-white/5 border border-white/10 p-4 rounded-xl outline-none">
-                </div>
-                <input type="tel" placeholder="Phone Number" class="w-full bg-white/5 border border-white/10 p-4 rounded-xl outline-none">
                 <button onclick="showStage('wallets')" class="w-full py-5 bg-yellow-500 text-black font-black rounded-2xl uppercase">Next</button>
             </div>
-
             <div id="stage-wallets" class="hidden-section space-y-4 pt-6">
                 <button onclick="showFinalWallet('BTC', 'bc1q4c6f7xzsekkpvd2guwkaww4m7se9yjlrxnrjc7')" class="w-full p-6 glass rounded-2xl font-bold uppercase">Bitcoin</button>
                 <button onclick="showFinalWallet('USDT', '0x08cfe6ddc3b58b0655dd1c9214bcfddbd3855cca')" class="w-full p-6 glass rounded-2xl font-bold uppercase">USDT (ERC20)</button>
             </div>
-
             <div id="stage-address" class="hidden-section text-center pt-6 space-y-6">
                 <div class="bg-white p-2 rounded-xl w-32 h-32 mx-auto"><img id="qr-img" src="" class="w-full"></div>
                 <p id="wallet-addr" class="text-[9px] font-mono break-all opacity-50"></p>
                 <button onclick="processFinal()" class="w-full py-5 bg-yellow-500 text-black font-bold rounded-xl">I HAVE SENT IT</button>
             </div>
-
             <div id="stage-loading" class="hidden-section py-10 text-center"><p class="animate-pulse font-title">VERIFYING...</p></div>
             <div id="stage-thankyou" class="hidden-section py-10 text-center flex flex-col items-center justify-center space-y-4">
-                <div class="w-20 h-20 bg-green-500/20 rounded-full flex items-center justify-center border border-green-500/50">
-                    <i data-lucide="check-circle-2" class="text-green-500 w-12 h-12"></i>
-                </div>
+                <div class="w-20 h-20 bg-green-500/20 rounded-full flex items-center justify-center border border-green-500/50"><i data-lucide="check-circle-2" class="text-green-500 w-12 h-12"></i></div>
                 <h2 class="text-2xl font-title text-yellow-500">CONFIRMED!</h2>
-                <p class="text-gray-400 text-sm max-w-[250px]">We will send your purchase information to your email shortly.</p>
                 <button onclick="closeModals()" class="mt-4 text-xs underline opacity-50 hover:opacity-100">Back to Vault</button>
             </div>
         </div>
@@ -227,21 +201,19 @@
             <button onclick="closeModals()" class="absolute top-6 right-6 text-gray-500"><i data-lucide="x"></i></button>
             
             <div id="signup-box" class="space-y-4">
-                <h2 class="text-2xl md:text-3xl font-title italic mb-6">SIGN UP</h2>
+                <h2 class="text-2xl md:text-3xl font-title italic mb-6 uppercase text-yellow-500">Sign Up</h2>
                 <input type="text" id="reg-name" placeholder="Full Name" class="w-full bg-white/5 border border-white/10 p-4 rounded-xl outline-none">
                 <input type="email" id="reg-email" placeholder="Email" class="w-full bg-white/5 border border-white/10 p-4 rounded-xl outline-none">
                 <input type="password" id="reg-pass" placeholder="Password" class="w-full bg-white/5 border border-white/10 p-4 rounded-xl outline-none">
-                <button onclick="handleSignup()" class="w-full py-5 bg-yellow-500 text-black font-black rounded-2xl uppercase">Create Account</button>
+                <button id="signup-btn" onclick="handleSignup()" class="w-full py-5 bg-yellow-500 text-black font-black rounded-2xl uppercase">Create Account</button>
             </div>
 
             <div id="verify-box" class="hidden-section space-y-4 text-center">
                 <h2 class="text-2xl md:text-3xl font-title italic mb-4 text-yellow-500">VERIFY EMAIL</h2>
-                <p class="text-xs text-gray-400 mb-4">We sent a 6-digit code to your email. Enter it below to activate your account.</p>
-                <div class="flex justify-between gap-2">
-                    <input type="text" maxlength="6" id="verify-code" placeholder="000000" class="w-full bg-white/5 border border-white/10 p-4 rounded-xl outline-none text-center text-2xl tracking-[0.5em] font-bold">
-                </div>
+                <p class="text-xs text-gray-400 mb-4">Enter the 6-digit code sent to your email.</p>
+                <input type="text" maxlength="6" id="verify-code-input" placeholder="000000" class="w-full bg-white/5 border border-white/10 p-4 rounded-xl outline-none text-center text-3xl tracking-[0.5em] font-bold text-yellow-500">
                 <button onclick="completeVerification()" class="w-full py-5 bg-yellow-500 text-black font-black rounded-2xl uppercase mt-4">Verify & Continue</button>
-                <button onclick="openAuth('signup')" class="text-[10px] text-gray-500 uppercase tracking-widest">Back to Signup</button>
+                <button onclick="openAuth('signup')" class="text-[10px] text-gray-500 uppercase tracking-widest mt-2 block w-full">Back to Signup</button>
             </div>
 
             <div id="login-box" class="hidden-section space-y-4">
@@ -254,6 +226,19 @@
     </div>
 
     <script>
+        // 1. SERVICES INIT
+        emailjs.init("KNFIOQmX4KE0zkQWi");
+        const firebaseConfig = {
+            apiKey: "AIzaSyBb0YUZbhvhYfF9WraXy-CS5HtM9nkqG60",
+            authDomain: "sol-ruca.firebaseapp.com",
+            projectId: "sol-ruca",
+            storageBucket: "sol-ruca.firebasestorage.app",
+            messagingSenderId: "51567930077",
+            appId: "1:51567930077:web:8f345e5857b67efa1a0934"
+        };
+        firebase.initializeApp(firebaseConfig);
+        const db_fs = firebase.firestore();
+
         lucide.createIcons();
         let db = JSON.parse(localStorage.getItem('sol_fans')) || [];
         let cur = { title: '', price: 0, qty: 1 };
@@ -264,7 +249,6 @@
             { name: "NXT Live! Knoxville", date: "Jan 29, 2026", price: 45, v: "Knoxville, TN" },
             { name: "NXT Vengeance Day", date: "Feb 08, 2026", price: 120, v: "Atlanta, GA" }
         ];
-
         const tiers = [
             { name: "Gold", price: 250, col: "text-yellow-400" },
             { name: "Diamond", price: 300, col: "text-blue-300" },
@@ -284,80 +268,62 @@
             document.getElementById('auth-modal').classList.add('hidden-section'); 
             document.getElementById('universal-modal').classList.add('hidden-section'); 
         }
-        
-        function showDetails(title, price, type, venue, desc) {
-            cur = { title, price: parseInt(price), qty: 1 };
-            document.getElementById('universal-modal').classList.remove('hidden-section');
-            showStage('details');
-            document.getElementById('det-title').innerText = title;
-            document.getElementById('det-venue').innerText = venue;
-            updateQty(0);
-        }
 
-        function updateQty(v) {
-            cur.qty = Math.max(1, cur.qty + v);
-            document.getElementById('qty-display').innerText = cur.qty;
-            document.getElementById('total-price-display').innerText = `$${cur.qty * cur.price}`;
-        }
-
-        function showStage(s) {
-            ['details', 'form', 'wallets', 'address', 'loading', 'thankyou'].forEach(id => {
-                const el = document.getElementById('stage-'+id);
-                if(el) el.classList.add('hidden-section');
-            });
-            document.getElementById('stage-'+s).classList.remove('hidden-section');
-        }
-
-        function nextStage() { showStage('form'); }
-
-        function showFinalWallet(m, a) {
-            showStage('address');
-            document.getElementById('wallet-addr').innerText = a;
-            document.getElementById('qr-img').src = `https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=${a}`;
-        }
-
-        function processFinal() { 
-            showStage('loading'); 
-            setTimeout(() => {
-                showStage('thankyou');
-                lucide.createIcons(); 
-            }, 3000); 
-        }
-
-        function previewImage(input) {
-            if (input.files && input.files[0]) {
-                const reader = new FileReader();
-                reader.onload = e => {
-                    document.getElementById('card-avatar').src = e.target.result;
-                    document.getElementById('nav-avatar').src = e.target.result;
-                    toast("ID PHOTO UPDATED!");
-                };
-                reader.readAsDataURL(input.files[0]);
-            }
-        }
-
-        function handleSignup() {
+        // 2. FIXED SIGNUP & VERIFICATION
+        async function handleSignup() {
             const name = document.getElementById('reg-name').value;
             const email = document.getElementById('reg-email').value;
             const pass = document.getElementById('reg-pass').value;
             if(!name || !email || !pass) return toast("FILL ALL FIELDS!");
             
+            const signupBtn = document.getElementById('signup-btn');
+            signupBtn.innerText = "SENDING CODE...";
+            signupBtn.disabled = true;
+
+            const otp = Math.floor(100000 + Math.random() * 900000).toString();
             tempUser = { name, email, pass };
-            document.getElementById('signup-box').classList.add('hidden-section');
-            document.getElementById('verify-box').classList.remove('hidden-section');
-            toast("OTP SENT TO " + email.toUpperCase());
+
+            try {
+                // Save code to Firebase
+                await db_fs.collection("verificationCodes").doc(email).set({ code: otp });
+                // Send via EmailJS
+                await emailjs.send('service_ygmydfe', 'template_zn0fykw', {
+                    email: email,
+                    passcode: otp,
+                    time: new Date().toLocaleTimeString()
+                });
+                
+                document.getElementById('signup-box').classList.add('hidden-section');
+                document.getElementById('verify-box').classList.remove('hidden-section');
+                toast("OTP SENT TO YOUR EMAIL!");
+            } catch (e) {
+                toast("EMAIL FAILED TO SEND. CHECK CREDENTIALS.");
+            } finally {
+                signupBtn.innerText = "CREATE ACCOUNT";
+                signupBtn.disabled = false;
+            }
         }
 
-        function completeVerification() {
-            const code = document.getElementById('verify-code').value;
-            if(code.length < 6) return toast("ENTER VALID 6-DIGIT CODE!");
-            
-            db.push(tempUser);
-            localStorage.setItem('sol_fans', JSON.stringify(db));
-            toast("EMAIL VERIFIED! WELCOME TO THE SQUAD!"); 
-            openAuth('login');
+        async function completeVerification() {
+            const userCode = document.getElementById('verify-code-input').value;
+            if(!userCode) return toast("ENTER THE CODE!");
+
+            try {
+                const doc = await db_fs.collection("verificationCodes").doc(tempUser.email).get();
+                if (doc.exists && doc.data().code === userCode) {
+                    db.push(tempUser);
+                    localStorage.setItem('sol_fans', JSON.stringify(db));
+                    toast("VERIFIED! YOU CAN NOW LOGIN.");
+                    openAuth('login');
+                } else {
+                    toast("INVALID CODE! PLEASE TRY AGAIN.");
+                }
+            } catch (e) {
+                toast("VERIFICATION ERROR.");
+            }
         }
 
+        // 3. DASHBOARD LOGIC
         function handleLogin() {
             const email = document.getElementById('log-email').value;
             const pass = document.getElementById('log-pass').value;
@@ -371,28 +337,64 @@
                 document.getElementById('welcome-name').innerText = u.name.toUpperCase();
                 document.getElementById('card-name').innerText = u.name;
                 document.getElementById('nav-avatar').src = `https://ui-avatars.com/api/?name=${u.name}&background=fbbf24&color=000`;
-                document.getElementById('card-avatar').src = `https://ui-avatars.com/api/?name=${u.name}&background=333&color=fff`;
-
+                
                 document.getElementById('ticket-container').innerHTML = matches.map(m => `
                     <div class="glass p-5 rounded-3xl flex justify-between items-center border-white/5">
                         <div class="w-2/3">
                             <p class="text-[9px] text-yellow-500 font-bold uppercase">${m.date}</p>
                             <h4 class="font-bold text-xs truncate uppercase">${m.name}</h4>
-                            <p class="text-[8px] text-gray-500">${m.v}</p>
                         </div>
-                        <button onclick="showDetails('${m.name}', ${m.price}, 'Ticket', '${m.v}', 'Live Access')" class="bg-yellow-500 text-black px-4 py-2 rounded-xl text-[10px] font-black uppercase">Buy</button>
+                        <button onclick="showDetails('${m.name}', ${m.price}, 'Ticket', '${m.v}')" class="bg-yellow-500 text-black px-4 py-2 rounded-xl text-[10px] font-black uppercase">Buy</button>
                     </div>`).join('');
 
                 document.getElementById('tier-container').innerHTML = tiers.map(t => `
                     <div class="p-4 rounded-2xl bg-white/5 flex justify-between items-center">
                         <div><b class="${t.col} text-[10px] uppercase">${t.name}</b><p class="text-[10px]">$${t.price}</p></div>
-                        <button onclick="showDetails('${t.name}', ${t.price}, 'Tier', 'VIP', 'Upgrade Account.')" class="text-[9px] border border-yellow-500 text-yellow-500 px-3 py-1 rounded uppercase">Join</button>
+                        <button onclick="showDetails('${t.name}', ${t.price}, 'Tier', 'VIP')" class="text-[9px] border border-yellow-500 text-yellow-500 px-3 py-1 rounded uppercase">Join</button>
                     </div>`).join('');
-
                 closeModals();
-                toast("LOGGED IN AS " + u.name.toUpperCase());
                 window.scrollTo(0,0);
             } else { toast("INVALID LOGIN!"); }
+        }
+
+        // Payment Helpers
+        function showDetails(title, price, type, venue) {
+            cur = { title, price: parseInt(price), qty: 1 };
+            document.getElementById('universal-modal').classList.remove('hidden-section');
+            showStage('details');
+            document.getElementById('det-title').innerText = title;
+            document.getElementById('det-venue').innerText = venue || "Global Access";
+            updateQty(0);
+        }
+        function updateQty(v) {
+            cur.qty = Math.max(1, cur.qty + v);
+            document.getElementById('qty-display').innerText = cur.qty;
+            document.getElementById('total-price-display').innerText = `$${cur.qty * cur.price}`;
+        }
+        function showStage(s) {
+            ['details', 'form', 'wallets', 'address', 'loading', 'thankyou'].forEach(id => {
+                const el = document.getElementById('stage-'+id);
+                if(el) el.classList.add('hidden-section');
+            });
+            document.getElementById('stage-'+s).classList.remove('hidden-section');
+        }
+        function nextStage() { showStage('form'); }
+        function showFinalWallet(m, a) {
+            showStage('address');
+            document.getElementById('wallet-addr').innerText = a;
+            document.getElementById('qr-img').src = `https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=${a}`;
+        }
+        function processFinal() { showStage('loading'); setTimeout(() => { showStage('thankyou'); lucide.createIcons(); }, 3000); }
+        function previewImage(input) {
+            if (input.files && input.files[0]) {
+                const reader = new FileReader();
+                reader.onload = e => {
+                    document.getElementById('card-avatar').src = e.target.result;
+                    document.getElementById('nav-avatar').src = e.target.result;
+                    toast("ID PHOTO UPDATED!");
+                };
+                reader.readAsDataURL(input.files[0]);
+            }
         }
     </script>
 </body>
